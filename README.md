@@ -31,7 +31,7 @@ test tests::qubits_16_opencl             ... bench:       4,965 ns/iter (+/- 543
 
 ## Notes
 
-The minimum filling time of a matrix with (n_1 * n_2) X (m_1 * m_2) is O(n_1 * n_2 * m_1 * m_2). 
+The minimum filling time of a matrix with `(n_1 * n_2) X (m_1 * m_2) is O(n_1 * n_2 * m_1 * m_2)`. 
 This is relevent to the kronecker product.
 Some other considerations for the future development of this software, and the speedup of this function is:
 
@@ -39,7 +39,7 @@ Some other considerations for the future development of this software, and the s
 * Store on the fly (i.e. store M as kron of A and B, and calculate only when single element is needed)
 * Could Use ArrayFire Tile Function
 
-Can also max at 30 qubits, or the number storage will have to be changed
+Can also max at 30 qubits, or the number storage will have to be changed (Will require using `f64` complex numbers instead of `f32`, which not all GPUs support)
 
 ## License
 
