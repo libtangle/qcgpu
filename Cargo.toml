@@ -1,0 +1,8 @@
+[package]
+name = "qcgpu-rust"
+version = "0.1.0"
+authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
+
+[dependencies]
+num-complex = "0.1.42"
+arrayfire = "3.5.0"
