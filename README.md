@@ -1,6 +1,6 @@
 # QCGPU
 
-> An Open Source, GPU Accelerated, Quantum Computer Simulator
+> An Open Source, High Performance & GPU Accelerated, Quantum Computer Simulator in Rust
 
 * Uses the parallel programing library [ArrayFire](http://arrayfire.org/docs/index.htm), which supports CUDA and OpenCL kernels.
 * Runs Cross Platform (x86, ARM, CUDA, and OpenCL devices)
@@ -22,7 +22,7 @@
 
 Run `cargo bench`
 
-```shell
+```rust
 test tests::qubits_16_cpu                ... bench:     220,692 ns/iter (+/- 47,403)
 test tests::qubits_16_from_string_cpu    ... bench:     224,432 ns/iter (+/- 25,096)
 test tests::qubits_16_from_string_opencl ... bench:       5,079 ns/iter (+/- 633)
