@@ -1,3 +1,31 @@
+//! The Kronecker Product,
+//! the tensor product for matrices, with respect to the
+//! standard choice of basis.
+//!
+//! This is used to combine qubits (or multiple qubits in a register)
+//! into a single register.
+//!
+//! # Examples
+//!
+//! ```
+//! use num_complex::Complex;
+//! use arrayfire::{Dim4, DType, constant, indentity_t};
+//!
+//! let a = constant(Complex::new(1.0, 0.0), Dim4::new(&[2,2,1,1]));
+//! let b = identity_t(Dim4::new(&[2,2,1,1]), DType::C32);
+//!
+//! kron(&a, &b)
+//!
+//! /*
+//!    [4 4 1 1]
+//!    (2.0000,0.0000) (0.0000,0.0000) (2.0000,0.0000) (0.0000,0.0000)
+//!    (0.0000,0.0000) (2.0000,0.0000) (0.0000,0.0000) (2.0000,0.0000)
+//!    (2.0000,0.0000) (0.0000,0.0000) (2.0000,0.0000) (0.0000,0.0000)
+//!    (0.0000,0.0000) (2.0000,0.0000) (0.0000,0.0000) (2.0000,0.0000)
+//! */
+//! ```
+
+
 use arrayfire::{assign_seq, index, Array, Dim4, DType, Seq};
 
 fn get(a: &Array, i: i32, j: i32) -> Array {
@@ -5,6 +33,10 @@ fn get(a: &Array, i: i32, j: i32) -> Array {
     return index(a, seqs);
 }
 
+/// Computes the kronecker product of two matrices
+///
+/// Accepts referneces to Arrayfire arrays, and returns
+/// a new array.
 pub fn kron(a: &Array, b: &Array) -> Array {
     let a_rows = a.dims().get()[0] as i32;
     let a_cols = a.dims().get()[1] as i32;
