@@ -177,12 +177,12 @@ fn toggle_bit(num: i32, bit: i32) -> i32 {
 /// //   (0.0000,0.0000)          (0.0000,0.0000)          (0.0000,0.0000)          (1.0000,0.0000)
 /// //   (0.0000,0.0000)          (0.0000,0.0000)          (1.0000,0.0000)          (0.0000,0.0000)
 /// ```
-pub fn generate_cnot(num_qubits: u32, control: i32, target: i32) -> Array {
-    let mut arr = constant(Complex::new(0.0f32, 0.0), Dim4::new(&[2u64.pow(num_qubits), 2u64.pow(num_qubits), 1, 1]));
+pub fn generate_cnot(num_qubits: usize, control: i32, target: i32) -> Array {
+    let mut arr = constant(Complex::new(0.0f32, 0.0), Dim4::new(&[2u64.pow(num_qubits as u32), 2u64.pow(num_qubits as u32), 1, 1]));
     let one = constant(Complex::new(1.0f32, 0.0), Dim4::new(&[1,1,1,1]));
     let c = num_qubits as i32 - 1 - control;
     let t = num_qubits as i32 - 1 - target;
-    for i in 0..(2u64.pow(num_qubits) as i32) {
+    for i in 0..(2u64.pow(num_qubits as u32) as i32) {
         if get_bit(i, c) == 1 {
             // This is a state that we want to apply the gate on
             // Input: i, Output: toggle_bit(i, t)
