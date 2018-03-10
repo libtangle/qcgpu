@@ -8,13 +8,18 @@
 //! # Examples
 //!
 //! ```
-//! use num_complex::Complex;
-//! use arrayfire::{Dim4, DType, constant, indentity_t};
+//! extern crate num_complex;
+//! extern crate arrayfire;
+//! extern crate qcgpu;
 //!
-//! let a = constant(Complex::new(1.0, 0.0), Dim4::new(&[2,2,1,1]));
+//! use num_complex::Complex;
+//! use arrayfire::{Dim4, DType, constant, identity_t};
+//! use qcgpu::kron::kron;
+//!
+//! let a = constant(Complex::new(1.0f32, 0.0), Dim4::new(&[2,2,1,1]));
 //! let b = identity_t(Dim4::new(&[2,2,1,1]), DType::C32);
 //!
-//! kron(&a, &b)
+//! kron(&a, &b);
 //!
 //! /*
 //!    [4 4 1 1]
