@@ -1,13 +1,6 @@
 use num_complex::Complex;
-use arrayfire::{assign_seq, print, index, constant, identity_t, Array, DType, Dim4, Seq};
+use arrayfire::{assign_seq, constant, identity_t, Array, DType, Dim4, Seq};
 use kron;
-use gates;
-
-// Helper Function
-fn get(a: &Array, i: i32, j: i32) -> Array {
-    let seqs = &[Seq::new(i, i, 1), Seq::new(j, j, 1)];
-    return index(a, seqs);
-}
 
 pub struct QState {
     pub num_qubits: usize,
