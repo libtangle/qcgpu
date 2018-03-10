@@ -14,8 +14,31 @@ pub mod gates;
 #[cfg(test)]
 mod tests {
     use test::{Bencher, black_box};
-    use arrayfire::{set_backend, Dim4, DType, identity_t, Backend};
+    use arrayfire::{set_backend, Dim4, DType, identity_t, Backend, Array};
+    use num_complex::Complex;
     use super::*;
+
+    #[test]
+    fn cnot_0_1_opencl() {
+        let generated_cnot = gates::generate_cnot(2, 0, 1);
+
+        let values: [Complex<f32>; 16] = [
+            Complex::new(1.0f32, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0),
+            Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(0.0, 0.0),
+        ];
+        let dims: Dim4 = Dim4::new(&[4, 4, 1, 1]);
+        let spec_cnot = Array::new(&values, dims);
+
+        let mut vals1: Vec<Complex<f32>> = vec![Complex::new(0.0f32, 0.0); 16];
+        let mut vals2: Vec<Complex<f32>> = vec![Complex::new(0.0f32, 0.0); 16];
+
+        generated_cnot.host::<Complex<f32>>(&mut vals1);
+        spec_cnot.host::<Complex<f32>>(&mut vals2);
+
+        assert_eq!(vals1, vals2);
+    }
 
     #[bench]
     fn qubits_16_cpu(b: &mut Bencher) {
