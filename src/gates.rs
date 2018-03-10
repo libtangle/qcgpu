@@ -127,7 +127,6 @@ pub fn t() -> Array {
 pub fn generate_gate(gate: Array, num_qubits: usize, target: i32) -> Array {
     let qubits_before = target;
     let qubits_after = num_qubits as i32 - target - 1;
-    println!("Before: {} After: {}", qubits_before, qubits_after);
 
     if qubits_before == 0 && qubits_after == 0 {
         return gate
