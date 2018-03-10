@@ -6,3 +6,12 @@ authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
 [dependencies]
 num-complex = "0.1.42"
 arrayfire = "3.5.0"
+
+[lib]
+name = "qcgpu"
+path = "src/lib.rs"
+
+[[bin]]
+name = "main"
+doc = false
+path = "src/bin.rs"
