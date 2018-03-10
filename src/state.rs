@@ -1,6 +1,7 @@
 use num_complex::Complex;
-use arrayfire::{assign_seq, constant, identity_t, Array, DType, Dim4, Seq};
+use arrayfire::{assign_seq, constant, identity_t, Array, DType, Dim4, Seq, matmul, MatProp};
 use kron;
+use gates;
 
 pub struct QState {
     pub num_qubits: usize,
@@ -23,7 +24,6 @@ impl QState {
         let bits = bit_string.to_string().replace("|", "").replace(">", "");
 
         let value = i32::from_str_radix(bits.as_str(), 2).unwrap();
-        println!("{:?}", value);
 
         let mut amps = constant(Complex::new(0.0f32, 0.0), Dim4::new(&[2 << (bits.len() - 1), 1, 1, 1]));
 
@@ -42,6 +42,16 @@ impl QState {
             num_qubits: self.num_qubits + state.num_qubits,
             amplitude: kron::kron(&self.amplitude, &state.amplitude),
         }
+    }
+
+    pub fn apply_gate(&mut self, gate: Array, target: i32) {
+        let full_gate = gates::generate_gate(gate, self.num_qubits, target);
+        self.amplitude = matmul(&full_gate, &self.amplitude, MatProp::NONE, MatProp::NONE);
+    }
+
+    pub fn cnot(&mut self, control: i32, target: i32) {
+        let full_gate = gates::generate_cnot(self.num_qubits, control, target);
+        self.amplitude = matmul(&full_gate, &self.amplitude, MatProp::NONE, MatProp::NONE);
     }
 }
 
