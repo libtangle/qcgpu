@@ -144,6 +144,27 @@ pub fn generate_gate(gate: Array, num_qubits: usize, target: i32) -> Array {
     }
 }
 
+/// Generate a multi-qubit gate, applying a single
+/// qubit gate to all qubits in the register.
+///
+/// # Examples
+///
+/// ```
+/// use qcgpu::gates::{generate_all_gate, x};
+///
+/// // Create a 3 qubit gate, applying a Hadamard gate to
+/// // all 3 qubits
+/// generate_all_gate(hadamard(), 3);
+/// ```
+pub fn generate_all_gate(gate: Array, num_qubits: usize) -> Array {
+    let mut arr = gate;
+    for _ in 1..num_qubits {
+        arr = kron(&arr, &arr);
+    }
+
+    arr
+}
+
 // Gets A Bit Of A Number
 // Zero Indexed
 //

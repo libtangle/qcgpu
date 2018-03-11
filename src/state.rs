@@ -53,6 +53,11 @@ impl QState {
         let full_gate = gates::generate_cnot(self.num_qubits, control, target);
         self.amplitude = matmul(&full_gate, &self.amplitude, MatProp::NONE, MatProp::NONE);
     }
+
+    pub fn apply_all(&mut self, gate: Array) {
+        let full_gate = gates::generate_all_gate(gate, self.num_qubits);
+        self.amplitude = matmul(&full_gate, &self.amplitude, MatProp::NONE, MatProp::NONE);
+    }
 }
 
 
