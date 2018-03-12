@@ -11,6 +11,7 @@ license = "MIT"
 [dependencies]
 num-complex = "0.1.42"
 arrayfire = "3.5.0"
+rand = "0.4"
 
 [lib]
 name = "qcgpu"
@@ -20,3 +21,8 @@ path = "src/lib.rs"
 name = "main"
 doc = false
 path = "src/bin.rs"
+
+[[example]]
+name = "grover"
+doc = false
+path = "examples/grover.rs"

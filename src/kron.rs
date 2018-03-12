@@ -30,8 +30,7 @@
 //! */
 //! ```
 
-
-use arrayfire::{assign_seq, index, Array, Dim4, DType, Seq};
+use arrayfire::{assign_seq, index, Array, DType, Dim4, Seq};
 
 fn get(a: &Array, i: i32, j: i32) -> Array {
     let seqs = &[Seq::new(i, i, 1), Seq::new(j, j, 1)];
@@ -54,14 +53,15 @@ pub fn kron(a: &Array, b: &Array) -> Array {
 
     for i in 0..a_rows {
         for j in 0..a_cols {
-            let current_mat = b * get(a,i,j);
+            let current_mat = b * get(a, i, j);
 
-            let seqs = &[Seq::new(i * b_rows, (i + 1) * b_rows - 1, 1), Seq::new(j * b_cols, (j + 1) * b_cols - 1, 1)];
-            new_array  = assign_seq(&new_array, seqs, &current_mat);
+            let seqs = &[
+                Seq::new(i * b_rows, (i + 1) * b_rows - 1, 1),
+                Seq::new(j * b_cols, (j + 1) * b_cols - 1, 1),
+            ];
+            new_array = assign_seq(&new_array, seqs, &current_mat);
         }
     }
 
-    return new_array
+    return new_array;
 }
-
-

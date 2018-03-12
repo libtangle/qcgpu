@@ -1,20 +1,19 @@
 #![feature(test)]
 
 //! An Open Source, High Performance & GPU Accelerated, Quantum Computer Simulator in Rust
-
-extern crate test;
-extern crate num_complex;
 extern crate arrayfire;
+extern crate num_complex;
+extern crate test;
+extern crate rand;
 
 pub mod state;
 pub mod kron;
 pub mod gates;
 
-
 #[cfg(test)]
 mod tests {
-    use test::{Bencher, black_box};
-    use arrayfire::{set_backend, Dim4, DType, identity_t, Backend, Array};
+    use test::{black_box, Bencher};
+    use arrayfire::{identity_t, set_backend, Array, Backend, DType, Dim4};
     use num_complex::Complex;
     use super::*;
 
@@ -23,10 +22,22 @@ mod tests {
         let generated_cnot = gates::generate_cnot(2, 0, 1);
 
         let values: [Complex<f32>; 16] = [
-            Complex::new(1.0f32, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0),
-            Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0),
-            Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0),
-            Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(0.0, 0.0),
+            Complex::new(1.0f32, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(1.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(1.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(1.0, 0.0),
+            Complex::new(0.0, 0.0),
         ];
         let dims: Dim4 = Dim4::new(&[4, 4, 1, 1]);
         let spec_cnot = Array::new(&values, dims);
@@ -91,8 +102,8 @@ mod tests {
     #[bench]
     fn kron_cpu(b: &mut Bencher) {
         set_backend(Backend::CPU);
-        let arr_1 = identity_t(Dim4::new(&[4,4,1,1]), DType::C32);
-        let arr_2 = identity_t(Dim4::new(&[2,2,1,1]), DType::C32);
+        let arr_1 = identity_t(Dim4::new(&[4, 4, 1, 1]), DType::C32);
+        let arr_2 = identity_t(Dim4::new(&[2, 2, 1, 1]), DType::C32);
 
         b.iter(|| {
             black_box(kron::kron(&arr_1, &arr_2));
@@ -102,8 +113,8 @@ mod tests {
     #[bench]
     fn kron_a_opencl(b: &mut Bencher) {
         set_backend(Backend::OPENCL);
-        let arr_1 = identity_t(Dim4::new(&[4,4,1,1]), DType::C32);
-        let arr_2 = identity_t(Dim4::new(&[2,2,1,1]), DType::C32);
+        let arr_1 = identity_t(Dim4::new(&[4, 4, 1, 1]), DType::C32);
+        let arr_2 = identity_t(Dim4::new(&[2, 2, 1, 1]), DType::C32);
 
         b.iter(|| {
             black_box(kron::kron(&arr_1, &arr_2));

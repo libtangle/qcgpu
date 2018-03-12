@@ -37,6 +37,9 @@ Can also max at 30 qubits, or the number storage will have to be changed (Will r
 
 Could try and use sparse matrices for the gates
 
+A stretch goal for this project is to also (optionally) simulate decoherence, to allow
+for more realistic simulations.
+
 ## License
 
 This software is licensed under the MIT licence (see `LICENSE.md`)
