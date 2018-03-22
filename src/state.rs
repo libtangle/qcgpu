@@ -78,6 +78,37 @@ impl State {
         }
     }
 
+    pub fn apply_controlled_gate(&mut self, control: i32, target: i32, gate: Gate) {
+        let source = vec![0.0f32; self.pro_que.dims().to_len()];
+
+        // create a temporary vector with the source buffer
+        let result_buffer = Buffer::builder()
+            .queue(self.pro_que.queue().clone())
+            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .len(self.num_amps)
+            .host_data(&source)
+            .build()
+            .expect("Result Buffer");
+
+        let apply = self.pro_que
+            .create_kernel("apply_controlled_gate")
+            .unwrap()
+            .arg_buf(&self.buffer)
+            .arg_buf(&result_buffer)
+            .arg_scl(control)
+            .arg_scl(target)
+            .arg_scl(gate.a)
+            .arg_scl(gate.b)
+            .arg_scl(gate.c)
+            .arg_scl(gate.d);
+
+        unsafe {
+            apply.enq().unwrap();
+        }
+
+        self.buffer = result_buffer;
+    }
+
     pub fn print(&self) {
         let mut vec_result = vec![0.0f32; self.num_amps];
         // Read results from the device into result_buffer's local vector:
