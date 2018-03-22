@@ -1,8 +1,8 @@
 #![feature(test)]
 
+extern crate num_complex;
 extern crate ocl;
 extern crate test;
-extern crate num_complex;
 
 mod kernel;
 mod gates;
@@ -19,12 +19,12 @@ mod tests {
 
     #[bench]
     fn qubits_20_not_all_gpu(b: &mut Bencher) {
-    let x = Gate {
-        a: Complex32::new(0.0, 0.0),
-        b: Complex32::new(1.0, 0.0),
-        c: Complex32::new(1.0, 0.0),
-        d: Complex32::new(0.0, 0.0),
-    };
+        let x = Gate {
+            a: Complex32::new(0.0, 0.0),
+            b: Complex32::new(1.0, 0.0),
+            c: Complex32::new(1.0, 0.0),
+            d: Complex32::new(0.0, 0.0),
+        };
         b.iter(|| {
             let mut state = State::new(20, 1);
             black_box(state.apply_all(x));
@@ -33,12 +33,12 @@ mod tests {
 
     #[bench]
     fn qubits_20_not_all_cpu(b: &mut Bencher) {
-    let x = Gate {
-        a: Complex32::new(0.0, 0.0),
-        b: Complex32::new(1.0, 0.0),
-        c: Complex32::new(1.0, 0.0),
-        d: Complex32::new(0.0, 0.0),
-    };
+        let x = Gate {
+            a: Complex32::new(0.0, 0.0),
+            b: Complex32::new(1.0, 0.0),
+            c: Complex32::new(1.0, 0.0),
+            d: Complex32::new(0.0, 0.0),
+        };
         b.iter(|| {
             let mut state = State::new(20, 0);
             black_box(state.apply_all(x));

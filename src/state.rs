@@ -40,8 +40,8 @@ impl State {
         State {
             buffer: source_buffer,
             pro_que: ocl_pq,
-            num_amps: num_amps,
-            num_qubits: num_qubits,
+            num_amps,
+            num_qubits,
         }
     }
 
@@ -58,7 +58,8 @@ impl State {
             .arg(gate.b)
             .arg(gate.c)
             .arg(gate.d)
-            .build().unwrap();
+            .build()
+            .unwrap();
 
         unsafe {
             apply.enq().unwrap();
@@ -86,7 +87,8 @@ impl State {
             .arg(gate.b)
             .arg(gate.c)
             .arg(gate.d)
-            .build().unwrap();
+            .build()
+            .unwrap();
 
         unsafe {
             apply.enq().unwrap();
@@ -96,14 +98,14 @@ impl State {
     }
 
     pub fn print(&self) {
-        let mut vec_result = vec![Complex32::new(0.0,0.0); self.num_amps];
+        let mut vec_result = vec![Complex32::new(0.0, 0.0); self.num_amps];
         // Read results from the device into result_buffer's local vector:
-        &self.buffer.read(&mut vec_result).enq().unwrap();
+        self.buffer.read(&mut vec_result).enq().unwrap();
 
-        for idx in 0..self.num_amps {
-            print!("[{idx}]: {}, ", vec_result[idx], idx = idx);
+        for (idx, item) in vec_result.iter().enumerate() {
+            print!("[{idx}]: {}, ", item, idx = idx);
         }
-        print!("\n");
+        println!();
     }
 
     pub fn info(&self) {
