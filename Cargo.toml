@@ -9,9 +9,7 @@ keywords = ["quantum", "computation", "gpu", "simulation"]
 license = "MIT"
 
 [dependencies]
-num-complex = "0.1.42"
-arrayfire = "3.5.0"
-rand = "0.4"
+ocl = "0.17"
 
 [lib]
 name = "qcgpu"

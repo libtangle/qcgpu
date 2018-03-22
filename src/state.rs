@@ -1,124 +1,95 @@
-use num_complex::Complex;
-use arrayfire::*;
-use rand::random;
-use kron;
-use gates;
+use ocl::{Buffer, MemFlags, ProQue};
+use ocl::enums::DeviceInfo::Type;
+use kernel::KERNEL;
+use gates::Gate;
 
-pub struct QState {
-    pub num_qubits: usize,
-    pub amplitude: Array,
+#[derive(Debug)]
+pub struct State {
+    pub buffer: Buffer<f32>,
+    pub pro_que: ProQue,
+    pub num_amps: usize,
+    pub num_qubits: u32,
 }
 
+impl State {
+    pub fn new(num_qubits: u32, backend: usize) -> State {
+        let num_amps = 2_u32.pow(num_qubits) as usize;
+        let ocl_pq = ProQue::builder()
+            .src(KERNEL)
+            .device(backend)
+            .dims(num_amps)
+            .build()
+            .expect("Error Building ProQue");
 
-fn get(a: &Array, i: i32, j: i32) -> Array {
-    let seqs = &[Seq::new(i, i, 1), Seq::new(j, j, 1)];
-    return index(a, seqs);
-}
+        let mut source = vec![0.0f32; ocl_pq.dims().to_len()];
+        source[0] = 1f32;
+        // let source = vec![1.0f32, 0.0, 0.0, 0.0];
 
-impl QState {
-    pub fn new(n: usize) -> QState {
-        let amps = identity_t(Dim4::new(&[2 << (n - 1), 1, 1, 1]), DType::C32);
-        //let one = constant(Complex::new(1.0f32, 1.0), Dim4::new(&[1, 1, 1, 1]));
-        //let seqs = &[Seq::new(0.0, 1.0, 1.0), Seq::new(0.0, 1.0, 1.0)];
+        // create a temporary vector with the source buffer
+        let source_buffer = Buffer::builder()
+            .queue(ocl_pq.queue().clone())
+            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .len(num_amps)
+            .host_data(&source)
+            .build()
+            .expect("Source Buffer");
 
-        QState {
-            num_qubits: n,
-            amplitude: amps,
+        State {
+            buffer: source_buffer,
+            pro_que: ocl_pq,
+            num_amps: num_amps,
+            num_qubits: num_qubits,
         }
     }
 
-    pub fn from_bit_string(bit_string: &str) -> QState {
-        let bits = bit_string.to_string().replace("|", "").replace(">", "");
+    pub fn apply_gate(&mut self, target: i32, gate: Gate) {
+        let source = vec![0.0f32; self.pro_que.dims().to_len()];
 
-        let value = i32::from_str_radix(bits.as_str(), 2).unwrap();
+        // create a temporary vector with the source buffer
+        let result_buffer = Buffer::builder()
+            .queue(self.pro_que.queue().clone())
+            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .len(self.num_amps)
+            .host_data(&source)
+            .build()
+            .expect("Result Buffer");
 
-        let mut amps = constant(
-            Complex::new(0.0f32, 0.0),
-            Dim4::new(&[2 << (bits.len() - 1), 1, 1, 1]),
-        );
+        let apply = self.pro_que
+            .create_kernel("apply_gate")
+            .unwrap()
+            .arg_buf(&self.buffer)
+            .arg_buf(&result_buffer)
+            .arg_scl(target)
+            .arg_scl(gate.a)
+            .arg_scl(gate.b)
+            .arg_scl(gate.c)
+            .arg_scl(gate.d);
 
-        let position = &[Seq::new(value, value, 1)]; // begin n end n step
-        let one = constant(Complex::new(1.0f32, 0.0), Dim4::new(&[1, 1, 1, 1]));
-        amps = assign_seq(&amps, position, &one);
-
-        return QState {
-            num_qubits: bits.len(),
-            amplitude: amps,
-        };
-    }
-
-    pub fn kron(&self, state: QState) -> QState {
-        return QState {
-            num_qubits: self.num_qubits + state.num_qubits,
-            amplitude: kron::kron(&self.amplitude, &state.amplitude),
-        };
-    }
-
-
-    pub fn apply_gate(&mut self, gate: &Array, target: i32) {
-        // Make a new copy of amps
-        let mut amps = constant(Complex::new(0.0f32, 0.0), Dim4::new(&[2 << (self.num_qubits - 1), 1, 1, 1]));
-
-        for state in 0..2i32.pow(self.num_qubits as u32) as i32 {
-            // Could Check Here If The Current Amp is zero, if so, skip.
-            let zero_state = state & (!(1 << target)); // Clear the target bit
-            let one_state = state | (1 << target); // Set the target bit
-
-            let bit_val = if ((1 << target) & state) > 0 { 1 } else { 0 };
-
-            let position_zero = &[Seq::new(zero_state, zero_state, 1)];
-            let position_one = &[Seq::new(one_state, one_state, 1)];
-
-            let amp = get(&self.amplitude, state, 0);
-
-            amps = assign_seq(&amps, position_zero, &(&get(&amps, zero_state, 0) + &(&get(gate, bit_val, 0) * &amp)));
-            amps = assign_seq(&amps, position_one, &(&get(&amps, one_state, 0) + &(&get(gate, bit_val, 1) * &amp)));
+        unsafe {
+            apply.enq().unwrap();
         }
 
-        self.amplitude = amps;
+        self.buffer = result_buffer;
     }
 
-
-
-    pub fn cnot(&mut self, control: i32, target: i32) {
-        let full_gate = gates::generate_cnot(self.num_qubits, control, target);
-        self.amplitude = matmul(&full_gate, &self.amplitude, MatProp::NONE, MatProp::NONE);
-    }
-
-    pub fn apply_all(&mut self, gate: &Array) {
+    pub fn apply_all(&mut self, gate: Gate) {
         for i in 0..self.num_qubits as i32 {
-            self.apply_gate(gate, i);
+            self.apply_gate(i, gate);
         }
     }
 
-    pub fn measure(&mut self) -> i32 {
-        let probabilities = pow(&self.amplitude, &2, true);
+    pub fn print(&self) {
+        let mut vec_result = vec![0.0f32; self.num_amps];
+        // Read results from the device into result_buffer's local vector:
+        &self.buffer.read(&mut vec_result).enq().unwrap();
 
-        let mut key = random::<f32>();
-        if key > 1.0 {
-            key = key % 1.0;
+        for idx in 0..self.num_amps {
+            print!("[{idx}]: {}, ", vec_result[idx], idx = idx);
         }
-
-        let mut i = 0;
-        while i < probabilities.elements() as i32 {
-            let mut vec = vec![0.0f32; 1];
-
-            let seqs = &[Seq::new(i, i, 1)];
-            index(&probabilities, seqs).host(&mut vec);
-
-            key = key - vec[0];
-
-            if key <= 0.0 {
-                return i;
-            }
-
-            i = i + 1;
-        }
-
-        i
+        print!("\n");
     }
 
-    pub fn partial_measure(&mut self) -> Array {
-        unimplemented!()
+    pub fn info(&self) {
+        println!("{:?}", self.pro_que.device().info(Type).unwrap())
     }
 }
