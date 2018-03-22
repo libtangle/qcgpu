@@ -12,8 +12,8 @@
 ## Initial Benchmarks
 
 ```rust
-test tests::qubits_18_not_all_cpu ... bench:  41,712,028 ns/iter (+/- 12,006,823)
-test tests::qubits_18_not_all_gpu ... bench:  20,557,968 ns/iter (+/- 1,638,552)
+test tests::qubits_20_not_all_cpu ... bench: 166,565,996 ns/iter (+/- 4,235,438)
+test tests::qubits_20_not_all_gpu ... bench:  74,625,368 ns/iter (+/- 4,295,963)
 ```
 
 ## Notes
