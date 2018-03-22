@@ -2,6 +2,7 @@
 
 extern crate ocl;
 extern crate test;
+extern crate num_complex;
 
 mod kernel;
 mod gates;

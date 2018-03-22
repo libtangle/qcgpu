@@ -1,11 +1,13 @@
 use ocl::{Buffer, MemFlags, ProQue};
 use ocl::enums::DeviceInfo::Type;
+use num_complex::Complex32;
+
 use kernel::KERNEL;
 use gates::Gate;
 
 #[derive(Debug)]
 pub struct State {
-    pub buffer: Buffer<f32>,
+    pub buffer: Buffer<Complex32>,
     pub pro_que: ProQue,
     pub num_amps: usize,
     pub num_qubits: u32,
@@ -14,6 +16,7 @@ pub struct State {
 impl State {
     pub fn new(num_qubits: u32, backend: usize) -> State {
         let num_amps = 2_u32.pow(num_qubits) as usize;
+
         let ocl_pq = ProQue::builder()
             .src(KERNEL)
             .device(backend)
@@ -21,8 +24,8 @@ impl State {
             .build()
             .expect("Error Building ProQue");
 
-        let mut source = vec![0.0f32; ocl_pq.dims().to_len()];
-        source[0] = 1f32;
+        let mut source = vec![Complex32::new(0.0, 0.0); ocl_pq.dims().to_len()];
+        source[0] = Complex32::new(1.0, 0.0);
         // let source = vec![1.0f32, 0.0, 0.0, 0.0];
 
         // create a temporary vector with the source buffer
@@ -30,7 +33,7 @@ impl State {
             .queue(ocl_pq.queue().clone())
             .flags(MemFlags::new().read_write().copy_host_ptr())
             .len(num_amps)
-            .host_data(&source)
+            .copy_host_slice(&source)
             .build()
             .expect("Source Buffer");
 
@@ -43,27 +46,19 @@ impl State {
     }
 
     pub fn apply_gate(&mut self, target: i32, gate: Gate) {
-        let source = vec![0.0f32; self.pro_que.dims().to_len()];
-
         // create a temporary vector with the source buffer
-        let result_buffer = Buffer::builder()
-            .queue(self.pro_que.queue().clone())
-            .flags(MemFlags::new().read_write().copy_host_ptr())
-            .len(self.num_amps)
-            .host_data(&source)
-            .build()
-            .expect("Result Buffer");
+        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
 
         let apply = self.pro_que
-            .create_kernel("apply_gate")
-            .unwrap()
-            .arg_buf(&self.buffer)
-            .arg_buf(&result_buffer)
-            .arg_scl(target)
-            .arg_scl(gate.a)
-            .arg_scl(gate.b)
-            .arg_scl(gate.c)
-            .arg_scl(gate.d);
+            .kernel_builder("apply_gate")
+            .arg(&self.buffer)
+            .arg(&result_buffer)
+            .arg(target)
+            .arg(gate.a)
+            .arg(gate.b)
+            .arg(gate.c)
+            .arg(gate.d)
+            .build().unwrap();
 
         unsafe {
             apply.enq().unwrap();
@@ -79,28 +74,19 @@ impl State {
     }
 
     pub fn apply_controlled_gate(&mut self, control: i32, target: i32, gate: Gate) {
-        let source = vec![0.0f32; self.pro_que.dims().to_len()];
-
-        // create a temporary vector with the source buffer
-        let result_buffer = Buffer::builder()
-            .queue(self.pro_que.queue().clone())
-            .flags(MemFlags::new().read_write().copy_host_ptr())
-            .len(self.num_amps)
-            .host_data(&source)
-            .build()
-            .expect("Result Buffer");
+        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
 
         let apply = self.pro_que
-            .create_kernel("apply_controlled_gate")
-            .unwrap()
-            .arg_buf(&self.buffer)
-            .arg_buf(&result_buffer)
-            .arg_scl(control)
-            .arg_scl(target)
-            .arg_scl(gate.a)
-            .arg_scl(gate.b)
-            .arg_scl(gate.c)
-            .arg_scl(gate.d);
+            .kernel_builder("apply_controlled_gate")
+            .arg(&self.buffer)
+            .arg(&result_buffer)
+            .arg(control)
+            .arg(target)
+            .arg(gate.a)
+            .arg(gate.b)
+            .arg(gate.c)
+            .arg(gate.d)
+            .build().unwrap();
 
         unsafe {
             apply.enq().unwrap();
@@ -110,7 +96,7 @@ impl State {
     }
 
     pub fn print(&self) {
-        let mut vec_result = vec![0.0f32; self.num_amps];
+        let mut vec_result = vec![Complex32::new(0.0,0.0); self.num_amps];
         // Read results from the device into result_buffer's local vector:
         &self.buffer.read(&mut vec_result).enq().unwrap();
 

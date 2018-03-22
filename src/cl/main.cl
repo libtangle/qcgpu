@@ -1,3 +1,16 @@
+typedef float2 complex_f;
+
+complex_f add(complex_f a, complex_f b) {
+    return (complex_f)(a.x + b.x, a.y + b.y);
+}
+
+complex_f mul(complex_f a, complex_f b) {
+    return (complex_f)(
+      (a.x * b.x) - (a.y * b.y),
+      (a.y * b.x) + (a.x * b.y)
+    );
+}
+
 /**
  * Applies a single qubit gate to the register.
  * The gate matrix must be given in the form:
@@ -6,16 +19,16 @@
  *  C D
  */
 __kernel void apply_gate(
-  __global float* const amplitudes,
-  __global float* amps,
+  __global complex_f* const amplitudes,
+  __global complex_f* amps,
   uint target,
-  float A,
-  float B,
-  float C,
-  float D
+  complex_f A,
+  complex_f B,
+  complex_f C,
+  complex_f D
 ) {
   uint const state = get_global_id(0);
-  float const amp = amplitudes[state];
+  complex_f const amp = amplitudes[state];
 
   uint const zero_state = state & (~(1 << target));
   uint const one_state = state | (1 << target);
@@ -24,9 +37,10 @@ __kernel void apply_gate(
 
   if (bit_val == 0) {
     // Bitval = 0
-    amps[state] = (A * amp) + (B * amplitudes[one_state]);
+
+    amps[state] = add(mul(A, amp), mul(B, amplitudes[one_state]));
   } else {
-    amps[state] = (D * amp) + (C * amplitudes[zero_state]);
+    amps[state] = add(mul(D, amp), mul(C, amplitudes[zero_state]));
   }
 }
 
@@ -35,17 +49,17 @@ __kernel void apply_gate(
  * Applies a controlled single qubit gate to the register.
  */
 __kernel void apply_controlled_gate(
-  __global float* const amplitudes,
-  __global float* amps,
+  __global complex_f* const amplitudes,
+  __global complex_f* amps,
   uint control,
   uint target,
-  float A,
-  float B,
-  float C,
-  float D
+  complex_f A,
+  complex_f B,
+  complex_f C,
+  complex_f D
 ) {
   uint const state = get_global_id(0);
-  float const amp = amplitudes[state];
+  complex_f const amp = amplitudes[state];
 
   uint const zero_state = state & (~(1 << target));
   uint const one_state = state | (1 << target);
@@ -60,9 +74,9 @@ __kernel void apply_controlled_gate(
     // control is 1, apply gate.
     if (bit_val == 0) {
         // Bitval = 0
-        amps[state] = (A * amp) + (B * amplitudes[one_state]);
+        amps[state] = add(mul(A, amp), mul(B, amplitudes[one_state]));
     } else {
-        amps[state] = (D * amp) + (C * amplitudes[zero_state]);
+        amps[state] = add(mul(D, amp), mul(C, amplitudes[zero_state]));
     }
   }
 }

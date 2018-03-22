@@ -1,7 +1,9 @@
+use num_complex::Complex32;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Gate {
-    pub a: f32,
-    pub b: f32,
-    pub c: f32,
-    pub d: f32,
+    pub a: Complex32,
+    pub b: Complex32,
+    pub c: Complex32,
+    pub d: Complex32,
 }

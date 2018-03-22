@@ -9,7 +9,8 @@ keywords = ["quantum", "computation", "gpu", "simulation"]
 license = "MIT"
 
 [dependencies]
-ocl = "0.17"
+ocl = { git = "https://github.com/QCGPU/ocl" }
+num-complex = "0.1.43"
 
 [lib]
 name = "qcgpu"
