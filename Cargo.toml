@@ -16,3 +16,8 @@ rand = "0.4.2"
 [lib]
 name = "qcgpu"
 path = "src/lib.rs"
+
+[[example]]
+name = "ghz"
+doc = false
+path = "examples/ghz-state.rs"
