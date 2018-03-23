@@ -21,3 +21,8 @@ path = "src/lib.rs"
 name = "ghz"
 doc = false
 path = "examples/ghz-state.rs"
+
+[[example]]
+name = "deutsch-jozsa"
+doc = false
+path = "examples/deutsch-jozsa.rs"
