@@ -1,0 +1,10 @@
+language: rust
+rust: nightly
+
+env:
+  global:
+    - RUST_THREADS=4
+
+install:
+  - sudo apt-get update
+  - sudo apt-get install fglrx opencl-headers

@@ -1,3 +1,7 @@
+//! An Open Source, High Performance & Hardware Accelerated, Quantum Computer Simulator in Rust
+//!
+//! See the code [here](https://github.com/QCGPU/QCGPU-rust).
+
 #![feature(test)]
 
 extern crate num_complex;
@@ -15,34 +19,64 @@ pub use gates::Gate;
 #[cfg(test)]
 mod tests {
     use test::{black_box, Bencher};
-    use num_complex::Complex32;
+    use gates::{h, x};
     use super::*;
 
     #[bench]
-    fn qubits_20_not_all_gpu(b: &mut Bencher) {
-        let x = Gate {
-            a: Complex32::new(0.0, 0.0),
-            b: Complex32::new(1.0, 0.0),
-            c: Complex32::new(1.0, 0.0),
-            d: Complex32::new(0.0, 0.0),
-        };
+    fn ghz_state_gpu(b: &mut Bencher) {
         b.iter(|| {
+            // New Quantum State with 3 qubits
             let mut state = State::new(20, 1);
-            black_box(state.apply_all(x));
+
+            // Print the hardware that the simulation will run on
+            print!("Running On: ");
+            state.info();
+
+            // Apply the gates
+            state.apply_gate(0, h());
+            state.apply_gate(1, h());
+            state.apply_gate(2, x());
+
+            state.apply_controlled_gate(1, 2, x());
+            state.apply_controlled_gate(0, 2, x());
+
+            state.apply_all(h());
+
+            // XXX Measurement
+            state.apply_all(h());
+
+            println!("State Vector: {}", state);
+            println!("Probabilities: {:?}", state.get_probabilities());
+            println!("Measured: {}", state.measure());
         });
     }
 
     #[bench]
-    fn qubits_20_not_all_cpu(b: &mut Bencher) {
-        let x = Gate {
-            a: Complex32::new(0.0, 0.0),
-            b: Complex32::new(1.0, 0.0),
-            c: Complex32::new(1.0, 0.0),
-            d: Complex32::new(0.0, 0.0),
-        };
-        b.iter(|| {
-            let mut state = State::new(20, 0);
-            black_box(state.apply_all(x));
+    fn ghz_state_cpu(b: &mut Bencher) {
+         b.iter(|| {
+            // New Quantum State with 3 qubits
+            let mut state = State::new(20, 1);
+
+            // Print the hardware that the simulation will run on
+            print!("Running On: ");
+            state.info();
+
+            // Apply the gates
+            state.apply_gate(0, h());
+            state.apply_gate(1, h());
+            state.apply_gate(2, x());
+
+            state.apply_controlled_gate(1, 2, x());
+            state.apply_controlled_gate(0, 2, x());
+
+            state.apply_all(h());
+
+            // XXX Measurement
+            state.apply_all(h());
+
+            println!("State Vector: {}", state);
+            println!("Probabilities: {:?}", state.get_probabilities());
+            println!("Measured: {}", state.measure());
         });
     }
 }
