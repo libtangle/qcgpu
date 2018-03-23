@@ -27,12 +27,10 @@ fn main() {
         d: Complex32::new(0.0, 0.0),
     };
 
-    let mut state = State::new(1, 1);
+    let mut state = State::new(2, 1);
     state.info();
-    state.apply_gate(0, x);
-    state.apply_gate(0, y);
     state.apply_gate(0, h);
-    //state.apply_all(x);
-    //state.apply_controlled_gate(0, 1, x);
-    state.print();
+    println!("Gate: H = {}", h);
+    println!("State Vector: {}", state);
+    println!("Probabilities: {:?}", state.get_probabilities());
 }

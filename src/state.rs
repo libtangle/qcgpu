@@ -1,6 +1,7 @@
 use ocl::{Buffer, MemFlags, ProQue};
 use ocl::enums::DeviceInfo::Type;
 use num_complex::Complex32;
+use std::fmt;
 
 use kernel::KERNEL;
 use gates::Gate;
@@ -97,7 +98,7 @@ impl State {
         self.buffer = result_buffer;
     }
 
-    pub fn get_probabilities(&mut self) -> Buffer<f32> {
+    pub fn get_probabilities(&mut self) -> Vec<f32> {
         let result_buffer: Buffer<f32> = self.pro_que.create_buffer().unwrap();
 
         let apply = self.pro_que
@@ -114,22 +115,31 @@ impl State {
         let mut vec_result = vec![0.0f32; self.num_amps];
         result_buffer.read(&mut vec_result).enq().unwrap();
 
-        println!("{:?}", vec_result);
-        result_buffer
-    }
-
-    pub fn print(&self) {
-        let mut vec_result = vec![Complex32::new(0.0, 0.0); self.num_amps];
-        // Read results from the device into result_buffer's local vector:
-        self.buffer.read(&mut vec_result).enq().unwrap();
-
-        for (idx, item) in vec_result.iter().enumerate() {
-            print!("[{idx}]: {}, ", item, idx = idx);
-        }
-        println!();
+        vec_result
     }
 
     pub fn info(&self) {
         println!("{:?}", self.pro_que.device().info(Type).unwrap())
     }
 }
+
+impl fmt::Display for State {
+     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut first = true;
+
+        let mut vec_result = vec![Complex32::new(0.0, 0.0); self.num_amps];
+        self.buffer.read(&mut vec_result).enq().unwrap();
+
+        for (idx, item) in vec_result.iter().enumerate() {
+            if first {
+                write!(f, "[{idx}]: {}", item, idx = idx);
+                first = false;
+            } else {
+                write!(f, ", [{idx}]: {}", item, idx = idx);
+            }
+        }
+
+        Ok(())
+     }
+}
+
