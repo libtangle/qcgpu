@@ -2,6 +2,8 @@
 
 > An Open Source, High Performance & Hardware Accelerated, Quantum Computer Simulator in Rust
 
+[![Build Status](https://travis-ci.org/QCGPU/qcgpu-rust.svg?branch=master)](https://travis-ci.org/QCGPU/qcgpu-rust)
+
 * Uses OpenCL kernels.
 * Runs Cross Platform.
 
