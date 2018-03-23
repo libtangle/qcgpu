@@ -5,6 +5,8 @@ env:
   global:
     - RUST_THREADS=4
 
+cache: cargo
+
 install:
   - sudo apt-get update
-  - sudo apt-get install fglrx opencl-headers
+  - sudo apt-get install fglrx opencl-headers pocl
