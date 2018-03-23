@@ -1,17 +1,37 @@
 typedef float2 complex_f;
 
+/*
+ * Addition of two complex numbers:
+ *
+ * a + b = (Re(a) + Re(b)) + i(Im(a) + Im(b))
+ */
 complex_f add(complex_f a, complex_f b) {
     return (complex_f)(a.x + b.x, a.y + b.y);
 }
 
+/*
+ * Multiplication of two complex numbers:
+ *
+ * a * b =
+ *   ((Re(a) * Re(b)) - (Im(a) * Im(b)))
+ * + ((Im(a) * Re(b)) + (Re(a) * Im(b)))i
+ */
 complex_f mul(complex_f a, complex_f b) {
     return (complex_f)(
       (a.x * b.x) - (a.y * b.y),
       (a.y * b.x) + (a.x * b.y)
     );
 }
-
 /**
+ * Absolute value of a complex number
+ *
+ * |a| = √(Re(a)^2 + Im(a)^2)
+ */
+float complex_abs(complex_f a) {
+    return sqrt((a.x * a.x) + (a.y * a.y));
+}
+
+/*
  * Applies a single qubit gate to the register.
  * The gate matrix must be given in the form:
  *
@@ -45,7 +65,7 @@ __kernel void apply_gate(
 }
 
 
-/**
+/*
  * Applies a controlled single qubit gate to the register.
  */
 __kernel void apply_controlled_gate(
@@ -79,4 +99,18 @@ __kernel void apply_controlled_gate(
         amps[state] = add(mul(D, amp), mul(C, amplitudes[zero_state]));
     }
   }
+}
+
+
+/**
+ * Calculates The Probabilities Of A State Vector
+ */
+__kernel void calculate_probabilities(
+  __global complex_f* const amplitudes,
+  __global float* probabilities
+) {
+  uint const state = get_global_id(0);
+  complex_f amp = amplitudes[state];
+
+  probabilities[state] = complex_abs(mul(amp, amp));
 }

@@ -97,6 +97,27 @@ impl State {
         self.buffer = result_buffer;
     }
 
+    pub fn get_probabilities(&mut self) -> Buffer<f32> {
+        let result_buffer: Buffer<f32> = self.pro_que.create_buffer().unwrap();
+
+        let apply = self.pro_que
+            .kernel_builder("calculate_probabilities")
+            .arg(&self.buffer)
+            .arg(&result_buffer)
+            .build()
+            .unwrap();
+
+        unsafe {
+            apply.enq().unwrap();
+        }
+
+        let mut vec_result = vec![0.0f32; self.num_amps];
+        result_buffer.read(&mut vec_result).enq().unwrap();
+
+        println!("{:?}", vec_result);
+        result_buffer
+    }
+
     pub fn print(&self) {
         let mut vec_result = vec![Complex32::new(0.0, 0.0); self.num_amps];
         // Read results from the device into result_buffer's local vector:
