@@ -16,13 +16,3 @@ rand = "0.4.2"
 [lib]
 name = "qcgpu"
 path = "src/lib.rs"
-
-[[bin]]
-name = "main"
-doc = false
-path = "src/bin.rs"
-
-[[example]]
-name = "grover"
-doc = false
-path = "examples/grover.rs"
