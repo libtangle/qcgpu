@@ -11,6 +11,7 @@ license = "MIT"
 [dependencies]
 ocl = { git = "https://github.com/QCGPU/ocl" }
 num-complex = "0.1.43"
+rand = "0.4.2"
 
 [lib]
 name = "qcgpu"

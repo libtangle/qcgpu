@@ -3,10 +3,11 @@
 extern crate num_complex;
 extern crate ocl;
 extern crate test;
+extern crate rand;
 
 mod kernel;
-mod gates;
 mod state;
+pub mod gates;
 
 pub use state::State;
 pub use gates::Gate;

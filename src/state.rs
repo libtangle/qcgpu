@@ -1,10 +1,14 @@
-use ocl::{Buffer, MemFlags, ProQue};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////use ocl::{Buffer, MemFlags, ProQue};
 use ocl::enums::DeviceInfo::Type;
+use ocl::{Buffer, ProQue, MemFlags};
 use num_complex::Complex32;
 use std::fmt;
+use rand::random;
 
 use kernel::KERNEL;
 use gates::Gate;
+
+/// Representation of a quantum register
 
 #[derive(Debug)]
 pub struct State {
@@ -118,13 +122,33 @@ impl State {
         vec_result
     }
 
+    pub fn measure(&mut self) -> i32 {
+        let probabilities = self.get_probabilities();
+
+        let mut key = random::<f32>();
+        if key > 1.0 {
+            key = key % 1.0;
+        }
+
+        let mut i = 0;
+        while i < probabilities.len() {
+            key = key - probabilities[i];
+            if key <= 0.0 {
+                break;
+            }
+            i = i + 1;
+        }
+
+        i as i32
+    }
+
     pub fn info(&self) {
         println!("{:?}", self.pro_que.device().info(Type).unwrap())
     }
 }
 
 impl fmt::Display for State {
-     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut first = true;
 
         let mut vec_result = vec![Complex32::new(0.0, 0.0); self.num_amps];
@@ -140,6 +164,5 @@ impl fmt::Display for State {
         }
 
         Ok(())
-     }
+    }
 }
-
