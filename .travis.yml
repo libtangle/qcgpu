@@ -1,12 +1,10 @@
 language: rust
 rust: nightly
 
+os: osx
+
 env:
   global:
     - RUST_THREADS=4
 
 cache: cargo
-
-install:
-  - sudo apt-get update
-  - sudo apt-get install fglrx opencl-headers pocl
