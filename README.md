@@ -11,6 +11,30 @@
 * OpenCL (Ensure that an OpenCL library is installed for your platform and that `clinfo` or some other diagnostic command will run). 
 * Rust (install [here](https://www.rustup.rs)). Please use a nightly build.
 
+## Usage
+
+First, add the crate to `cargo.toml`
+
+```toml
+[dependencies]
+qcgpu = { git = "https://github.com/QCGPU/QCGPU-rust" }
+```
+
+Then just use the crate!
+
+```rust
+extern crate qcgpu;
+
+fn main() {
+    let mut state = qcgpu::State::new(2, 0);
+    state.apply_gate(0, qcgpu::gates::x());
+
+    println!("Measured: {}", state.measure());
+    // 1
+}
+
+```
+
 ## Initial Benchmarks
 
 ```rust
