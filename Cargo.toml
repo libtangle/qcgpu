@@ -13,6 +13,13 @@ ocl = { git = "https://github.com/QCGPU/ocl" }
 num-complex = "0.1.43"
 rand = "0.4.2"
 
+[dev-dependencies]
+criterion = "0.1.2"
+
+[[bench]]
+name = "benchmark"
+harness = false
+
 [lib]
 name = "qcgpu"
 path = "src/lib.rs"
@@ -28,6 +35,12 @@ doc = false
 path = "examples/deutsch-jozsa.rs"
 
 [[example]]
+name = "simple"
+doc = false
+path = "examples/simple.rs"
+
+[[example]]
 name = "superdense"
 doc = false
 path = "examples/super-dense.rs"
+

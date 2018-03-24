@@ -1,4 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////use ocl::{Buffer, MemFlags, ProQue};
 use ocl::enums::DeviceInfo::Type;
 use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::Complex32;
@@ -173,6 +172,30 @@ impl State {
         }
 
         i as i32
+    }
+
+    pub fn measure_many(&mut self, num_iterations: i32) -> Vec<i32> {
+        let probabilities = self.get_probabilities();
+        let mut results = vec![];
+
+        for _ in 0..num_iterations {
+            let mut key = random::<f32>();
+            if key > 1.0 {
+                key %= 1.0;
+            }
+
+            let mut i = 0;
+            while i < probabilities.len() {
+                key -= probabilities[i];
+                if key <= 0.0 {
+                    break;
+                }
+                i += 1;
+            }
+            results.push(i as i32);
+        }
+
+        results
     }
 
     pub fn info(&self) {
