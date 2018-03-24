@@ -25,7 +25,7 @@
 
 extern crate qcgpu;
 
-use qcgpu::{State};
+use qcgpu::State;
 use qcgpu::gates::{h, x, z};
 
 fn main() {

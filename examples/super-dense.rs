@@ -5,8 +5,8 @@
 
 extern crate qcgpu;
 
-use qcgpu::{State};
-use qcgpu::gates::{x, h, z};
+use qcgpu::State;
+use qcgpu::gates::{h, x, z};
 
 fn superdense(input: &str) -> i32 {
     let mut state = State::new(2, 0);
@@ -32,7 +32,10 @@ fn superdense(input: &str) -> i32 {
     state.apply_controlled_gate(alice, bob, x());
     state.apply_gate(alice, h());
 
-    println!("\nState after Bob receives Alice's qubit and 'decodes' it: \n{}", state);
+    println!(
+        "\nState after Bob receives Alice's qubit and 'decodes' it: \n{}",
+        state
+    );
 
     state.measure()
 }

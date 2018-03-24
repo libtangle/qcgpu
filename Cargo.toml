@@ -14,7 +14,7 @@ num-complex = "0.1.43"
 rand = "0.4.2"
 
 [dev-dependencies]
-criterion = "0.1.2"
+criterion = "0.2.1"
 
 [[bench]]
 name = "benchmark"
