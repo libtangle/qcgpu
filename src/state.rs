@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////use ocl::{Buffer, MemFlags, ProQue};
 use ocl::enums::DeviceInfo::Type;
-use ocl::{Buffer, ProQue, MemFlags};
+use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::Complex32;
 use std::fmt;
 use rand::random;
@@ -47,6 +47,39 @@ impl State {
             pro_que: ocl_pq,
             num_amps,
             num_qubits,
+        }
+    }
+
+    pub fn from_bit_string(bit_string: &str, backend: usize) -> State {
+        let bits = bit_string.to_string().replace("|", "").replace(">", "");
+        let num_amps = 2 << (bits.len() - 1) as usize;
+
+        let ocl_pq = ProQue::builder()
+            .src(KERNEL)
+            .device(backend)
+            .dims(num_amps)
+            .build()
+            .expect("Error Building ProQue");
+
+        let mut source = vec![Complex32::new(0.0, 0.0); ocl_pq.dims().to_len()];
+        let value = i32::from_str_radix(bits.as_str(), 2).unwrap();
+        source[value as usize] = Complex32::new(1.0, 0.0);
+        // let source = vec![1.0f32, 0.0, 0.0, 0.0];
+
+        // create a temporary vector with the source buffer
+        let source_buffer = Buffer::builder()
+            .queue(ocl_pq.queue().clone())
+            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .len(num_amps)
+            .copy_host_slice(&source)
+            .build()
+            .expect("Source Buffer");
+
+        State {
+            buffer: source_buffer,
+            pro_que: ocl_pq,
+            num_amps,
+            num_qubits: bits.len() as u32,
         }
     }
 

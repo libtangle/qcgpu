@@ -2,12 +2,12 @@
 
 extern crate qcgpu;
 
-use qcgpu::{State};
-use qcgpu::gates::{x, h};
+use qcgpu::State;
+use qcgpu::gates::{h, x};
 
 fn main() {
     // New Quantum State with 3 qubits
-    let mut state = State::new(3, 1);
+    let mut state = State::new(25, 1);
 
     // Print the hardware that the simulation will run on
     print!("Running On: ");
@@ -26,7 +26,7 @@ fn main() {
     // XXX Measurement
     state.apply_all(h());
 
-    println!("State Vector: {}", state);
-    println!("Probabilities: {:?}", state.get_probabilities());
+    // println!("State Vector: {}", state);
+    //println!("Probabilities: {:?}", state.get_probabilities());
     println!("Measured: {}", state.measure());
 }

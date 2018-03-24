@@ -6,8 +6,8 @@
 
 extern crate num_complex;
 extern crate ocl;
-extern crate test;
 extern crate rand;
+extern crate test;
 
 mod kernel;
 mod state;
@@ -22,11 +22,20 @@ mod tests {
     use gates::{h, x};
     use super::*;
 
+    #[test]
+    fn gate_application() {
+        let mut state = State::new(1, 0);
+
+        state.apply_gate(0, x());
+
+        assert_eq!(state.measure(), 1);
+    }
+
     #[bench]
     fn ghz_state_gpu(b: &mut Bencher) {
         b.iter(|| {
-            // New Quantum State with 3 qubits
-            let mut state = State::new(20, 1);
+            // New Quantum State with 25 qubits
+            let mut state = State::new(25, 1);
 
             // Print the hardware that the simulation will run on
             print!("Running On: ");
@@ -53,9 +62,9 @@ mod tests {
 
     #[bench]
     fn ghz_state_cpu(b: &mut Bencher) {
-         b.iter(|| {
-            // New Quantum State with 3 qubits
-            let mut state = State::new(20, 1);
+        b.iter(|| {
+            // New Quantum State with 25 qubits
+            let mut state = State::new(25, 1);
 
             // Print the hardware that the simulation will run on
             print!("Running On: ");

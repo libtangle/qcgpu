@@ -26,3 +26,8 @@ path = "examples/ghz-state.rs"
 name = "deutsch-jozsa"
 doc = false
 path = "examples/deutsch-jozsa.rs"
+
+[[example]]
+name = "superdense"
+doc = false
+path = "examples/super-dense.rs"

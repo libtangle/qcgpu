@@ -8,7 +8,6 @@ use num_complex::Complex32;
 use std::fmt;
 use std::f32::consts::FRAC_1_SQRT_2;
 
-
 /// Representation of a gate
 ///
 /// # Examples
@@ -126,7 +125,6 @@ pub fn s() -> Gate {
         d: Complex32::new(0.0, 1.0),
     }
 }
-
 
 /// T Gate
 ///

@@ -25,8 +25,8 @@
 
 extern crate qcgpu;
 
-use qcgpu::{State, Gate};
-use qcgpu::gates::{z, h, x};
+use qcgpu::{Gate, State};
+use qcgpu::gates::{h, x, z};
 
 fn main() {
     // 3 qubits, f(x) = x_0 NOT x_1 x_2
@@ -40,7 +40,14 @@ fn main() {
     balanced_state.apply_gate(2, h());
     balanced_state.apply_all(h());
 
-    println!("{}", if balanced_state.measure() == 0 { "constant" } else { "balanced" });
+    println!(
+        "{}",
+        if balanced_state.measure() == 0 {
+            "constant"
+        } else {
+            "balanced"
+        }
+    );
 
     // 3 qubits, f(x) = 0
     // Constant
@@ -49,5 +56,12 @@ fn main() {
     constant_state.apply_all(h());
     constant_state.apply_all(h());
 
-    println!("{}", if constant_state.measure() == 0 { "constant" } else { "balanced" });
+    println!(
+        "{}",
+        if constant_state.measure() == 0 {
+            "constant"
+        } else {
+            "balanced"
+        }
+    );
 }
