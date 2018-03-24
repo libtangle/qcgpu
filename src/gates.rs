@@ -1,7 +1,7 @@
 //! Gates and Gate Generation
 //!
 //! Matrices are in row major format, and
-//! all gates use the num_complex::Complex&lt;f32&gt;
+//! all gates use the `num_complex::Complex<f32>;`
 //! datatype.
 
 use num_complex::Complex32;
@@ -138,8 +138,8 @@ pub fn t() -> Gate {
         b: Complex32::new(0.0, 0.0),
         c: Complex32::new(0.0, 0.0),
         d: Complex32::new(
-            0.7071067811865475244008443621048490393,
-            0.7071067811865475244008443621048490393,
+            0.707_106_781_186_547_524_400_844_362_104_849_039_3,
+            0.707_106_781_186_547_524_400_844_362_104_849_039_3,
         ),
     }
 }

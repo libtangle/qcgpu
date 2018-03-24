@@ -160,16 +160,16 @@ impl State {
 
         let mut key = random::<f32>();
         if key > 1.0 {
-            key = key % 1.0;
+            key %= 1.0;
         }
 
         let mut i = 0;
         while i < probabilities.len() {
-            key = key - probabilities[i];
+            key -= probabilities[i];
             if key <= 0.0 {
                 break;
             }
-            i = i + 1;
+            i += 1;
         }
 
         i as i32
@@ -189,10 +189,10 @@ impl fmt::Display for State {
 
         for (idx, item) in vec_result.iter().enumerate() {
             if first {
-                write!(f, "[{idx}]: {}", item, idx = idx);
+                write!(f, "[{idx}]: {}", item, idx = idx).unwrap();
                 first = false;
             } else {
-                write!(f, ", [{idx}]: {}", item, idx = idx);
+                write!(f, ", [{idx}]: {}", item, idx = idx).unwrap();
             }
         }
 

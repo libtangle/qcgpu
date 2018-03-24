@@ -18,7 +18,7 @@ pub use gates::Gate;
 
 #[cfg(test)]
 mod tests {
-    use test::{black_box, Bencher};
+    use test::{Bencher};
     use gates::{h, x};
     use super::*;
 

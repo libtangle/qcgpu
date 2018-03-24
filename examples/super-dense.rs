@@ -34,7 +34,7 @@ fn superdense(input: &str) -> i32 {
 
     println!("\nState after Bob receives Alice's qubit and 'decodes' it: \n{}", state);
 
-    return state.measure()
+    state.measure()
 }
 
 fn main() {
@@ -43,7 +43,7 @@ fn main() {
     println!("Two bit string to send:");
     let mut input = String::new();
     match io::stdin().read_line(&mut input) {
-        Ok(n) => {
+        Ok(_n) => {
             let result = superdense(input.as_str());
             println!("\nDecoded string is: {}", result);
         }

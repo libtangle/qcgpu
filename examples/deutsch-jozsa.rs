@@ -11,7 +11,7 @@
 //! Using classical computing, in the worst case, this requires $2^{n-1}+1$ function evaluations.
 //! Using quantum computing, this can be done with just one function evaluation.
 //!
-//! The function $f$, to be used in a quantum computer, must be specified specified by an oracle circuit $U_f$ such that $U_f \lvert x \rangle = (-1)^{f(x)}\lvert x \rangle$.
+//! The function $f$, to be used in a quantum computer, must be specified specified by an oracle circuit $U_{f}$ such that $U_{f} \lvert x \rangle = (-1)^{f(x)}\lvert x \rangle$.
 //!
 //! ## The Algorithm
 //!
@@ -19,13 +19,13 @@
 //! 2. Apply the Hadamard gate $H$ to each qubit.
 //! 3. Apply the oracle circuit $U_f$.
 //! 4. Apply the Hadamard gate $H$ to each qubit.
-//! 5. Measure each qubit. Let $y = (y_1, \dots, y_n)$ be the list of measurement outcomes.
+//! 5. Measure each qubit. Let $y = (y_{1}, \dots, y_{n})$ be the list of measurement outcomes.
 //!
 //! From this procedure, we find that $f$ is constant if $y$ is the all zero string.
 
 extern crate qcgpu;
 
-use qcgpu::{Gate, State};
+use qcgpu::{State};
 use qcgpu::gates::{h, x, z};
 
 fn main() {
