@@ -2,6 +2,7 @@ use ocl::enums::DeviceInfo::Type;
 use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::Complex32;
 use std::fmt;
+use std::collections::HashMap;
 use rand::random;
 
 use kernel::KERNEL;
@@ -174,9 +175,9 @@ impl State {
         i as i32
     }
 
-    pub fn measure_many(&mut self, num_iterations: i32) -> Vec<i32> {
+    pub fn measure_many(&mut self, num_iterations: i32) -> HashMap<String, i32> {
         let probabilities = self.get_probabilities();
-        let mut results = vec![];
+        let mut num_results = HashMap::new();
 
         for _ in 0..num_iterations {
             let mut key = random::<f32>();
@@ -192,10 +193,12 @@ impl State {
                 }
                 i += 1;
             }
-            results.push(i as i32);
+            let state = format!("{:0width$b}", i, width = self.num_qubits as usize);
+            let count = num_results.entry(state).or_insert(0);
+            *count += 1;
         }
 
-        results
+        num_results
     }
 
     pub fn info(&self) {
