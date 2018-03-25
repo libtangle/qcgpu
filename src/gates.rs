@@ -42,6 +42,7 @@ impl fmt::Display for Gate {
 /// [1, 0]
 ///
 /// [0, 1]
+#[inline]
 pub fn id() -> Gate {
     Gate {
         a: Complex32::new(1.0, 0.0),
