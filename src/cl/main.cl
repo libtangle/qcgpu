@@ -64,7 +64,6 @@ __kernel void apply_gate(
   }
 }
 
-
 /*
  * Applies a controlled single qubit gate to the register.
  */
@@ -101,6 +100,27 @@ __kernel void apply_controlled_gate(
   }
 }
 
+/*
+ * Swaps the states of two qubits in the register
+ */
+__kernel void swap(
+  __global complex_f* const amplitudes,
+  __global complex_f* amps,
+  uint first_qubit,
+  uint second_qubit
+) {
+    uint const state = get_global_id(0);
+
+    uint const first_bit_mask = 1 << first_qubit;
+    uint const second_bit_mask = 1 << second_qubit;
+
+    uint const new_second_bit = ((state & first_bit_mask) >> first_qubit) << second_qubit;
+    uint const new_first_bit = ((state & second_bit_mask) >> second_qubit) << first_qubit;
+
+    uint const new_state = (state & !first_bit_mask & !second_bit_mask) | new_first_bit | new_second_bit;
+
+    amps[new_state] = amplitudes[state];
+}
 
 /**
  * Calculates The Probabilities Of A State Vector

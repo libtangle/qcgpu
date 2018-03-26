@@ -234,6 +234,25 @@ impl State {
     pub fn cx(&mut self, control: i32, target: i32) {
         self.apply_controlled_gate(control, target, x());
     }
+
+    pub fn swap(&mut self, first_qubit: i32, second_qubit: i32) {
+        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
+
+        let apply = self.pro_que
+            .kernel_builder("swap")
+            .arg(&self.buffer)
+            .arg(&result_buffer)
+            .arg(first_qubit)
+            .arg(second_qubit)
+            .build()
+            .unwrap();
+
+        unsafe {
+            apply.enq().unwrap();
+        }
+
+        self.buffer = result_buffer;
+    }
 }
 
 impl fmt::Display for State {

@@ -22,15 +22,32 @@ pub use gates::Gate;
 
 #[cfg(test)]
 mod tests {
-    use gates::{h, x};
     use super::*;
 
     #[test]
     fn gate_application() {
         let mut state = State::new(1, 0);
 
-        state.apply_gate(0, x());
+        state.x(0);
 
         assert_eq!(state.measure(), 1);
+    }
+
+    #[test]
+    fn swap_gate() {
+        let mut state = State::new(2, 0);
+
+        state.x(0);
+
+        let before_probabilities = state.get_probabilities();
+
+        // Applying a swap gate twice should
+        // keep the register the same
+        state.swap(0,1);
+        state.swap(0,1);
+
+        let after_probabilities = state.get_probabilities();
+
+        assert_eq!(before_probabilities, after_probabilities);
     }
 }
