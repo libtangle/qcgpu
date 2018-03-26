@@ -1,6 +1,10 @@
 //! An Open Source, High Performance & Hardware Accelerated, Quantum Computer Simulator in Rust
 //!
 //! See the code [here](https://github.com/QCGPU/QCGPU-rust).
+//!
+//! ## Tutorials
+//!
+//! - [Getting Started with QCGPU](./getting_started.html)
 
 #![feature(test)]
 
