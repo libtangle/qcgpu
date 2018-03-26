@@ -25,27 +25,26 @@ name = "qcgpu"
 path = "src/lib.rs"
 
 [[example]]
+name = "bernstein-vazirani"
+doc = false
+path = "algorithms/bernstein-vazirani.rs"
+
+[[example]]
+name = "deutsch-jozsa"
+doc = false
+path = "algorithms/deutsch-jozsa.rs"
+
+[[example]]
+name = "superdense"
+doc = false
+path = "algorithms/super-dense.rs"
+
+[[example]]
 name = "ghz"
 doc = false
 path = "examples/ghz-state.rs"
 
 [[example]]
-name = "deutsch-jozsa"
-doc = false
-path = "examples/deutsch-jozsa.rs"
-
-[[example]]
-name = "bernstein-vazirani"
-doc = false
-path = "examples/bernstein-vazirani.rs"
-
-[[example]]
 name = "simple"
 doc = false
 path = "examples/simple.rs"
-
-[[example]]
-name = "superdense"
-doc = false
-path = "examples/super-dense.rs"
-
