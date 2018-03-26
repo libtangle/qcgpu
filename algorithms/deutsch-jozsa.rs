@@ -26,7 +26,7 @@
 extern crate qcgpu;
 
 use qcgpu::State;
-use qcgpu::gates::{h, x, z};
+use qcgpu::gates::h;
 
 fn main() {
     // 3 qubits, f(x) = x_0 NOT x_1 x_2
@@ -34,10 +34,13 @@ fn main() {
     let mut balanced_state = State::new(3, 1);
 
     balanced_state.apply_all(h());
-    balanced_state.apply_gate(2, h());
-    balanced_state.apply_gate(0, z());
-    balanced_state.apply_controlled_gate(1, 2, x());
-    balanced_state.apply_gate(2, h());
+
+    // Oracle U_f
+    balanced_state.h(2);
+    balanced_state.z(0);
+    balanced_state.cx(1, 2);
+    balanced_state.h(2);
+
     balanced_state.apply_all(h());
 
     println!(
@@ -54,6 +57,10 @@ fn main() {
     let mut constant_state = State::new(3, 1);
 
     constant_state.apply_all(h());
+
+    // Oracle is equivilant to the identity gate, thus has no effect on the
+    // state.
+
     constant_state.apply_all(h());
 
     println!(

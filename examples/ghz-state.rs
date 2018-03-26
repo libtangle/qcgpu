@@ -3,7 +3,7 @@
 extern crate qcgpu;
 
 use qcgpu::State;
-use qcgpu::gates::{h, x};
+use qcgpu::gates::h;
 
 fn main() {
     // New Quantum State with 3 qubits
@@ -14,12 +14,12 @@ fn main() {
     state.info();
 
     // Apply the gates
-    state.apply_gate(0, h());
-    state.apply_gate(1, h());
-    state.apply_gate(2, x());
+    state.h(0);
+    state.h(1);
+    state.x(2);
 
-    state.apply_controlled_gate(1, 2, x());
-    state.apply_controlled_gate(0, 2, x());
+    state.cx(1, 2);
+    state.cx(0, 2);
 
     state.apply_all(h());
 

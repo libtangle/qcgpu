@@ -7,6 +7,7 @@ use rand::random;
 
 use kernel::KERNEL;
 use gates::Gate;
+use gates::{h, s, t, x, y, z};
 
 /// Representation of a quantum register
 
@@ -203,6 +204,35 @@ impl State {
 
     pub fn info(&self) {
         println!("{:?}", self.pro_que.device().info(Type).unwrap())
+    }
+
+    /* Ease Of Access Functions*/
+    pub fn h(&mut self, target: i32) {
+        self.apply_gate(target, h());
+    }
+
+    pub fn s(&mut self, target: i32) {
+        self.apply_gate(target, s());
+    }
+
+    pub fn t(&mut self, target: i32) {
+        self.apply_gate(target, t());
+    }
+
+    pub fn x(&mut self, target: i32) {
+        self.apply_gate(target, x());
+    }
+
+    pub fn y(&mut self, target: i32) {
+        self.apply_gate(target, y());
+    }
+
+    pub fn z(&mut self, target: i32) {
+        self.apply_gate(target, z());
+    }
+
+    pub fn cx(&mut self, control: i32, target: i32) {
+        self.apply_controlled_gate(control, target, x());
     }
 }
 

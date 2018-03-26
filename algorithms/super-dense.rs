@@ -13,24 +13,24 @@ fn superdense(input: &str) -> i32 {
     let input_str = String::from(input);
 
     // Prepare the bell state
-    state.apply_gate(0, h());
-    state.apply_controlled_gate(0, 1, x());
+    state.h(0);
+    state.cx(0, 1);
 
     // Alice prepares her qubit
     let alice = 1;
     if input_str.get(0..1) == Some("1") {
-        state.apply_gate(alice, z());
+        state.z(alice);
     }
     if input_str.get(1..2) == Some("1") {
-        state.apply_gate(alice, x());
+        state.x(alice);
     }
 
     println!("\nState after Alice prepares her qubit: \n{}", state);
 
     // Alice sends her qubit to Bob
     let bob = 0;
-    state.apply_controlled_gate(alice, bob, x());
-    state.apply_gate(alice, h());
+    state.cx(alice, bob);
+    state.h(alice);
 
     println!(
         "\nState after Bob receives Alice's qubit and 'decodes' it: \n{}",

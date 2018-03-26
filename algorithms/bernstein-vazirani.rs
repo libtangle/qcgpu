@@ -27,7 +27,7 @@
 extern crate qcgpu;
 
 use qcgpu::State;
-use qcgpu::gates::{h, z};
+use qcgpu::gates::h;
 
 fn main() {
     let num_qubits = 16; // Number of qubits to use
@@ -45,7 +45,7 @@ fn main() {
     // Apply the inner products oracle
     for i in 0..num_qubits {
         if a & (1 << i) != 0 {
-            state.apply_gate(i as i32, z());
+            state.z(i as i32);
         }
         // Otherwise should apply identity gate, but computationally this doens't change the state.
     }
