@@ -8,9 +8,10 @@
 //! must be queried with superpositions of input $x$'s.
 //!
 //! To solve this problem classically, the hidden integer can be found by checking the
-//! oracle with the inputs $x = 1,2,/dots,2^i,2^{n-1}$, wjere each query reveals the $i$th bit of $a$ ($a_i$).
-//! This is the optimal classical solution, and is O(n). Using a quantum oracle and the Bernstein-Vazirani,
-//! the integer can be found with just one query to the oracle.
+//! oracle with the inputs $x = 1,2,/dots,2^i,2^{n-1}$, where each
+//! query reveals the $i$th bit of $a$ ($a_i$).
+//! This is the optimal classical solution, and is O(n). Using a quantum oracle and the
+//! Bernstein-Vazirani algorithm, $a$ can be found with just one query to the oracle.
 //!
 //! ## The Algorithm
 //!
