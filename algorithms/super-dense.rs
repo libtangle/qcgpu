@@ -6,7 +6,6 @@
 extern crate qcgpu;
 
 use qcgpu::State;
-use qcgpu::gates::{h, x, z};
 
 fn superdense(input: &str) -> i32 {
     let mut state = State::new(2, 0);
