@@ -43,8 +43,8 @@ mod tests {
 
         // Applying a swap gate twice should
         // keep the register the same
-        state.swap(0,1);
-        state.swap(0,1);
+        state.swap(0, 1);
+        state.swap(0, 1);
 
         let after_probabilities = state.get_probabilities();
 
