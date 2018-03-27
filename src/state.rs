@@ -22,6 +22,15 @@ pub struct State {
 }
 
 impl State {
+    /// Create a new quantum register, with a given number of qubits.
+    /// The backend is the OpenCL ID of the accelerator to use.
+    ///
+    /// The register will be initialized in the state |00...0>
+    ///
+    /// ```rust
+    /// # extern crate qcgpu;
+    /// let state = qcgpu::State::from_bit_string("|00>");
+    /// ```
     pub fn new(num_qubits: u32, backend: usize) -> State {
         let num_amps = 2_u32.pow(num_qubits) as usize;
 
@@ -54,6 +63,14 @@ impl State {
         }
     }
 
+    /// Create a new quantum register, starting in the
+    /// State given. The backend is the OpenCL ID of the
+    /// accelerator to use.
+    ///
+    /// ```rust
+    /// # extern crate qcgpu;
+    /// let state = qcgpu::State::from_bit_string("|00>");
+    /// ```
     pub fn from_bit_string(bit_string: &str, backend: usize) -> State {
         let bits = bit_string.to_string().replace("|", "").replace(">", "");
         let num_amps = 2 << (bits.len() - 1) as usize;
@@ -88,6 +105,7 @@ impl State {
         }
     }
 
+    /// Apply a gate to the target qubit
     pub fn apply_gate(&mut self, target: i32, gate: Gate) {
         // create a temporary vector with the source buffer
         let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
@@ -111,12 +129,14 @@ impl State {
         self.buffer = result_buffer;
     }
 
+    /// Apply a gate to every qubit in the register
     pub fn apply_all(&mut self, gate: Gate) {
         for i in 0..self.num_qubits as i32 {
             self.apply_gate(i, gate);
         }
     }
 
+    /// Apply a gate to the register if the control qubit is 1.
     pub fn apply_controlled_gate(&mut self, control: i32, target: i32, gate: Gate) {
         let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
 
@@ -140,6 +160,10 @@ impl State {
         self.buffer = result_buffer;
     }
 
+    /// Return the probabilities of each outcome.
+    ///
+    /// The probabilitity of a state a|x> being measured
+    /// is |a|^2.
     pub fn get_probabilities(&mut self) -> Vec<f32> {
         let result_buffer: Buffer<f32> = self.pro_que.create_buffer().unwrap();
 
@@ -160,6 +184,7 @@ impl State {
         vec_result
     }
 
+    /// Return the state vector of the quantum register
     pub fn get_amplitudes(&mut self) -> Vec<Complex32> {
         let mut vec_result = vec![Complex32::new(0.0, 0.0); self.num_amps];
         self.buffer.read(&mut vec_result).enq().unwrap();
@@ -167,6 +192,7 @@ impl State {
         vec_result
     }
 
+    /// Measure the quantum register, returning the measured result
     pub fn measure(&mut self) -> i32 {
         let probabilities = self.get_probabilities();
 
@@ -187,6 +213,9 @@ impl State {
         i as i32
     }
 
+    /// Preform multiple measurements, returning the results
+    /// as a HashMap, with the key as the result and the value as teh
+    /// number of times that result was measured
     pub fn measure_many(&mut self, num_iterations: i32) -> HashMap<String, i32> {
         let probabilities = self.get_probabilities();
         let mut num_results = HashMap::new();
@@ -213,6 +242,7 @@ impl State {
         num_results
     }
 
+    /// Measure a single qubit, removing it from the register.
     pub fn partial_measure(&mut self, target: i32) {
         println!("Using Unimplemented Method Partial Measure");
     }
@@ -253,35 +283,65 @@ impl State {
         println!("{:?}", self.pro_que.device().info(Type).unwrap())
     }
 
-    /* Ease Of Access Functions*/
+    /* Ease Of Access / shorthand Functions*/
+
+    /// Hadamard Gate
+    /// Shorthand Method
+    ///
+    /// Equivilent to `state.apply_gate(target, h());`
     pub fn h(&mut self, target: i32) {
         self.apply_gate(target, h());
     }
 
+    /// S Gate
+    /// Shorthand Method
+    ///
+    /// Equivilent to `state.apply_gate(target, s());`
     pub fn s(&mut self, target: i32) {
         self.apply_gate(target, s());
     }
 
+    /// T Gate
+    /// Shorthand Method
+    ///
+    /// Equivilent to `state.apply_gate(target, t());`
     pub fn t(&mut self, target: i32) {
         self.apply_gate(target, t());
     }
 
+    /// Pauli X Gate
+    /// Shorthand Method
+    ///
+    /// Equivilent to `state.apply_gate(target, x());`
     pub fn x(&mut self, target: i32) {
         self.apply_gate(target, x());
     }
 
+    /// Pauli Y Gate
+    /// Shorthand Method
+    ///
+    /// Equivilent to `state.apply_gate(target, y());`
     pub fn y(&mut self, target: i32) {
         self.apply_gate(target, y());
     }
 
+    /// Pauli Z Gate
+    /// Shorthand Method
+    ///
+    /// Equivilent to `state.apply_gate(target, z());`
     pub fn z(&mut self, target: i32) {
         self.apply_gate(target, z());
     }
 
+    /// Controlled Not Gate S
+    /// Shorthand method
+    ///
+    /// Equivilent to `state.apply_controlled_gate(control, target, x());`
     pub fn cx(&mut self, control: i32, target: i32) {
         self.apply_controlled_gate(control, target, x());
     }
 
+    /// Quantum Fourier Transform.
     pub fn qft(&mut self, width: i32) {
         // Phase shift by PI / 2^{control-target}
         let mut i = width - 1;
@@ -306,6 +366,7 @@ impl State {
         }
     }
 
+    /// Swap two qubits in the register
     pub fn swap(&mut self, first_qubit: i32, second_qubit: i32) {
         let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
 
