@@ -305,7 +305,10 @@ impl State {
 
     /// Print Information About The Device
     pub fn info(&self) {
-        println!("Device type: {:?}", self.pro_que.device().info(Type).unwrap())
+        println!(
+            "Device type: {:?}",
+            self.pro_que.device().info(Type).unwrap()
+        )
     }
 
     /* Ease Of Access / shorthand Functions*/
@@ -370,25 +373,27 @@ impl State {
     pub fn qft(&mut self, width: i32) {
         // Phase shift by PI / 2^{control-target}
         let mut i = width - 1;
+        let mut j = width - 1;
+
         while i >= 0 {
-            let mut j = width - 1;
             while j > i {
-                self.apply_controlled_gate(
-                    j,
-                    i,
-                    Gate {
-                        // Phase shift by PI / 2^{control-target}
-                        a: Complex32::new(1.0, 0.0),
-                        b: Complex32::new(0.0, 0.0),
-                        c: Complex32::new(0.0, 0.0),
-                        d: Complex32::new(0.0, PI / 2.0_f32.powi(j - i)).exp(),
-                    },
-                );
+                self.cond_phase(j, i);
                 j -= 1;
             }
             self.h(i);
             i -= 1;
         }
+    }
+
+    /// Apply a conditional phase shift by PI / 2^(CONTROL - TARGET)
+    fn cond_phase(&mut self, control: i32, target: i32) {
+        let z = Complex32::new(0.0, PI / 2_f32.powi(control - target)).exp();
+
+        let phase_gate = Gate {
+            a: Complex32::new(1.0, 0.0), b: Complex32::new(0.0, 0.0),
+            c: Complex32::new(0.0, 0.0), d: z
+        };
+        self.apply_controlled_gate(control, target, phase_gate);
     }
 
     /// Swap two qubits in the register
