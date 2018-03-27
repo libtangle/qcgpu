@@ -17,6 +17,7 @@ pub struct State {
     pub pro_que: ProQue,
     pub num_amps: usize,
     pub num_qubits: u32,
+    pub backend: usize,
 }
 
 impl State {
@@ -48,6 +49,7 @@ impl State {
             pro_que: ocl_pq,
             num_amps,
             num_qubits,
+            backend,
         }
     }
 
@@ -81,6 +83,7 @@ impl State {
             pro_que: ocl_pq,
             num_amps,
             num_qubits: bits.len() as u32,
+            backend,
         }
     }
 
@@ -156,6 +159,13 @@ impl State {
         vec_result
     }
 
+    pub fn get_amplitudes(&mut self) -> Vec<Complex32> {
+        let mut vec_result = vec![Complex32::new(0.0, 0.0); self.num_amps];
+        self.buffer.read(&mut vec_result).enq().unwrap();
+
+        vec_result
+    }
+
     pub fn measure(&mut self) -> i32 {
         let probabilities = self.get_probabilities();
 
@@ -200,6 +210,35 @@ impl State {
         }
 
         num_results
+    }
+
+    /// Add qubits to the register. The qubits are initialized to zero.
+    /// This should be used as scratch space.
+    pub fn add_scratch(&mut self, num_scratch: u32) {
+        let num_amps = 2_u32.pow(self.num_qubits + num_scratch) as usize;
+        let ocl_pq = ProQue::builder()
+            .src(KERNEL)
+            .device(self.backend)
+            .dims(num_amps)
+            .build()
+            .expect("Error Building ProQue");
+
+        let mut amps = self.get_amplitudes();
+        amps.extend(vec![Complex32::new(0.0, 0.0); ocl_pq.dims().to_len() - self.pro_que.dims().to_len()]);
+
+        // create a temporary vector with the source buffer
+        let source_buffer = Buffer::builder()
+            .queue(ocl_pq.queue().clone())
+            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .len(num_amps)
+            .copy_host_slice(&amps)
+            .build()
+            .expect("Source Buffer");
+
+        self.buffer = source_buffer;
+        self.pro_que = ocl_pq;
+        self.num_amps = num_amps;
+        self.num_qubits = self.num_qubits + num_scratch;
     }
 
     pub fn info(&self) {
