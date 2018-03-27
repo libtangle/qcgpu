@@ -390,8 +390,10 @@ impl State {
         let z = Complex32::new(0.0, PI / 2_f32.powi(control - target)).exp();
 
         let phase_gate = Gate {
-            a: Complex32::new(1.0, 0.0), b: Complex32::new(0.0, 0.0),
-            c: Complex32::new(0.0, 0.0), d: z
+            a: Complex32::new(1.0, 0.0),
+            b: Complex32::new(0.0, 0.0),
+            c: Complex32::new(0.0, 0.0),
+            d: z,
         };
         self.apply_controlled_gate(control, target, phase_gate);
     }

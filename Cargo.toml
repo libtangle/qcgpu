@@ -40,6 +40,11 @@ doc = false
 path = "algorithms/super-dense.rs"
 
 [[example]]
+name = "shor"
+doc = false
+path = "algorithms/shor.rs"
+
+[[example]]
 name = "ghz"
 doc = false
 path = "examples/ghz-state.rs"
