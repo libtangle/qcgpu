@@ -242,11 +242,6 @@ impl State {
         num_results
     }
 
-    /// Measure a single qubit, removing it from the register.
-    pub fn partial_measure(&mut self, target: i32) {
-        println!("Using Unimplemented Method Partial Measure");
-    }
-
     /// Add qubits to the register. The qubits are initialized to zero.
     /// This should be used as scratch space.
     pub fn add_scratch(&mut self, num_scratch: u32) {
@@ -279,8 +274,38 @@ impl State {
         self.num_qubits = self.num_qubits + num_scratch;
     }
 
+    /// Measure the scratch qubits. The measurement is discarded, and
+    /// the register size is reduced by `num_to_measure` qubits.
+    pub fn measure_scratch(&mut self, num_to_measure: u32) {
+        let num_amps = 2_u32.pow(self.num_qubits - num_to_measure) as usize;
+        let ocl_pq = ProQue::builder()
+            .src(KERNEL)
+            .device(self.backend)
+            .dims(num_amps)
+            .build()
+            .expect("Error Building ProQue");
+
+        let mut amps = self.get_amplitudes();
+        amps.truncate(num_amps);
+
+        // create a temporary vector with the source buffer
+        let source_buffer = Buffer::builder()
+            .queue(ocl_pq.queue().clone())
+            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .len(num_amps)
+            .copy_host_slice(&amps)
+            .build()
+            .expect("Source Buffer");
+
+        self.buffer = source_buffer;
+        self.pro_que = ocl_pq;
+        self.num_amps = num_amps;
+        self.num_qubits = self.num_qubits - num_to_measure;
+    }
+
+    /// Print Information About The Device
     pub fn info(&self) {
-        println!("{:?}", self.pro_que.device().info(Type).unwrap())
+        println!("Device type: {:?}", self.pro_que.device().info(Type).unwrap())
     }
 
     /* Ease Of Access / shorthand Functions*/
