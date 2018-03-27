@@ -1,4 +1,4 @@
-//! # Shors algorthm Algorithm
+//! # Shors Algorithm
 //!
 //! This algorithm finds the prime factors ($u$ and $v$) of an odd, composite integer $n$,
 //! that is not a prime power.
