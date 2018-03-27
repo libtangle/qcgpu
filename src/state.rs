@@ -3,6 +3,7 @@ use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::Complex32;
 use std::fmt;
 use std::collections::HashMap;
+use std::f32::consts::PI;
 use rand::random;
 
 use kernel::KERNEL;
@@ -212,6 +213,10 @@ impl State {
         num_results
     }
 
+    pub fn partial_measure(&mut self, target: i32) {
+        println!("Using Unimplemented Method Partial Measure");
+    }
+
     /// Add qubits to the register. The qubits are initialized to zero.
     /// This should be used as scratch space.
     pub fn add_scratch(&mut self, num_scratch: u32) {
@@ -224,7 +229,10 @@ impl State {
             .expect("Error Building ProQue");
 
         let mut amps = self.get_amplitudes();
-        amps.extend(vec![Complex32::new(0.0, 0.0); ocl_pq.dims().to_len() - self.pro_que.dims().to_len()]);
+        amps.extend(vec![
+            Complex32::new(0.0, 0.0);
+            ocl_pq.dims().to_len() - self.pro_que.dims().to_len()
+        ]);
 
         // create a temporary vector with the source buffer
         let source_buffer = Buffer::builder()
@@ -272,6 +280,30 @@ impl State {
 
     pub fn cx(&mut self, control: i32, target: i32) {
         self.apply_controlled_gate(control, target, x());
+    }
+
+    pub fn qft(&mut self, width: i32) {
+        // Phase shift by PI / 2^{control-target}
+        let mut i = width - 1;
+        while i >= 0 {
+            let mut j = width - 1;
+            while j > i {
+                self.apply_controlled_gate(
+                    j,
+                    i,
+                    Gate {
+                        // Phase shift by PI / 2^{control-target}
+                        a: Complex32::new(1.0, 0.0),
+                        b: Complex32::new(0.0, 0.0),
+                        c: Complex32::new(0.0, 0.0),
+                        d: Complex32::new(0.0, PI / 2.0_f32.powi(j - i)).exp(),
+                    },
+                );
+                j -= 1;
+            }
+            self.h(i);
+            i -= 1;
+        }
     }
 
     pub fn swap(&mut self, first_qubit: i32, second_qubit: i32) {
