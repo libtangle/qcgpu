@@ -122,6 +122,59 @@ __kernel void swap(
     amps[new_state] = amplitudes[state];
 }
 
+
+uint _pow_mod(uint x, uint y, uint n) {
+    if (y == 0) {
+        return 1;
+    } else if (y == 1) {
+        return x;
+    }
+
+    uint half_y = floor(y / 2);
+    uint power_half_y = pow_mod(x, half_y, n);
+    uint result =  (power_half_y * power_half_y) % n;
+    if (y % 2 == 1) {
+        result = (x * result) % n;
+    }
+    return result;
+}
+
+/*
+ * Calculates f(a) = x^a mod N
+ */
+__kernel void pow_mod(
+  __global complex_f* const amplitudes,
+  __global complex_f* amps,
+  uint x,
+  uint n,
+  uint input_width,
+  uint output_width
+) {
+    uint input_bit_range_from = output_width;
+    uint input_bit_range_to = output_width + input_width - 1;
+    uint target_bit_range_from = 0;
+    uint target_bit_range_to = output_width - 1;
+
+    uint high_bit_mask = (1 << (input_bit_range_to + 1)) - 1;
+    uint target_bit_mask = ((1 << (1 + target_bit_range_to - target_bit_range_from)) - 1) << target_bit_range_from;
+
+    uint const state = get_global_id(0);
+
+    uint input = (state & high_bit_mask) >> input_bit_range_from;
+    uint result = (_pow_mod(x, input, n) <<  target_bit_range_from) & target_bit_mask;
+    uint result_state = state ^ result;
+
+    if (result_state == state) {
+        amps[state] = amplitudes[state];
+    } else {
+        amps[state] = amplitudes[result_state];
+        amps[result_state] = amplitudes[state];
+    }
+
+    amps[new_state] = amplitudes[state];
+}
+
+
 /**
  * Calculates The Probabilities Of A State Vector
  */

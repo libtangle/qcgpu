@@ -292,6 +292,28 @@ impl State {
 
         self.buffer = result_buffer;
     }
+
+    /// Caclulates f(a) = x^a mod n.
+    pub fn pow_mod(&mut self, x: i32, n: i32, input_width: i32, output_width: i32) {
+        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
+
+        let apply = self.pro_que
+            .kernel_builder("apply_pow_mod")
+            .arg(&self.buffer)
+            .arg(&result_buffer)
+            .arg(x)
+            .arg(n)
+            .arg(input_width)
+            .arg(output_width)
+            .build()
+            .unwrap();
+
+        unsafe {
+            apply.enq().unwrap();
+        }
+
+        self.buffer = result_buffer;
+    }
 }
 
 impl fmt::Display for State {
