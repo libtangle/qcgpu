@@ -5,7 +5,7 @@ typedef float2 complex_f;
  *
  * a + b = (Re(a) + Re(b)) + i(Im(a) + Im(b))
  */
-complex_f add(complex_f a, complex_f b) {
+static complex_f add(complex_f a, complex_f b) {
     return (complex_f)(a.x + b.x, a.y + b.y);
 }
 
@@ -16,7 +16,7 @@ complex_f add(complex_f a, complex_f b) {
  *   ((Re(a) * Re(b)) - (Im(a) * Im(b)))
  * + ((Im(a) * Re(b)) + (Re(a) * Im(b)))i
  */
-complex_f mul(complex_f a, complex_f b) {
+static complex_f mul(complex_f a, complex_f b) {
     return (complex_f)(
       (a.x * b.x) - (a.y * b.y),
       (a.y * b.x) + (a.x * b.y)
@@ -27,7 +27,7 @@ complex_f mul(complex_f a, complex_f b) {
  *
  * |a| = √(Re(a)^2 + Im(a)^2)
  */
-float complex_abs(complex_f a) {
+static float complex_abs(complex_f a) {
     return sqrt((a.x * a.x) + (a.y * a.y));
 }
 
@@ -122,27 +122,23 @@ __kernel void swap(
     amps[new_state] = amplitudes[state];
 }
 
-
-uint _pow_mod(uint x, uint y, uint n) {
-    if (y == 0) {
-        return 1;
-    } else if (y == 1) {
-        return x;
+static uint pow_mod(uint x, uint y, uint n) {
+    uint r = 1;
+    while (y > 0) {
+        if (y & 1 == 1) {
+            r = r * x % n;
+        }
+        y /= 2;
+        x = x * x % n;
     }
 
-    uint half_y = floor(y / 2);
-    uint power_half_y = pow_mod(x, half_y, n);
-    uint result =  (power_half_y * power_half_y) % n;
-    if (y % 2 == 1) {
-        result = (x * result) % n;
-    }
-    return result;
+    return r;
 }
 
 /*
  * Calculates f(a) = x^a mod N
  */
-__kernel void pow_mod(
+__kernel void apply_pow_mod(
   __global complex_f* const amplitudes,
   __global complex_f* amps,
   uint x,
@@ -161,7 +157,7 @@ __kernel void pow_mod(
     uint const state = get_global_id(0);
 
     uint input = (state & high_bit_mask) >> input_bit_range_from;
-    uint result = (_pow_mod(x, input, n) <<  target_bit_range_from) & target_bit_mask;
+    uint result = (pow_mod(x, input, n) <<  target_bit_range_from) & target_bit_mask;
     uint result_state = state ^ result;
 
     if (result_state == state) {
@@ -171,7 +167,7 @@ __kernel void pow_mod(
         amps[result_state] = amplitudes[state];
     }
 
-    amps[new_state] = amplitudes[state];
+    amps[result_state] = amplitudes[state];
 }
 
 
