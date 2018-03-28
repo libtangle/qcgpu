@@ -3,7 +3,6 @@ use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::Complex32;
 use std::fmt;
 use std::collections::HashMap;
-use std::f32::consts::PI;
 use rand::random;
 
 use kernel::KERNEL;
@@ -395,9 +394,6 @@ impl State {
         }
 
         self.buffer = result_buffer;
-    }
-
-
     }
 
     /// Swap two qubits in the register
