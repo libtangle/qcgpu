@@ -110,41 +110,42 @@ __kernel void apply_controlled_gate(
 }
 
 /*
- * The oracle for grovers algorithm
- * Technically cheating but anyway
+ * Applies a controlled-controlled single qubit gate to the register.
  */
-__kernel void grover_oracle(
+__kernel void apply_controlled_controlled_gate(
   __global complex_f* const amplitudes,
   __global complex_f* amps,
-  uint target
+  uint control1,
+  uint control2,
+  uint target,
+  complex_f A,
+  complex_f B,
+  complex_f C,
+  complex_f D
 ) {
   uint const state = get_global_id(0);
   complex_f const amp = amplitudes[state];
 
-  if (state == target) {
-    amps[state] = neg(amp);
-  } else {
+  uint const zero_state = state & (~(1 << target));
+  uint const one_state = state | (1 << target);
+
+  uint const bit_val = (((1 << target) & state) > 0)? 1 : 0;
+  uint const control1_val = (((1 << control1) & state) > 0)? 1 : 0;
+  uint const control2_val = (((1 << control2) & state) > 0)? 1 : 0;
+
+  if (control1_val == 0 || control2_val == 0) {
+    // Control is 0, don't apply gate
     amps[state] = amp;
-  }
-}
-
-/*
- * The grover amplification procedure
- */
-__kernel void grover_amplify(
-  __global complex_f* const amplitudes,
-  __global complex_f* amps
-) {
-  uint const state = get_global_id(0);
-  complex_f const amp = amplitudes[state];
-
-  if (state == 0) {
-    amps[state] = neg(amp);
   } else {
-      amps[state] = amp;
+    // control is 1, apply gate.
+    if (bit_val == 0) {
+        // Bitval = 0
+        amps[state] = add(mul(A, amp), mul(B, amplitudes[one_state]));
+    } else {
+        amps[state] = add(mul(D, amp), mul(C, amplitudes[zero_state]));
+    }
   }
 }
-
 
 /*
  * Swaps the states of two qubits in the register

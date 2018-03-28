@@ -50,7 +50,7 @@ fn main() {
                 d,
                 n / d
             );
-            break
+            break;
         } else {
             // We know $a \in \mathbb{Z}^*_N$
             let r = find_order(a, n);

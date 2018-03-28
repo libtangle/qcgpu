@@ -50,11 +50,6 @@ doc = false
 path = "algorithms/grover.rs"
 
 [[example]]
-name = "ghz"
-doc = false
-path = "examples/ghz-state.rs"
-
-[[example]]
 name = "simple"
 doc = false
 path = "examples/simple.rs"

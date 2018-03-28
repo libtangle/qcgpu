@@ -8,7 +8,7 @@ use rand::random;
 
 use kernel::KERNEL;
 use gates::Gate;
-use gates::{h, s, t, x, y, z, negh};
+use gates::{h, negh, s, t, x, y, z};
 
 /// Representation of a quantum register
 
@@ -158,45 +158,6 @@ impl State {
         }
 
         self.buffer = result_buffer;
-    }
-
-    /// Apply the grovers oracle, which negates the amplitude of the `number`th state
-    pub fn apply_grover_oracle(&mut self, number: i32) {
-        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
-
-        let apply = self.pro_que
-            .kernel_builder("grover_oracle")
-            .arg(&self.buffer)
-            .arg(&result_buffer)
-            .arg(number)
-            .build()
-            .unwrap();
-
-        unsafe {
-            apply.enq().unwrap();
-        }
-
-        self.buffer = result_buffer;
-    }
-
-    /// Apply the grovers amplification procedure
-    pub fn apply_grover_amplify(&mut self) {
-        self.apply_all(negh());
-        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
-
-        let apply = self.pro_que
-            .kernel_builder("grover_amplify")
-            .arg(&self.buffer)
-            .arg(&result_buffer)
-            .build()
-            .unwrap();
-
-        unsafe {
-            apply.enq().unwrap();
-        }
-
-        self.buffer = result_buffer;
-        self.apply_all(h());
     }
 
     /// Return the probabilities of each outcome.
@@ -406,6 +367,34 @@ impl State {
     /// Equivilent to `state.apply_controlled_gate(control, target, x());`
     pub fn cx(&mut self, control: i32, target: i32) {
         self.apply_controlled_gate(control, target, x());
+    }
+
+    /// Toffoli (Controlled-Controlled-NOT gate)
+    /// Shorthand method
+    pub fn toffoli(&mut self, control1: i32, control2: i32, target: i32) {
+        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer().unwrap();
+
+        let gate = x();
+
+        let apply = self.pro_que
+            .kernel_builder("apply_controlled_controlled_gate")
+            .arg(&self.buffer)
+            .arg(&result_buffer)
+            .arg(control1)
+            .arg(control2)
+            .arg(target)
+            .arg(gate.a)
+            .arg(gate.b)
+            .arg(gate.c)
+            .arg(gate.d)
+            .build()
+            .unwrap();
+
+        unsafe {
+            apply.enq().unwrap();
+        }
+
+        self.buffer = result_buffer;
     }
 
     /// Quantum Fourier Transform.

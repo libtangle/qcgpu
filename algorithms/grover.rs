@@ -1,37 +1,43 @@
+//! # Grovers Algorithm
+//!
+//! Given an unstructured set $N = \{a_1, a_2,\dots,a_n\}$, find
+//! a given element $a_i \in N$.
+//!
+//! This implementation looks for a given number $a$ in the set $\{0,1,\dots,\lceil \log2 (a) \rceil\}$
+//!
+//! ## The Algorithm
+//!
+//! (pseudo code)
+//!
+//! ```pseudo
+//! Initialize $\lceil \log2 (a) \rceil\$ qubits to the 1 state.
+//! ```
+//!
+//! See https://cs.uwaterloo.ca/~watrous/LectureNotes.html
+
 extern crate qcgpu;
 
 use qcgpu::State;
-use qcgpu::gates::{negh, h, z, x};
+use qcgpu::gates::{h, negh, x, z};
 use std::f32::consts::PI;
 use std::env;
 
-// Finding the number 11011
+// Finding the number 10 from 2 qubits
 fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let num_arg = &args[1];
-    let num = num_arg.parse::<i32>().unwrap();
-
-    search(num);
-}
-
-fn search(n: i32) {
-    let qubits_needed = (n as f32).log2().ceil() as u32;
-    let num_amps = 2_i32.pow(qubits_needed);
-    let num_amplifications_needed = ((num_amps as f32).sqrt() * PI / 4.0) as i32;
-
-    println!("Searching for: {}", n);
-    println!("Using: {} qubits", qubits_needed);
-    println!("{} amplifications needed", num_amplifications_needed);
-
-    let mut state = State::new(qubits_needed, 1);
-
+    let mut state = State::new(2, 1);
     state.apply_all(h());
+    state.s(0);
+    state.h(1);
+    state.cx(0, 1);
+    state.h(1);
+    state.s(0);
+    state.apply_all(h());
+    state.apply_all(x());
+    state.h(1);
+    state.cx(0, 1);
+    state.h(1);
+    state.apply_all(h());
+    state.apply_all(x());
 
-    for _ in 0..num_amplifications_needed {
-        state.apply_grover_oracle(n);
-        state.apply_grover_amplify();
-    }
-
-    println!("Measured: {:?}", state.measure_many(10000));
+    println!("Measured: {:?}", state.measure_many(10000000));
 }
