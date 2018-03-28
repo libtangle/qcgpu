@@ -6,6 +6,7 @@
 //!
 //! - [Getting Started with QCGPU](./getting_started.html)
 
+#![ignore(doc_markdown)]
 #![feature(test)]
 
 extern crate num_complex;

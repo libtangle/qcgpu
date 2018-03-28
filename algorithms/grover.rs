@@ -18,9 +18,7 @@
 extern crate qcgpu;
 
 use qcgpu::State;
-use qcgpu::gates::{h, negh, x, z};
-use std::f32::consts::PI;
-use std::env;
+use qcgpu::gates::{h, x, z};
 
 // Finding the number 10 from 2 qubits
 fn main() {
@@ -39,5 +37,5 @@ fn main() {
     state.apply_all(h());
     state.apply_all(x());
 
-    println!("Measured: {:?}", state.measure_many(10000000));
+    println!("Measured: {:?}", state.measure_many(100_000));
 }

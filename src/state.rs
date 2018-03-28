@@ -8,7 +8,7 @@ use rand::random;
 
 use kernel::KERNEL;
 use gates::Gate;
-use gates::{h, negh, s, t, x, y, z};
+use gates::{h, s, t, x, y, z};
 
 /// Representation of a quantum register
 
@@ -271,7 +271,7 @@ impl State {
         self.buffer = source_buffer;
         self.pro_que = ocl_pq;
         self.num_amps = num_amps;
-        self.num_qubits = self.num_qubits + num_scratch;
+        self.num_qubits += num_scratch;
     }
 
     /// Measure the scratch qubits. The measurement is discarded, and
@@ -300,7 +300,7 @@ impl State {
         self.buffer = source_buffer;
         self.pro_que = ocl_pq;
         self.num_amps = num_amps;
-        self.num_qubits = self.num_qubits - num_to_measure;
+        self.num_qubits = self.num_qubits -= num_to_measure;
     }
 
     /// Print Information About The Device
