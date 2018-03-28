@@ -45,6 +45,11 @@ doc = false
 path = "algorithms/shor.rs"
 
 [[example]]
+name = "grover"
+doc = false
+path = "algorithms/grover.rs"
+
+[[example]]
 name = "ghz"
 doc = false
 path = "examples/ghz-state.rs"

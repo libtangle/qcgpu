@@ -67,6 +67,21 @@ pub fn h() -> Gate {
     }
 }
 
+/// Negative Hadamard Gate
+///
+/// [-0.70710678118, -0.70710678118]
+///
+/// [-0.70710678118, 0.70710678118]
+#[inline]
+pub fn negh() -> Gate {
+    Gate {
+        a: Complex32::new(-FRAC_1_SQRT_2, 0.0),
+        b: Complex32::new(-FRAC_1_SQRT_2, 0.0),
+        c: Complex32::new(-FRAC_1_SQRT_2, 0.0),
+        d: Complex32::new(FRAC_1_SQRT_2, 0.0),
+    }
+}
+
 /// Pauli X / NOT Gate
 ///
 /// [0, 1]

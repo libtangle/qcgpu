@@ -10,6 +10,15 @@ static complex_f add(complex_f a, complex_f b) {
 }
 
 /*
+ * Negation of a complex numbers:
+ *
+ * -a = -(Re(a) - i(Im(a))
+ */
+static complex_f neg(complex_f a) {
+    return (complex_f)(-a.x, -a.y);
+}
+
+/*
  * Multiplication of two complex numbers:
  *
  * a * b =
@@ -99,6 +108,43 @@ __kernel void apply_controlled_gate(
     }
   }
 }
+
+/*
+ * The oracle for grovers algorithm
+ * Technically cheating but anyway
+ */
+__kernel void grover_oracle(
+  __global complex_f* const amplitudes,
+  __global complex_f* amps,
+  uint target
+) {
+  uint const state = get_global_id(0);
+  complex_f const amp = amplitudes[state];
+
+  if (state == target) {
+    amps[state] = neg(amp);
+  } else {
+    amps[state] = amp;
+  }
+}
+
+/*
+ * The grover amplification procedure
+ */
+__kernel void grover_amplify(
+  __global complex_f* const amplitudes,
+  __global complex_f* amps
+) {
+  uint const state = get_global_id(0);
+  complex_f const amp = amplitudes[state];
+
+  if (state == 0) {
+    amps[state] = neg(amp);
+  } else {
+      amps[state] = amp;
+  }
+}
+
 
 /*
  * Swaps the states of two qubits in the register
