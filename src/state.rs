@@ -28,7 +28,7 @@ impl State {
     ///
     /// ```rust
     /// # extern crate qcgpu;
-    /// let state = qcgpu::State::from_bit_string("|00>");
+    /// let state = qcgpu::State::new(2, 1);
     /// ```
     pub fn new(num_qubits: u32, backend: usize) -> State {
         let num_amps = 2_u32.pow(num_qubits) as usize;
@@ -68,7 +68,7 @@ impl State {
     ///
     /// ```rust
     /// # extern crate qcgpu;
-    /// let state = qcgpu::State::from_bit_string("|00>");
+    /// let state = qcgpu::State::from_bit_string("|00>", 1);
     /// ```
     pub fn from_bit_string(bit_string: &str, backend: usize) -> State {
         let bits = bit_string.to_string().replace("|", "").replace(">", "");
