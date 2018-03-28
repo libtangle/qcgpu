@@ -32,14 +32,27 @@ fn main() {
     println!("Measured: {}", state.measure());
     // 1
 }
-
 ```
 
 ## Initial Benchmarks
 
 ```rust
-test tests::qubits_20_not_all_cpu ... bench: 166,565,996 ns/iter (+/- 4,235,438)
-test tests::qubits_20_not_all_gpu ... bench:  74,625,368 ns/iter (+/- 4,295,963)
+5 Qubits Single Gate Application/GPU
+                        time:   [204.39 us 214.76 us 225.98 us]
+5 Qubits Single Gate Application/CPU
+                        time:   [157.85 us 160.23 us 162.47 us]
+25 Qubits Single Gate Application/GPU
+                        time:   [103.50 ms 105.64 ms 108.39 ms]
+25 Qubits Single Gate Application/CPU
+                        time:   [248.81 ms 249.93 ms 250.53 ms]
+5 Qubits Controlled Gate Application/GPU
+                        time:   [205.55 us 209.50 us 214.34 us]
+5 Qubits Controlled Gate Application/CPU
+                        time:   [158.28 us 159.56 us 161.78 us]
+25 Qubits Controlled Gate Application/GPU
+                        time:   [106.13 ms 108.15 ms 110.50 ms]
+25 Qubits Controlled Gate Application/CPU
+                        time:   [246.37 ms 247.91 ms 248.89 ms]
 ```
 
 ## Notes
