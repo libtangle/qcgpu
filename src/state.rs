@@ -300,7 +300,7 @@ impl State {
         self.buffer = source_buffer;
         self.pro_que = ocl_pq;
         self.num_amps = num_amps;
-        self.num_qubits = self.num_qubits -= num_to_measure;
+        self.num_qubits -= num_to_measure;
     }
 
     /// Print Information About The Device
@@ -397,33 +397,7 @@ impl State {
         self.buffer = result_buffer;
     }
 
-    /// Quantum Fourier Transform.
-    pub fn qft(&mut self, width: i32) {
-        // Phase shift by PI / 2^{control-target}
-        let mut i = width - 1;
-        let mut j = width - 1;
 
-        while i >= 0 {
-            while j > i {
-                self.cond_phase(j, i);
-                j -= 1;
-            }
-            self.h(i);
-            i -= 1;
-        }
-    }
-
-    /// Apply a conditional phase shift by PI / 2^(CONTROL - TARGET)
-    fn cond_phase(&mut self, control: i32, target: i32) {
-        let z = Complex32::new(0.0, PI / 2_f32.powi(control - target)).exp();
-
-        let phase_gate = Gate {
-            a: Complex32::new(1.0, 0.0),
-            b: Complex32::new(0.0, 0.0),
-            c: Complex32::new(0.0, 0.0),
-            d: z,
-        };
-        self.apply_controlled_gate(control, target, phase_gate);
     }
 
     /// Swap two qubits in the register
