@@ -36,6 +36,8 @@ fn main() {
 
 ## Initial Benchmarks
 
+Running on an amazon EC2 p3.2xlarge instance, with a 25GB General Purpose SSD (GP2)
+
 ```rust
 5 Qubits Single Gate Application/GPU
                         time:   [204.39 us 214.76 us 225.98 us]

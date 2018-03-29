@@ -1,4 +1,4 @@
-# How to install onto an EC2 p3.2xLarge instance
+# How to install onto an AWS EC2 p3.2xLarge instance
 
 ```bash
 sudo yum update -y
