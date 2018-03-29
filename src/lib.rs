@@ -15,10 +15,12 @@ extern crate test;
 
 mod kernel;
 mod state;
+mod utilities;
 pub mod gates;
 
 pub use state::State;
 pub use gates::Gate;
+pub use utilities::{get_width};
 
 #[cfg(test)]
 mod tests {
@@ -49,5 +51,13 @@ mod tests {
         let after_probabilities = state.get_probabilities();
 
         assert_eq!(before_probabilities, after_probabilities);
+    }
+
+    #[test]
+    fn get_width_test() {
+        assert_eq!(get_width(1), 1);
+        assert_eq!(get_width(3), 2);
+        assert_eq!(get_width(7), 3);
+        assert_eq!(get_width(8), 4);
     }
 }
