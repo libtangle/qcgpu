@@ -213,7 +213,7 @@ impl State {
     }
 
     /// Preform multiple measurements, returning the results
-    /// as a HashMap, with the key as the result and the value as teh
+    /// as a HashMap, with the key as the result and the value as the
     /// number of times that result was measured
     pub fn measure_many(&mut self, num_iterations: i32) -> HashMap<String, i32> {
         let probabilities = self.get_probabilities();
@@ -300,6 +300,37 @@ impl State {
         self.pro_que = ocl_pq;
         self.num_amps = num_amps;
         self.num_qubits -= num_to_measure;
+    }
+
+    /// Preform multiple measurements of the first `num_to_measure`, returning the results
+    /// as a HashMap, with the key as the result and the value as the
+    /// number of times that result was measured
+    pub fn measure_first(&mut self, num_to_measure: i32, num_iterations: i32) -> HashMap<String, i32> {
+        let probabilities = self.get_probabilities();
+        let mut num_results = HashMap::new();
+
+        for _ in 0..num_iterations {
+            let mut key = random::<f32>();
+            if key > 1.0 {
+                key %= 1.0;
+            }
+
+            let mut i = 0;
+            while i < probabilities.len() {
+                key -= probabilities[i];
+                if key <= 0.0 {
+                    break;
+                }
+                i += 1;
+            }
+            let state = format!("{:0width$b}", i, width = self.num_qubits as usize);
+            let num_chars = state.len() as usize;
+            let result = state.chars().skip(num_chars - num_to_measure as usize).take(num_to_measure as usize).collect();
+            let count = num_results.entry(result).or_insert(0);
+            *count += 1;
+        }
+
+        num_results
     }
 
     /// Print Information About The Device

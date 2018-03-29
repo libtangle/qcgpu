@@ -20,7 +20,7 @@ pub mod gates;
 
 pub use state::State;
 pub use gates::Gate;
-pub use utilities::{get_width, gcd};
+pub use utilities::{gcd, get_width};
 
 #[cfg(test)]
 mod tests {
