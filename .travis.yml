@@ -8,3 +8,4 @@ matrix:
     - rust: nightly
 os: osx
 cache: cargo
+sudo: false
