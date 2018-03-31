@@ -11,9 +11,7 @@
 extern crate qcgpu;
 extern crate rand;
 
-use rand::{thread_rng, Rng};
 use qcgpu::State;
-use qcgpu::gates::h;
 use std::f32::consts::PI;
 
 fn main() {
@@ -30,7 +28,7 @@ fn main() {
         state.h(i);
     }
 
-    for i in 0..(num_inversions) {
+    for _ in 0..(num_inversions) {
         iteration(&mut state, target, reg_width);
     }
 
