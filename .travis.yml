@@ -1,10 +1,10 @@
 language: rust
-rust: nightly
-
+rust:
+  - stable
+  - beta
+  - nightly
+matrix:
+  allow_failures:
+    - rust: nightly
 os: osx
-
-env:
-  global:
-    - RUST_THREADS=4
-
 cache: cargo
