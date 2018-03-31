@@ -4,8 +4,18 @@
 
 [![Build Status](https://travis-ci.org/QCGPU/qcgpu-rust.svg?branch=master)](https://travis-ci.org/QCGPU/qcgpu-rust)
 
-* Uses OpenCL kernels.
-* Runs Cross Platform.
+**Features:**
+
+* Uses OpenCL kernels
+* Runs cross platform
+* Simulation of arbitrary quantum algorithms
+* Optional simulation of decoherence
+* Optimized for maximally entangled states
+* Accelerated with GPUs
+* Includes Example Implementations of Grover's algorithm, the Deutsch-Jozsa algorithm, the Bernstein-Vazirani algorithm and Shors algorithm
+* Implements Hadamard, Pauli and phase gates, with support for arbitrary single qubit gate creation
+* Support for controlled gates along with the toffoli and swap gate
+* Support for measuring a state many times quickly
 
 ## Prerequisites:
 * OpenCL (Ensure that an OpenCL library is installed for your platform and that `clinfo` or some other diagnostic command will run). 
@@ -56,11 +66,6 @@ Running on an amazon EC2 p3.2xlarge instance, with a 25GB General Purpose SSD (G
 25 Qubits Controlled Gate Application/CPU
                         time:   [246.37 ms 247.91 ms 248.89 ms]
 ```
-
-## Notes
-
-A stretch goal for this project is to also (optionally) simulate decoherence, to allow
-for more realistic simulations.
 
 ## License
 
