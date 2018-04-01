@@ -14,10 +14,19 @@ num-complex = "0.1.43"
 rand = "0.4.2"
 
 [dev-dependencies]
-criterion = "0.2.1"
+criterion = "0.2.2"
+libquantum = { git = "https://github.com/QCGPU/rust-libquantum" }
 
 [[bench]]
 name = "benchmark"
+harness = false
+
+[[bench]]
+name = "qiskit"
+harness = false
+
+[[bench]]
+name = "libquantum"
 harness = false
 
 [lib]

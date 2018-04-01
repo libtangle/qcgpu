@@ -1,5 +1,7 @@
 # How to install onto an AWS EC2 p3.2xLarge instance
 
+To run the benchamarks against libquantum and qiskit, they must also be installed
+
 ```bash
 sudo yum update -y
 sudo yum install git -y

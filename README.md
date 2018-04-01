@@ -21,6 +21,8 @@
 * OpenCL (Ensure that an OpenCL library is installed for your platform and that `clinfo` or some other diagnostic command will run). 
 * Rust (install [here](https://www.rustup.rs)). Please use a nightly build.
 
+If you wish to run the benchmarks, you must also install libquantum and qiskit.
+
 ## Usage
 
 First, add the crate to `cargo.toml`

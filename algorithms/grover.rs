@@ -7,7 +7,6 @@
 //!
 //! See https://cs.uwaterloo.ca/~watrous/LectureNotes.html
 
-
 extern crate qcgpu;
 extern crate rand;
 
@@ -33,8 +32,6 @@ fn main() {
     }
 
     state.h(reg_width);
-
-
 
     println!("Measured: {:?}", state.measure_first(reg_width, 1000));
 }

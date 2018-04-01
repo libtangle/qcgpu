@@ -9,3 +9,5 @@ matrix:
 os: osx
 cache: cargo
 sudo: false
+before_install:
+    - brew install libquantum # Used by the benchmarks
