@@ -13,11 +13,19 @@ use gates::{h, s, t, x, y, z};
 
 #[derive(Debug)]
 pub struct State {
+    /// The OpenCL Buffer for the state vector
     pub buffer: Buffer<Complex32>,
-    pub pro_que: ProQue,
+    pro_que: ProQue,
+    /// Number of amplitudes stored in the state vector
     pub num_amps: usize,
+    /// Number of qubits in the register
     pub num_qubits: u32,
+    /// The OpenCL Backend used. Use the method `info()` to get the devices identifier
     pub backend: usize,
+
+    /// The amount of decoherence
+    #[cfg(feature = "decoherence")]
+    pub decoherence: f32,
 }
 
 impl State {
@@ -28,7 +36,7 @@ impl State {
     ///
     /// ```rust
     /// # extern crate qcgpu;
-    /// let state = qcgpu::State::new(2, 1);
+    /// let state = qcgpu::State::new(2,0);
     /// ```
     pub fn new(num_qubits: u32, backend: usize) -> State {
         let num_amps = 2_u32.pow(num_qubits) as usize;
@@ -40,18 +48,24 @@ impl State {
             .build()
             .expect("Error Building ProQue");
 
-        let mut source = vec![Complex32::new(0.0, 0.0); ocl_pq.dims().to_len()];
-        source[0] = Complex32::new(1.0, 0.0);
-        // let source = vec![1.0f32, 0.0, 0.0, 0.0];
-
         // create a temporary vector with the source buffer
-        let source_buffer = Buffer::builder()
+        let source_buffer: Buffer<Complex32> = Buffer::builder()
             .queue(ocl_pq.queue().clone())
-            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .flags(MemFlags::new().read_write())
             .len(num_amps)
-            .copy_host_slice(&source)
             .build()
             .expect("Source Buffer");
+
+        let apply = ocl_pq
+            .kernel_builder("initalize_register")
+            .arg(&source_buffer)
+            .arg(0)
+            .build()
+            .unwrap();
+
+        unsafe {
+            apply.enq().unwrap();
+        }
 
         State {
             buffer: source_buffer,
@@ -59,6 +73,9 @@ impl State {
             num_amps,
             num_qubits,
             backend,
+
+            #[cfg(feature = "decoherence")]
+            decoherence: 0.0,
         }
     }
 
@@ -72,7 +89,7 @@ impl State {
     /// ```
     pub fn from_bit_string(bit_string: &str, backend: usize) -> State {
         let bits = bit_string.to_string().replace("|", "").replace(">", "");
-        let num_amps = 2 << (bits.len() - 1) as usize;
+        let num_amps = 2 << (bits.len() - 1);
 
         let ocl_pq = ProQue::builder()
             .src(KERNEL)
@@ -81,19 +98,26 @@ impl State {
             .build()
             .expect("Error Building ProQue");
 
-        let mut source = vec![Complex32::new(0.0, 0.0); ocl_pq.dims().to_len()];
         let value = i32::from_str_radix(bits.as_str(), 2).unwrap();
-        source[value as usize] = Complex32::new(1.0, 0.0);
-        // let source = vec![1.0f32, 0.0, 0.0, 0.0];
 
         // create a temporary vector with the source buffer
-        let source_buffer = Buffer::builder()
+        let source_buffer: Buffer<Complex32> = Buffer::builder()
             .queue(ocl_pq.queue().clone())
-            .flags(MemFlags::new().read_write().copy_host_ptr())
+            .flags(MemFlags::new().read_write())
             .len(num_amps)
-            .copy_host_slice(&source)
             .build()
             .expect("Source Buffer");
+
+        let apply = ocl_pq
+            .kernel_builder("initalize_register")
+            .arg(&source_buffer)
+            .arg(value)
+            .build()
+            .unwrap();
+
+        unsafe {
+            apply.enq().unwrap();
+        }
 
         State {
             buffer: source_buffer,
@@ -101,6 +125,9 @@ impl State {
             num_amps,
             num_qubits: bits.len() as u32,
             backend,
+
+            #[cfg(feature = "decoherence")]
+            decoherence: 0.0,
         }
     }
 
@@ -126,6 +153,9 @@ impl State {
         }
 
         self.buffer = result_buffer;
+
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// Apply a gate to every qubit in the register
@@ -157,6 +187,9 @@ impl State {
         }
 
         self.buffer = result_buffer;
+
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// Return the probabilities of each outcome.
@@ -273,6 +306,48 @@ impl State {
         self.num_qubits += num_scratch;
     }
 
+    /// This method allows you to simulate the effects of decoherence on
+    /// the simulated quantum computer. The decoherence is simulated through phase dapening.
+    /// The argument `d` will be used as the strength factor
+    ///
+    /// Note that setting the decoherence will make the simulator have to preform twice the
+    /// number of calculations, as the `decohere` function is called after each state changing
+    /// method.
+    #[cfg(feature = "decoherence")]
+    pub fn set_decoherence(&mut self, d: f32) {
+        self.decoherence = d;
+    }
+
+    /// Preforms the actual decoherence of a quantum register based on the parameter `self.decoherence`
+    #[inline]
+    #[cfg(feature = "decoherence")]
+    pub fn decohere(&mut self) {
+        if self.decoherence != 0.0 {
+            /*
+            /**
+ * Renders decoherence.
+ * @param {number} strength The strength of the decoherence.
+ */
+quantum.Simulator.prototype.applyDecoherence = function(strength) {
+  /* Generate normal distributed random numbers */
+  for (var i = 0; i < this.vectorSize; i++) {
+    do {
+      var u = 2 * Math.random() - 1;
+      var v = 2 * Math.random() - 1;
+      var s = u * u + v * v;
+    } while (s >= 1);
+    var x = u * Math.sqrt(-2 * Math.log(s) / s);
+    x *= Math.sqrt(2 * strength);
+    this.decoherenceShader.uniforms.nrands.value[i] = x / 2;
+  }
+  for (var i = this.vectorSize; i < 22; i++) {
+    this.decoherenceShader.uniforms.nrands.value[i] = 0;
+  }
+  this.renderShader(this.decoherenceShader);
+};*/
+        }
+    }
+
     /// Measure the scratch qubits. The measurement is discarded, and
     /// the register size is reduced by `num_to_measure` qubits.
     pub fn measure_scratch(&mut self, num_to_measure: u32) {
@@ -305,7 +380,11 @@ impl State {
     /// Preform multiple measurements of the first `num_to_measure`, returning the results
     /// as a HashMap, with the key as the result and the value as the
     /// number of times that result was measured
-    pub fn measure_first(&mut self, num_to_measure: i32, num_iterations: i32) -> HashMap<String, i32> {
+    pub fn measure_first(
+        &mut self,
+        num_to_measure: i32,
+        num_iterations: i32,
+    ) -> HashMap<String, i32> {
         let probabilities = self.get_probabilities();
         let mut num_results = HashMap::new();
 
@@ -324,8 +403,12 @@ impl State {
                 i += 1;
             }
             let state = format!("{:0width$b}", i, width = self.num_qubits as usize);
-            let num_chars = state.len() as usize;
-            let result = state.chars().skip(num_chars - num_to_measure as usize).take(num_to_measure as usize).collect();
+            let num_chars = state.len();
+            let result = state
+                .chars()
+                .skip(num_chars - num_to_measure as usize)
+                .take(num_to_measure as usize)
+                .collect();
             let count = num_results.entry(result).or_insert(0);
             *count += 1;
         }
@@ -425,6 +508,9 @@ impl State {
         }
 
         self.buffer = result_buffer;
+
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// Swap two qubits in the register
@@ -467,6 +553,9 @@ impl State {
         }
 
         self.buffer = result_buffer;
+
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 }
 

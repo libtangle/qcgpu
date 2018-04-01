@@ -1,3 +1,5 @@
+#![allow(missing_docs)]
+
 //! Gates and Gate Generation
 //!
 //! Matrices are in row major format, and
@@ -9,8 +11,6 @@ use std::fmt;
 use std::f32::consts::FRAC_1_SQRT_2;
 
 /// Representation of a gate
-///
-/// # Examples
 ///
 /// ```
 ///# extern crate qcgpu;

@@ -7,6 +7,19 @@ homepage = "https://github.com/qcgpu/qcgpu-rust"
 readme = "./README.md"
 keywords = ["quantum", "computation", "gpu", "simulation"]
 license = "MIT"
+exclude = ["algorithms/**/*", "benches/**/*", "examples/**/*", ".editorconfig", "EC2-install.md", "ISSUE_TEMPLATE.md", "PULL_REQUEST_TEMPLATE.md"]
+
+[badges]
+travis-ci = { repository = "https://github.com/qcgpu/qcgpu-rust", branch = "master" }
+maintenance = { status = "actively-developed" }
+
+[features]
+default = []
+decoherence = []
+
+[lib]
+name = "qcgpu"
+path = "src/lib.rs"
 
 [dependencies]
 ocl = { git = "https://github.com/QCGPU/ocl" }
@@ -28,10 +41,6 @@ harness = false
 [[bench]]
 name = "libquantum"
 harness = false
-
-[lib]
-name = "qcgpu"
-path = "src/lib.rs"
 
 [[example]]
 name = "bernstein-vazirani"

@@ -2,16 +2,12 @@
 extern crate criterion;
 extern crate qcgpu;
 
-use std::time::Duration;
 use criterion::Criterion;
 use qcgpu::State;
 
 // Criterion struct for really fast benchmarks
 fn fast_benchmark() -> Criterion {
-    Criterion::default()
-        //.warm_up_time(Duration::from_millis(250))
-        .sample_size(10)
-        .nresamples(2)
+    Criterion::default().sample_size(10).nresamples(2)
 }
 
 fn benchmarks(c: &mut Criterion) {

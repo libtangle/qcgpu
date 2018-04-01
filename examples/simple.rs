@@ -10,7 +10,7 @@ fn main() {
     let num_q = &args[1];
     let num_qubits = num_q.parse::<u32>().unwrap();
 
-    let mut state = State::new(num_qubits, 1);
+    let mut state = State::new(num_qubits, 0);
 
     // Apply the gates
     state.apply_gate(0, h());
