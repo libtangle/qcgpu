@@ -66,8 +66,3 @@ path = "algorithms/shor.rs"
 name = "grover"
 doc = false
 path = "algorithms/grover.rs"
-
-[[example]]
-name = "simple"
-doc = false
-path = "examples/simple.rs"
