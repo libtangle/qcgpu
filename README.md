@@ -23,6 +23,8 @@
 
 If you wish to run the benchmarks, you must also install libquantum and qiskit.
 
+* Libquantum can be installed from [source](http://libquantum.de/downloads), or from a package manager such as brew (`brew install libquantum --devel`) or apt (`sudo apt-get install libquantum-dev`). You should get the development version 1.1.1
+* Qiskit can be installed through pip `pip3 install qiskit`. 
 ## Usage
 
 First, add the crate to `cargo.toml`

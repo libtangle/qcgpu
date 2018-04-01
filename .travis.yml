@@ -10,4 +10,4 @@ os: osx
 cache: cargo
 sudo: false
 before_install:
-    - brew install libquantum # Used by the benchmarks
+    - brew install libquantum --devel # Used by the benchmarks
