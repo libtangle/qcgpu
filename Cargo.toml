@@ -27,7 +27,7 @@ num-complex = "0.1.43"
 rand = "0.4.2"
 ocl = "0.17"
 
-[patch.crates.io]
+[patch.crates-io]
 ocl = { git = "https://github.com/QCGPU/ocl" }
 
 [dev-dependencies]
