@@ -326,7 +326,7 @@ impl State {
         if self.decoherence != 0.0 {
             let mut rng = thread_rng();
 
-            let normal = Normal::new(0.0, self.decoherence);
+            let normal = Normal::new(0.0, self.decoherence as f32);
 
 
             let apply = self.pro_que
