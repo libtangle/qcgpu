@@ -1,10 +1,25 @@
-# QCGPU
+<h1 align="center">QCGPU-Rust</h1>
+<div align="center">Open Source, High Performance & Hardware Accelerated, Quantum Computer Simulation in Rust</div>
 
-> An Open Source, High Performance & Hardware Accelerated, Quantum Computer Simulator in Rust
+<div align="center">
+	<a href="https://qcgpu.github.io/qcgpu-rust/book/getting-started.html">Getting Started</a>
+    |
+    <a href="https://qcgpu.github.io/qcgpu-rust/book/">User Guide</a>
+    |
+    <a href="https://qcgpu.github.io/qcgpu-rust/doc/qcgpu/index.html">Documentation</a>
+    |
+    <a href="https://qcgpu.github.io/qcgpu-rust/book/algorithms/algorithms.html">Algorithms</a>
+</div>
 
-[![Build Status](https://travis-ci.org/QCGPU/qcgpu-rust.svg?branch=master)](https://travis-ci.org/QCGPU/qcgpu-rust)
-
-Read the [Docs](https://qcgpu.github.io/qcgpu-rust/doc/qcgpu/). Read The [User Guide](https://qcgpu.github.io/qcgpu-rust/book/)
+<div align="center">
+	<a href="https://travis-ci.org/qcgpu/qcgpu-rust">
+        <img src="https://travis-ci.org/qcgpu/qcgpu-rust.svg?branch=master" alt="Travis-CI">
+    </a>
+    |
+    <a href="https://crates.io/crates/qcgpu">
+        <img src="https://img.shields.io/crates/v/qcgpu.svg" alt="Crates.io">
+    </a>
+</div>
 
 **Features:**
 
