@@ -3,8 +3,8 @@ use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::Complex32;
 use std::fmt;
 use std::collections::HashMap;
-use rand::{random, Rng, thread_rng};
-use rand::distributions::Normal;
+use rand::{self, random};
+use rand::distributions::{Normal, Sample};
 
 use kernel::KERNEL;
 use gates::Gate;
@@ -324,16 +324,15 @@ impl State {
     #[cfg(feature = "decoherence")]
     pub fn decohere(&mut self) {
         if self.decoherence != 0.0 {
-            let mut rng = thread_rng();
 
-            let normal = Normal::new(0.0, self.decoherence as f32);
-
+            let mut normal = Normal::new(0.0, self.decoherence as f64);
+            let x = normal.sample(&mut rand::thread_rng());
 
             let apply = self.pro_que
                 .kernel_builder("decohere")
                 .arg(&self.buffer)
                 .arg(self.decoherence)
-                .arg(normal.sample(&rng) as f32)
+                .arg(x as f32)
                 .arg(self.num_qubits as i32)
                 .build()
                 .unwrap();
