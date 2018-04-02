@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["gcd","Calculate the greatest common divisor (Euclid's algorithm)"],["get_width","Get the number of qubits needed to represent a number."]],"mod":[["gates","Gates and Gate Generation"]],"struct":[["State","Representation of a quantum register"]]});
