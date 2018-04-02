@@ -3,7 +3,7 @@ use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::Complex32;
 use std::fmt;
 use std::collections::HashMap;
-use rand::{self, random};
+use rand::random;
 use rand::distributions::{Normal, Sample};
 
 use kernel::KERNEL;
