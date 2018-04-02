@@ -4,6 +4,8 @@
 
 [![Build Status](https://travis-ci.org/QCGPU/qcgpu-rust.svg?branch=master)](https://travis-ci.org/QCGPU/qcgpu-rust)
 
+Read the [Docs](https://qcgpu.github.io/qcgpu-rust/doc/qcgpu/). Read The [User Guide](https://qcgpu.github.io/qcgpu-rust/book/)
+
 **Features:**
 
 * Uses OpenCL kernels
