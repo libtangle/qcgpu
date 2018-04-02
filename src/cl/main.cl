@@ -195,7 +195,7 @@ static uint pow_mod(uint x, uint y, uint n)
     uint r = 1;
     while (y > 0)
     {
-        if (y & 1 == 1)
+        if ((y & 1) == 1)
         {
             r = r * x % n;
         }
@@ -279,6 +279,8 @@ __kernel void initalize_register(
 __kernel void decohere(
     __global complex_f *amplitudes,
     float const lambda,
+    float const rand1, // Can't Get Random Numbers
+    float const rand2,
     uint const num_qubits
 ) {
     uint const i = get_global_id(0);
@@ -288,8 +290,8 @@ __kernel void decohere(
     // x is random
 
     do {
-        u = 2 * quantum_frand() - 1;
-        v = 2 * quantum_frand() - 1;
+        u = 2 * rand1 - 1;
+        v = 2 * rand2 - 1;
         s = u * u + v * v;
       } while (s >= 1);
 
@@ -297,7 +299,7 @@ __kernel void decohere(
     x *= sqrt(2 * lambda) / 2;
 
     for (uint i = 0; i < num_qubits; i++) {
-        if (i & ((MAX_UNSIGNED)1 << j))
+        if (i & ((0xffffffff)1 << j))
             angle += x;
         else
             angle -= x;
