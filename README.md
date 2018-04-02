@@ -12,8 +12,8 @@
 </div>
 
 <div align="center">
-	<a href="https://travis-ci.org/qcgpu/qcgpu-rust">
-        <img src="https://travis-ci.org/qcgpu/qcgpu-rust.svg?branch=master" alt="Travis-CI">
+	<a href="https://travis-ci.org/QCGPU/qcgpu-rust">
+        <img src="https://travis-ci.org/QCGPU/qcgpu-rust.svg?branch=master" alt="Travis-CI">
     </a>
     |
     <a href="https://crates.io/crates/qcgpu">
