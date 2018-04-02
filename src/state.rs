@@ -154,9 +154,6 @@ impl State {
         }
 
         self.buffer = result_buffer;
-
-        #[cfg(feature = "decoherence")]
-        self.decohere();
     }
 
     /// Apply a gate to every qubit in the register
@@ -322,16 +319,15 @@ impl State {
     /// Preforms the actual decoherence of a quantum register based on the parameter `self.decoherence`
     ///
     /// This method does not have a custom OpenCL kernel, but that will be changed in later updates.
-    #[inline]
     #[cfg(feature = "decoherence")]
     pub fn decohere(&mut self) {
         if self.decoherence != 0.0 {
             let mut normal = Normal::new(0.0, self.decoherence as f64);
 
-            for i in 0..self.num_qubits as i32 {
+            for i in 0..1 {
                 let angle = normal.sample(&mut rand::thread_rng());
 
-                // Apply a phase shift according to the normally distrobuted angle
+                // Apply a phase shift according to the normally distributed angle
                 let gate = r(angle as f32);
                 self.apply_gate(i, gate);
             }
@@ -422,6 +418,8 @@ impl State {
     /// Equivilent to `state.apply_gate(target, h());`
     pub fn h(&mut self, target: i32) {
         self.apply_gate(target, h());
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// S Gate
@@ -430,6 +428,8 @@ impl State {
     /// Equivilent to `state.apply_gate(target, s());`
     pub fn s(&mut self, target: i32) {
         self.apply_gate(target, s());
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// T Gate
@@ -438,6 +438,8 @@ impl State {
     /// Equivilent to `state.apply_gate(target, t());`
     pub fn t(&mut self, target: i32) {
         self.apply_gate(target, t());
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// Pauli X Gate
@@ -446,6 +448,8 @@ impl State {
     /// Equivilent to `state.apply_gate(target, x());`
     pub fn x(&mut self, target: i32) {
         self.apply_gate(target, x());
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// Pauli Y Gate
@@ -454,6 +458,8 @@ impl State {
     /// Equivilent to `state.apply_gate(target, y());`
     pub fn y(&mut self, target: i32) {
         self.apply_gate(target, y());
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// Pauli Z Gate
@@ -462,6 +468,8 @@ impl State {
     /// Equivilent to `state.apply_gate(target, z());`
     pub fn z(&mut self, target: i32) {
         self.apply_gate(target, z());
+        #[cfg(feature = "decoherence")]
+        self.decohere();
     }
 
     /// Controlled Not Gate

@@ -6,9 +6,9 @@
 //! all gates use the `num_complex::Complex<f32>;`
 //! datatype.
 
-use num_complex::{Complex, Complex32};
+use num_complex::Complex32;
 use std::fmt;
-use std::f32::consts::FRAC_1_SQRT_2;
+use std::f32::consts::{FRAC_1_SQRT_2, E};
 
 /// Representation of a gate
 ///
@@ -172,6 +172,6 @@ pub fn r(angle: f32) -> Gate {
         a: Complex32::new(1.0, 0.0),
         b: Complex32::new(0.0, 0.0),
         c: Complex32::new(0.0, 0.0),
-        d: Complex::from_polar(&1.0, &angle),
+        d: Complex32::new(E, 0.0).powc(Complex32::new(0.0, angle)),
     }
 }
