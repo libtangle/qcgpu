@@ -10,3 +10,18 @@ os: osx
 sudo: false
 before_install:
     - brew install libquantum --devel
+after_success:
+    - cargo install mdbook
+    - cargo doc
+    - cp -R target/doc pages/docs
+    - cd book && mdbook build
+    - mkdir -p ../pages/guide
+    - cp -R  book ../pages/guide
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  local-dir: pages
+  on:
+    branch: master
