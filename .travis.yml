@@ -13,10 +13,10 @@ before_install:
 after_success:
     - cargo install mdbook
     - cargo doc
+    - mkdir -p pages/docs pages/book
     - cp -R target/doc pages/docs
     - cd book && mdbook build
-    - mkdir -p ../pages/guide
-    - cp -R  book ../pages/guide
+    - cp -R  book ../pages/book
 deploy:
   provider: pages
   skip-cleanup: true
