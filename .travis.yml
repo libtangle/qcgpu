@@ -7,8 +7,7 @@ matrix:
   allow_failures:
     - rust: nightly
 os: osx
-cache: cargo
+#cache: cargo
 sudo: false
 before_install:
     - brew install libquantum --devel
-    - brew postinstall libquantum
