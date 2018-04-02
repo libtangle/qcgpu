@@ -6,7 +6,7 @@
 //! all gates use the `num_complex::Complex<f32>;`
 //! datatype.
 
-use num_complex::Complex32;
+use num_complex::{Complex, Complex32};
 use std::fmt;
 use std::f32::consts::FRAC_1_SQRT_2;
 
@@ -157,5 +157,21 @@ pub fn t() -> Gate {
             0.707_106_781_186_547_524_400_844_362_104_849_039_3,
             0.707_106_781_186_547_524_400_844_362_104_849_039_3,
         ),
+    }
+}
+
+/// The Phase Shift / R gate.
+/// Note that this function has an argument of `angle`, which corresponds to the
+/// rotation angle of the gate.
+///
+/// [1 ,0]
+///
+/// [0, e^i*angle]
+pub fn r(angle: f32) -> Gate {
+    Gate {
+        a: Complex32::new(1.0, 0.0),
+        b: Complex32::new(0.0, 0.0),
+        c: Complex32::new(0.0, 0.0),
+        d: Complex::from_polar(&1.0, &angle),
     }
 }

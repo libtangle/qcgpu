@@ -8,7 +8,7 @@ use rand::distributions::{Normal, Sample};
 
 use kernel::KERNEL;
 use gates::Gate;
-use gates::{h, s, t, x, y, z};
+use gates::{h, r, s, t, x, y, z};
 
 /// Representation of a quantum register
 
@@ -320,25 +320,20 @@ impl State {
     }
 
     /// Preforms the actual decoherence of a quantum register based on the parameter `self.decoherence`
+    ///
+    /// This method does not have a custom OpenCL kernel, but that will be changed in later updates.
     #[inline]
     #[cfg(feature = "decoherence")]
     pub fn decohere(&mut self) {
         if self.decoherence != 0.0 {
-
             let mut normal = Normal::new(0.0, self.decoherence as f64);
-            let x = normal.sample(&mut rand::thread_rng());
 
-            let apply = self.pro_que
-                .kernel_builder("decohere")
-                .arg(&self.buffer)
-                .arg(self.decoherence)
-                .arg(x as f32)
-                .arg(self.num_qubits as i32)
-                .build()
-                .unwrap();
+            for i in 0..self.num_qubits as i32 {
+                let angle = normal.sample(&mut rand::thread_rng());
 
-            unsafe {
-                apply.enq().unwrap();
+                // Apply a phase shift according to the normally distrobuted angle
+                let gate = r(angle as f32);
+                self.apply_gate(i, gate);
             }
         }
     }

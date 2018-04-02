@@ -275,27 +275,3 @@ __kernel void initalize_register(
         amplitudes[state] = (complex_f)(0, 0);
     }
 }
-
-__kernel void decohere(
-    __global complex_f *amplitudes,
-    float const lambda,
-    float const x,
-    uint const num_qubits
-) {
-    uint const i = get_global_id(0);
-
-    float angle = 0;
-
-    // x is random
-
-    for (uint k = 0; k < num_qubits; k++) {
-        uint const bit_val = (((1 << i) & k) > 0) ? 1 : 0;
-        if (bit_val == 0) {
-            angle += x;
-        } else {
-            angle -= x;
-        }
-    }
-
-    amplitudes[i] = mul(amplitudes[i], cexp(angle));
-}
