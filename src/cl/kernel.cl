@@ -289,10 +289,11 @@ __kernel void decohere(
     // x is random
 
     for (uint k = 0; k < num_qubits; k++) {
-        if (i & ((0xffffffff1) << k))
-            angle += x;
-        else
-            angle -= x;
+    uint const bit_val = (((1 << i) & k) > 0) ? 1 : 0;
+    if (bit_val == 0) {
+        angle += x;
+    } else {
+        angle -= x;
     }
 
     amplitudes[i] = mul(amplitudes[i], cexp(angle));
