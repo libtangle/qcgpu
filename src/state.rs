@@ -474,7 +474,7 @@ quantum.Simulator.prototype.applyDecoherence = function(strength) {
         self.apply_gate(target, z());
     }
 
-    /// Controlled Not Gate S
+    /// Controlled Not Gate
     /// Shorthand method
     ///
     /// Equivilent to `state.apply_controlled_gate(control, target, x());`
