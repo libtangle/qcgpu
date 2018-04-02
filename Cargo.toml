@@ -2,7 +2,7 @@
 name = "qcgpu"
 version = "0.1.0"
 authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
-documentation = "https://qcgpu.github.io/qcgpu-rust/doc/qcgpu/"
+documentation = "https://qcgpu.github.io/qcgpu-rust/doc/qcgpu/index.html"
 homepage = "https://github.com/qcgpu/qcgpu-rust"
 readme = "./README.md"
 keywords = ["quantum", "computation", "gpu", "simulation"]
