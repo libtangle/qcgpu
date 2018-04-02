@@ -19,7 +19,6 @@
 //! * Implements Hadamard, Pauli and phase gates, with support for arbitrary gates
 //! * Support for arbitrary controlled gates
 
-
 extern crate num_complex;
 extern crate ocl;
 extern crate rand;

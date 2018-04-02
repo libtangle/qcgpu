@@ -323,28 +323,16 @@ impl State {
     #[cfg(feature = "decoherence")]
     pub fn decohere(&mut self) {
         if self.decoherence != 0.0 {
-            /*
-            /**
- * Renders decoherence.
- * @param {number} strength The strength of the decoherence.
- */
-quantum.Simulator.prototype.applyDecoherence = function(strength) {
-  /* Generate normal distributed random numbers */
-  for (var i = 0; i < this.vectorSize; i++) {
-    do {
-      var u = 2 * Math.random() - 1;
-      var v = 2 * Math.random() - 1;
-      var s = u * u + v * v;
-    } while (s >= 1);
-    var x = u * Math.sqrt(-2 * Math.log(s) / s);
-    x *= Math.sqrt(2 * strength);
-    this.decoherenceShader.uniforms.nrands.value[i] = x / 2;
-  }
-  for (var i = this.vectorSize; i < 22; i++) {
-    this.decoherenceShader.uniforms.nrands.value[i] = 0;
-  }
-  this.renderShader(this.decoherenceShader);
-};*/
+            let apply = self.pro_que
+                .kernel_builder("decohere")
+                .arg(&self.buffer)
+                .arg(self.decoherence)
+                .build()
+                .unwrap();
+
+            unsafe {
+                apply.enq().unwrap();
+            }
         }
     }
 

@@ -43,6 +43,9 @@ static float complex_abs(complex_f a)
     return sqrt((a.x * a.x) + (a.y * a.y));
 }
 
+static complex_f cexp(float a) {
+    return (complex_f)(cos(a), sin(a));
+}
 /*
  * Applies a single qubit gate to the register.
  * The gate matrix must be given in the form:
@@ -271,4 +274,34 @@ __kernel void initalize_register(
     {
         amplitudes[state] = (complex_f)(0, 0);
     }
+}
+
+__kernel void decohere(
+    __global complex_f *amplitudes,
+    float const lambda,
+    uint const num_qubits
+) {
+    uint const i = get_global_id(0);
+    float u, v, s, x;
+    float angle = 0;
+
+    // x is random
+
+    do {
+        u = 2 * quantum_frand() - 1;
+        v = 2 * quantum_frand() - 1;
+        s = u * u + v * v;
+      } while (s >= 1);
+
+    x = u * sqrt(-2 * log(s) / s);
+    x *= sqrt(2 * lambda) / 2;
+
+    for (uint i = 0; i < num_qubits; i++) {
+        if (i & ((MAX_UNSIGNED)1 << j))
+            angle += x;
+        else
+            angle -= x;
+    }
+
+    amplitudes[i] = mul(amplitudes[i], cexp(angle));
 }
