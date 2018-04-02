@@ -4,6 +4,7 @@ use num_complex::Complex32;
 use std::fmt;
 use std::collections::HashMap;
 use rand::{random, Rng, thread_rng};
+use rand::distributions::Normal;
 
 use kernel::KERNEL;
 use gates::Gate;
@@ -325,12 +326,14 @@ impl State {
         if self.decoherence != 0.0 {
             let mut rng = thread_rng();
 
+            let normal = Normal::new(0.0, self.decoherence);
+
+
             let apply = self.pro_que
                 .kernel_builder("decohere")
                 .arg(&self.buffer)
                 .arg(self.decoherence)
-                .arg(rng.gen::<f32>())
-                .arg(rng.gen::<f32>())
+                .arg(normal.sample(&rng) as f32)
                 .arg(self.num_qubits as i32)
                 .build()
                 .unwrap();

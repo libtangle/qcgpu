@@ -279,24 +279,14 @@ __kernel void initalize_register(
 __kernel void decohere(
     __global complex_f *amplitudes,
     float const lambda,
-    float const rand1, // Can't Get Random Numbers
-    float const rand2,
+    float const x,
     uint const num_qubits
 ) {
     uint const i = get_global_id(0);
-    float u, v, s, x;
+
     float angle = 0;
 
     // x is random
-
-    do {
-        u = 2 * rand1 - 1;
-        v = 2 * rand2 - 1;
-        s = u * u + v * v;
-      } while (s >= 1);
-
-    x = u * sqrt(-2 * log(s) / s);
-    x *= sqrt(2 * lambda) / 2;
 
     for (uint k = 0; k < num_qubits; k++) {
         if (i & ((0xffffffff1) << k))
