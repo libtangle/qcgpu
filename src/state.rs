@@ -331,6 +331,7 @@ impl State {
                 .arg(self.decoherence)
                 .arg(rng.gen::<f32>())
                 .arg(rng.gen::<f32>())
+                .arg(self.num_qubits as i32)
                 .build()
                 .unwrap();
 
