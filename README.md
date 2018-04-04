@@ -15,7 +15,6 @@
 	<a href="https://travis-ci.org/QCGPU/qcgpu-rust">
         <img src="https://travis-ci.org/QCGPU/qcgpu-rust.svg?branch=master" alt="Travis-CI">
     </a>
-    |
     <a href="https://crates.io/crates/qcgpu">
         <img src="https://img.shields.io/crates/v/qcgpu.svg" alt="Crates.io">
     </a>
