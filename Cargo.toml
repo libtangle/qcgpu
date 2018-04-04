@@ -29,7 +29,7 @@ ocl = "0.18"
 
 [dev-dependencies]
 criterion = "0.2.2"
-libquantum = { git = "https://github.com/QCGPU/rust-libquantum" }
+libquantum-patched = "0.1.3"
 
 [[bench]]
 name = "benchmark"

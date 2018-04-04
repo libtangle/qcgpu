@@ -1,7 +1,9 @@
 #[macro_use]
 extern crate criterion;
-extern crate libquantum;
+extern crate libquantum_devel;
 extern crate qcgpu;
+
+use libquantum_devel as libquantum;
 
 use std::time::Duration;
 use criterion::{Criterion, Fun};
