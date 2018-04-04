@@ -11,7 +11,7 @@ license = "MIT"
 exclude = ["algorithms/**/*", "benches/**/*", "examples/**/*", ".editorconfig", "EC2-install.md", "ISSUE_TEMPLATE.md", "PULL_REQUEST_TEMPLATE.md"]
 
 [badges]
-travis-ci = { repository = "https://github.com/qcgpu/qcgpu-rust", branch = "master" }
+travis-ci = { repository = "qcgpu/qcgpu-rust", branch = "master" }
 maintenance = { status = "actively-developed" }
 
 [features]
