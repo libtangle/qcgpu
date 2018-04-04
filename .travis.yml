@@ -25,3 +25,4 @@ deploy:
   local-dir: pages
   on:
     branch: master
+    rust: stable
