@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/git/checkouts/ocl-21810c0a37a638dd/c345b5b/ocl/src/standard/kernel.rs`.">
+    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/ocl-0.18.0/src/standard/kernel.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>kernel.rs.html -- source</title>
@@ -1864,6 +1864,9 @@
 <span id="1808">1808</span>
 <span id="1809">1809</span>
 <span id="1810">1810</span>
+<span id="1811">1811</span>
+<span id="1812">1812</span>
+<span id="1813">1813</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! An OpenCL kernel.</span>
 
@@ -2296,6 +2299,9 @@
 
 
 <span class="doccomment">/// Storage for `Mem` arguments.</span>
+<span class="comment">//</span>
+<span class="comment">// NOTE: `RefCell` is used to prevent `::set_arg*` methods from requiring a</span>
+<span class="comment">// mutable reference (to `self`).</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">struct</span> <span class="ident">MemArgs</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">MemCore</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>);
 
