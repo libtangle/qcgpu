@@ -11,7 +11,7 @@ The Deutsch-Jozsa problem is to find whether \\(f\\) is *constant* or *balanced*
 Using classical computing, in the worst case, this requires \\(2^{n-1}+1\\) function evaluations.
 Using quantum computing, this can be done with just one function evaluation.
 
-The function \\(f\\), to be used in a quantum computer, must be specified specified by an oracle circuit \\(U_{f}\\) such that \\(U_{f} \lvert x \rangle = (-1)^{f(x)}\lvert x \rangle\\).
+The function \\(f\\), to be used in a quantum computer, must be specified by an oracle circuit \\(U_{f}\\) such that \\(U_{f} \lvert x \rangle = (-1)^{f(x)}\lvert x \rangle\\).
 
 ## The Algorithm
 
