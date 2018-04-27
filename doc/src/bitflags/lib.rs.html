@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/bitflags-1.0.1/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/bitflags-1.0.2/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1435,7 +1435,7 @@
 
 <span class="attribute">#![<span class="ident">no_std</span>]</span>
 
-<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/bitflags/1.0.1&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/bitflags/1.0.2&quot;</span>)]</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
@@ -1732,7 +1732,7 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_bits</span>(<span class="ident">bits</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>) <span class="op">-&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">_core</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> (<span class="ident">bits</span> <span class="op">&amp;</span> <span class="op">!</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span>::<span class="ident">all</span>().<span class="ident">bits</span>()) <span class="op">==</span> <span class="number">0</span> {
-                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">_core</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span>::<span class="prelude-val">Some</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span> { <span class="ident">bits</span>: <span class="ident">bits</span> })
+                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">_core</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span>::<span class="prelude-val">Some</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span> { <span class="ident">bits</span> })
                 } <span class="kw">else</span> {
                     <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">_core</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span>::<span class="prelude-val">None</span>
                 }
@@ -1742,7 +1742,7 @@
             <span class="doccomment">/// that do not correspond to flags.</span>
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_bits_truncate</span>(<span class="ident">bits</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>) <span class="op">-&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span> {
-                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span> { <span class="ident">bits</span>: <span class="ident">bits</span> } <span class="op">&amp;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span>::<span class="ident">all</span>()
+                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span> { <span class="ident">bits</span> } <span class="op">&amp;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span>::<span class="ident">all</span>()
             }
 
             <span class="doccomment">/// Returns `true` if no flags are currently stored.</span>
