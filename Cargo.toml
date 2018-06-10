@@ -1,0 +1,6 @@
+[package]
+name = "qcgpu"
+version = "1.0.0"
+authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
+
+[dependencies]
