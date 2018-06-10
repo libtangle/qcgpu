@@ -4,3 +4,11 @@ version = "1.0.0"
 authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
 
 [dependencies]
+num-complex = "0.1.0"
+ocl = "0.18.0"
+rand = "0.5.1"
+
+[[example]]
+name = "bell"
+doc = false
+path = "examples/bell-state.rs"
