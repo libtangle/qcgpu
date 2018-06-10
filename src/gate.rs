@@ -2,6 +2,20 @@ use num_complex::Complex32;
 use std::fmt;
 use std::f32::consts::FRAC_1_SQRT_2;
 
+/// Representation of a gate
+///
+/// ```
+///# extern crate qcgpu;
+///# extern crate num_complex;
+///# use qcgpu::Gate;
+///# use num_complex::Complex32;
+/// Gate {
+///    a: Complex32::new(0.0, 0.0), b: Complex32::new(1.0, 0.0),
+///    c: Complex32::new(1.0, 0.0), d: Complex32::new(0.0, 0.0)
+/// };
+///
+///
+#[derive(Debug, Clone, Copy)]
 pub struct Gate {
     pub a: Complex32,
     pub b: Complex32,
@@ -42,5 +56,36 @@ pub fn x() -> Gate {
         b: Complex32::new(1.0, 0.0),
         c: Complex32::new(1.0, 0.0),
         d: Complex32::new(0.0, 0.0),
+    }
+}
+
+
+/// Pauli Y Gate
+///
+/// [0, -i]
+///
+/// [i, 0]
+#[inline]
+pub fn y() -> Gate {
+    Gate {
+        a: Complex32::new(0.0, 0.0),
+        b: Complex32::new(0.0, -1.0),
+        c: Complex32::new(0.0, 1.0),
+        d: Complex32::new(0.0, 0.0),
+    }
+}
+
+/// Pauli Z Gate
+///
+/// [1, 0]
+///
+/// [0, -1]
+#[inline]
+pub fn z() -> Gate {
+    Gate {
+        a: Complex32::new(1.0, 0.0),
+        b: Complex32::new(0.0, 0.0),
+        c: Complex32::new(0.0, 0.0),
+        d: Complex32::new(-1.0, 0.0),
     }
 }

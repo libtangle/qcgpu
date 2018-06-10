@@ -4,10 +4,12 @@ use gate::Gate;
 use ocl::{Buffer, MemFlags, ProQue};
 use num_complex::{Complex, Complex32};
 use rand::random;
+use std::fmt;
 
 // OpenCL Kernel
 pub static KERNEL: &'static str = include_str!("kernel.cl");
 
+#[derive(Debug)]
 pub struct OpenCL {
     /// OpenCL Buffer for the state vector
     pub buffer: Buffer<Complex<f32>>,
@@ -136,5 +138,35 @@ impl Backend for OpenCL {
         }
 
         i as u8
+    }
+}
+
+impl fmt::Display for OpenCL {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut first = true;
+
+        let mut vec_result = vec![Complex32::new(0.0, 0.0); self.buffer.len()];
+        self.buffer.read(&mut vec_result).enq().unwrap();
+
+        for (idx, item) in vec_result.iter().enumerate() {
+            if !first {
+                write!(f, ", ").unwrap();
+            } else {
+                first = false;
+            }
+
+            write!(f, "[{}]: ", idx).unwrap();
+
+            // Do we print the imaginary part?
+            if item.im == 0.0 {
+                write!(f, "{}", item.re).unwrap();
+            } else if item.re == 0.0 {
+                write!(f, "{}i", item.im).unwrap();
+            } else {
+                write!(f, "{}", item).unwrap();
+            }
+        }
+
+        Ok(())
     }
 }
