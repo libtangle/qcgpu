@@ -1,3 +1,9 @@
+//! # Bell State / EPR Pair
+//!
+//! The Bell State, also known as the EPR pair (after Einstein, Podosky and Rosen)
+//! is the simplest example of entanglement.
+//!
+//! The Bell State is defined as the maximally entangled quantum state of two qubits.
 extern crate qcgpu;
 
 use qcgpu::Simulator;

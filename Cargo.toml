@@ -12,3 +12,13 @@ rand = "0.5.1"
 name = "bell"
 doc = false
 path = "examples/bell-state.rs"
+
+[[example]]
+name = "super-dense"
+doc = false
+path = "examples/super-dense.rs"
+
+[[example]]
+name="bernstein-vazirani"
+doc = false
+path = "examples/bernstein-vazirani.rs"
