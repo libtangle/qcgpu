@@ -44,7 +44,7 @@ First, add the crate to `cargo.toml`
 
 ```toml
 [dependencies]
-qcgpu = { git = "https://github.com/QCGPU/QCGPU-rust" }
+qcgpu = 1.0.0 
 ```
 
 Then use the crate!
