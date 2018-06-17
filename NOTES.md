@@ -1,6 +1,9 @@
-# Quantum Computer Simulators
+# Notes
 
-## Requirements
+> This document is to keep track of various ideas, plans ect. relating
+> to the development of QCGPU.
+
+## Simulators
 
 At a bare minimum, a quantum computer simulator must have the following parts:
 
