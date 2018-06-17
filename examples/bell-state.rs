@@ -16,6 +16,6 @@ fn main() {
     sim.h(0);
     sim.cx(0, 1);
 
-    println!("Measurment Results:");
+    println!("Measurement Results:");
     println!("{}", sim.measure().unwrap());
 }
