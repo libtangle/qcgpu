@@ -11,11 +11,11 @@ use qcgpu::Simulator;
 fn main() {
     println!("Creating Bell State");
 
-    let mut sim = Simulator::new_opencl(2);
+    let mut sim = Simulator::new_opencl(2).unwrap();
 
     sim.h(0);
     sim.cx(0, 1);
 
     println!("Measurment Results:");
-    println!("{}", sim.measure());
+    println!("{}", sim.measure().unwrap());
 }

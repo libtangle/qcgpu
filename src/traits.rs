@@ -1,20 +1,26 @@
 use gate::Gate;
 use std::fmt::{Debug, Display};
-use std::collections::HashMap;
+use failure::Error;
 
 pub trait Backend: Debug + Display {
-    fn apply_gate(&mut self, gate: Gate, target: u8);
-    fn apply_controlled_gate(&mut self, gate: Gate, control: u8, target: u8);
-    fn measure(&self) -> u8;
-    fn measure_many(&self, iters: u32) -> HashMap<u8, u32> {
-        let mut results = HashMap::new();
+    fn num_qubits(&self) -> u8;
+    fn apply_gate(&mut self, gate: Gate, target: u8) -> Result<(), Error>;
+    fn apply_controlled_gate(&mut self, gate: Gate, control: u8, target: u8) -> Result<(), Error>;
+    fn measure_qubit(&mut self, target: u8) -> Result<u8, Error>;
 
-        for _ in 0..iters {
-            let state = self.measure();
-            let count = results.entry(state).or_insert(0);
-            *count += 1;
+    fn measure(&mut self) -> Result<u8, Error> {
+        let mut result = 0;
+        for i in 0..self.num_qubits() {
+            let bit_mask = 1 << i;
+            if self.measure_qubit(i)? == 1 {
+                // 1, set the bit in result
+                result = result | bit_mask
+            } else {
+                // 0, clear the bit in result
+                result = result & (!bit_mask)
+            }
         }
 
-        results
+        Ok(result)
     }
 }

@@ -59,7 +59,6 @@ pub fn x() -> Gate {
     }
 }
 
-
 /// Pauli Y Gate
 ///
 /// [0, -i]

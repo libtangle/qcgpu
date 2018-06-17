@@ -7,6 +7,8 @@ authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
 num-complex = "0.1.0"
 ocl = "0.18.0"
 rand = "0.5.1"
+failure = "0.1.1"
+failure_derive = "0.1.1"
 
 [[example]]
 name = "bell"
@@ -17,8 +19,3 @@ path = "examples/bell-state.rs"
 name = "super-dense"
 doc = false
 path = "examples/super-dense.rs"
-
-[[example]]
-name="bernstein-vazirani"
-doc = false
-path = "examples/bernstein-vazirani.rs"
