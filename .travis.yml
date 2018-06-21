@@ -1,0 +1,29 @@
+language: rust
+rust:
+  - stable
+  - beta
+  - nightly
+matrix:
+  allow_failures:
+    - rust: nightly
+os: osx
+sudo: false
+before_install:
+    # - brew install libquantum --devel
+    - cargo update
+after_success:
+    - cargo install mdbook
+    - cargo doc
+    - mkdir -p pages/docs pages/book
+    - cp -R target/doc pages/
+    - cd book && mdbook build
+    - cp -R  book ../pages/
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  local-dir: pages
+  on:
+    branch: master
+    rust: stable
