@@ -147,7 +147,6 @@ impl Backend for OpenCL {
         Ok(i as u8)
     }
 
-
     /// Measure the value of a single qubit, leaving the register in
     /// the state where only that qubit (or any entangled qubits) have
     /// been collapsed
