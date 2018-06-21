@@ -13,3 +13,8 @@ At a bare minimum, a quantum computer simulator must have the following parts:
 * Ability to measure single qubits in the register and collapse their state into the measured state.
 
 Other functionality can be added which will make the simulator more useful, which is discussed later
+
+## Alternative Simulator Architectures
+
+* Could try using the Feynmann path integral formulation of quantum mechanics
+* Could use CUDA, Apple's Metal compute and standard Rust
