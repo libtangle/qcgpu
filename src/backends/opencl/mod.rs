@@ -74,13 +74,10 @@ impl OpenCL {
 
 impl Backend for OpenCL {
     fn apply_gate(&mut self, gate: Gate, target: u8) -> Result<(), Error> {
-        // create a temporary vector with the source buffer
-        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer()?;
-
         let apply = self.pro_que
             .kernel_builder("apply_gate")
+            .global_work_size(&self.buffer.len() / 2)
             .arg(&self.buffer)
-            .arg(&result_buffer)
             .arg(i32::from(target))
             .arg(gate.a)
             .arg(gate.b)
@@ -92,7 +89,6 @@ impl Backend for OpenCL {
             apply.enq()?;
         }
 
-        self.buffer = result_buffer;
         Ok(())
     }
 

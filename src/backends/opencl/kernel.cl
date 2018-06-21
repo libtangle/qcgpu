@@ -46,6 +46,18 @@ static float complex_abs(complex_f a)
 static complex_f cexp(float a) {
     return (complex_f)(cos(a), sin(a));
 }
+
+/*
+ * Returns the nth number where a given digit
+ * is cleared in the binary representation of the number
+ */
+static uint nth_cleared(uint n, uint target)
+{
+    uint mask = (1 << target) - 1;
+    uint not_mask = ~mask;
+
+    return (n & mask) | ((n & not_mask) << 1);
+}
 /*
  * Applies a single qubit gate to the register.
  * The gate matrix must be given in the form:
@@ -61,9 +73,11 @@ __kernel void apply_gate(
     complex_f C,
     complex_f D)
 {
-    uint const state = get_global_id(0);
+    uint const global_id = get_global_id(0);
 
-    uint const zero_state = state & (~(1 << target));
+    uint const state = nth_cleared(global_id, target);
+
+    uint const zero_state = state & (~(1 << target)); // Could just be state
     uint const one_state = state | (1 << target);
 
     uint const target_bit_val = (((1 << target) & state) > 0) ? 1 : 0;
