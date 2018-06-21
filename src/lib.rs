@@ -12,7 +12,7 @@ pub mod traits;
 pub mod backends;
 
 use backends::OpenCL;
-use gate::{h, x, y, z, Gate};
+pub use gate::{h, x, y, z, Gate};
 
 use std::fmt;
 use failure::Error;

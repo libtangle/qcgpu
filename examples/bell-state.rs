@@ -13,8 +13,8 @@ fn main() {
 
     let mut sim = Simulator::new_opencl(2).unwrap();
 
-    sim.h(0);
-    sim.cx(0, 1);
+    sim.h(0).unwrap();
+    sim.cx(0, 1).unwrap();
 
     println!("Measurement Results:");
     println!("{}", sim.measure().unwrap());

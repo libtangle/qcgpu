@@ -28,11 +28,11 @@ impl fmt::Display for BackendError {
     }
 }
 
-impl BackendError {
-    pub fn kind(&self) -> BackendErrorKind {
-        *self.inner.get_context()
-    }
-}
+// impl BackendError {
+//     pub fn kind(&self) -> BackendErrorKind {
+//         *self.inner.get_context()
+//     }
+// }
 
 impl From<BackendErrorKind> for BackendError {
     fn from(kind: BackendErrorKind) -> BackendError {
@@ -44,6 +44,6 @@ impl From<BackendErrorKind> for BackendError {
 
 impl From<Context<BackendErrorKind>> for BackendError {
     fn from(inner: Context<BackendErrorKind>) -> BackendError {
-        BackendError { inner: inner }
+        BackendError { inner }
     }
 }

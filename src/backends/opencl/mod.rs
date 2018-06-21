@@ -150,7 +150,7 @@ impl Backend for OpenCL {
     /// Measure the value of a single qubit, leaving the register in
     /// the state where only that qubit (or any entangled qubits) have
     /// been collapsed
-    fn measure_qubit(&mut self, target: u8) -> Result<u8, Error> {
+    fn measure_qubit(&mut self, _target: u8) -> Result<u8, Error> {
         unimplemented!()
     }
 

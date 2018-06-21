@@ -14,10 +14,10 @@ pub trait Backend: Debug + Display {
             let bit_mask = 1 << i;
             if self.measure_qubit(i)? == 1 {
                 // 1, set the bit in result
-                result = result | bit_mask
+                result |= bit_mask
             } else {
                 // 0, clear the bit in result
-                result = result & (!bit_mask)
+                result &= !bit_mask
             }
         }
 
