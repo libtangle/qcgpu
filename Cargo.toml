@@ -2,6 +2,16 @@
 name = "qcgpu"
 version = "1.0.0"
 authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
+documentation = "https://qcgpu.github.io/qcgpu-rust/doc/qcgpu/index.html"
+homepage = "https://qcgpu.github.io"
+readme = "./README.md"
+keywords = ["quantum", "computation", "gpu", "simulation"]
+lincense = "MIT"
+exclude = ["examples/**/*"]
+
+[badges]
+travis-ci = { repository = "qcgpu/qcgpu-rust", branch = "master" }
+maintenance = { status = "actively-developed" }
 
 [dependencies]
 num-complex = "0.1.0"
