@@ -54,8 +54,7 @@ static complex_f cexp(float a) {
  *  C D
  */
 __kernel void apply_gate(
-    __global complex_f *const amplitudes,
-    __global complex_f *amps,
+    __global complex_f *amplitudes,
     uint target,
     complex_f A,
     complex_f B,
@@ -69,10 +68,13 @@ __kernel void apply_gate(
 
     uint const target_bit_val = (((1 << target) & state) > 0) ? 1 : 0;
 
+    complex_f const zero_amp = amplitudes[zero_state];
+    complex_f const one_amp = amplitudes[one_state];
+
     if (target_bit_val == 0)
     {
-        amps[zero_state] = add(mul(A, amplitudes[zero_state]), mul(B, amplitudes[one_state]));
-        amps[one_state] = add(mul(D, amplitudes[one_state]), mul(C, amplitudes[zero_state]));
+        amplitudes[zero_state] = add(mul(A, zero_amp), mul(B, one_amp));
+        amplitudes[one_state] = add(mul(D, one_amp), mul(C, zero_amp));
     }
 }
 
