@@ -75,29 +75,23 @@ __kernel void apply_gate(
 {
     uint const global_id = get_global_id(0);
 
-    uint const state = nth_cleared(global_id, target);
+    uint const zero_state = nth_cleared(global_id, target);
 
-    uint const zero_state = state & (~(1 << target)); // Could just be state
-    uint const one_state = state | (1 << target);
-
-    uint const target_bit_val = (((1 << target) & state) > 0) ? 1 : 0;
+    // uint const zero_state = state & (~(1 << target)); // Could just be state
+    uint const one_state = zero_state | (1 << target);
 
     complex_f const zero_amp = amplitudes[zero_state];
     complex_f const one_amp = amplitudes[one_state];
 
-    if (target_bit_val == 0)
-    {
-        amplitudes[zero_state] = add(mul(A, zero_amp), mul(B, one_amp));
-        amplitudes[one_state] = add(mul(D, one_amp), mul(C, zero_amp));
-    }
+    amplitudes[zero_state] = add(mul(A, zero_amp), mul(B, one_amp));
+    amplitudes[one_state] = add(mul(D, one_amp), mul(C, zero_amp));
 }
 
 /*
  * Applies a controlled single qubit gate to the register.
  */
 __kernel void apply_controlled_gate(
-    __global complex_f *const amplitudes,
-    __global complex_f *amps,
+    __global complex_f *amplitudes,
     uint control,
     uint target,
     complex_f A,
@@ -105,33 +99,27 @@ __kernel void apply_controlled_gate(
     complex_f C,
     complex_f D)
 {
-    uint const state = get_global_id(0);
-    complex_f const amp = amplitudes[state];
+    uint const global_id = get_global_id(0);
+    uint const zero_state = nth_cleared(global_id, target);
+    uint const one_state = zero_state | (1 << target); // Set the target bit
 
-    uint const zero_state = state & (~(1 << target));
-    uint const one_state = state | (1 << target);
+    uint const control_val_zero = (((1 << control) & zero_state) > 0) ? 1 : 0;
+    uint const control_val_one = (((1 << control) & one_state) > 0) ? 1 : 0;
 
-    uint const bit_val = (((1 << target) & state) > 0) ? 1 : 0;
-    uint const control_val = (((1 << control) & state) > 0) ? 1 : 0;
+    complex_f const zero_amp = amplitudes[zero_state];
+    complex_f const one_amp = amplitudes[one_state];
 
-    if (control_val == 0)
+    if (control_val_zero == 1)
     {
-        // Control is 0, don't apply gate
-        amps[state] = amp;
+        amplitudes[zero_state] = add(mul(A, zero_amp), mul(B, one_amp));
     }
-    else
+
+    if (control_val_one == 1)
     {
-        // control is 1, apply gate.
-        if (bit_val == 0)
-        {
-            // Bitval = 0
-            amps[state] = add(mul(A, amp), mul(B, amplitudes[one_state]));
-        }
-        else
-        {
-            amps[state] = add(mul(D, amp), mul(C, amplitudes[zero_state]));
-        }
+        amplitudes[one_state] = add(mul(D, one_amp), mul(C, zero_amp));
     }
+
+
 }
 
 /*

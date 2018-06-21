@@ -93,12 +93,10 @@ impl Backend for OpenCL {
     }
 
     fn apply_controlled_gate(&mut self, gate: Gate, control: u8, target: u8) -> Result<(), Error> {
-        let result_buffer: Buffer<Complex32> = self.pro_que.create_buffer()?;
-
         let apply = self.pro_que
             .kernel_builder("apply_controlled_gate")
+            .global_work_size(&self.buffer.len() / 2)
             .arg(&self.buffer)
-            .arg(&result_buffer)
             .arg(control)
             .arg(target)
             .arg(gate.a)
@@ -110,8 +108,6 @@ impl Backend for OpenCL {
         unsafe {
             apply.enq()?;
         }
-
-        self.buffer = result_buffer;
 
         Ok(())
     }
