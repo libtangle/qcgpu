@@ -19,6 +19,10 @@ pub struct OpenCL {
 }
 
 impl OpenCL {
+    /// Initialize a new OpenCL Backend
+    ///
+    /// Takes an argument of the number of qubits to use
+    /// in the register, and returns a result with the backend.
     pub fn new(num_qubits: u8) -> Result<OpenCL, Error> {
         // How many amplitudes needed?
         let num_amps = 2_usize.pow(u32::from(num_qubits)) as usize;
@@ -52,6 +56,12 @@ impl OpenCL {
         })
     }
 
+    /// Note that this method doesn't mutate the state, thus
+    /// a new vector must be created, which means you will have to have
+    /// enough memory to store another object half the size of the
+    /// state vector
+    ///
+    /// **This methods is very likely to change!**
     fn get_probabilities(&self) -> Result<Vec<f32>, Error> {
         let result_buffer: Buffer<f32> = self.pro_que.create_buffer()?;
 
@@ -112,9 +122,14 @@ impl Backend for OpenCL {
         Ok(())
     }
 
+    /// Measure the whole register, leaving the register in
+    /// the measured state
     fn measure(&mut self) -> Result<u8, Error> {
         let probabilities = self.get_probabilities()?;
 
+        // A key must be generated on the host, as most
+        // external accelerators do not have in built support
+        // for random number generation
         let mut key = random::<f32>();
         if key > 1.0 {
             key %= 1.0;
@@ -132,10 +147,15 @@ impl Backend for OpenCL {
         Ok(i as u8)
     }
 
+
+    /// Measure the value of a single qubit, leaving the register in
+    /// the state where only that qubit (or any entangled qubits) have
+    /// been collapsed
     fn measure_qubit(&mut self, target: u8) -> Result<u8, Error> {
         unimplemented!()
     }
 
+    /// Get the number of qubits that this backend was initialized for
     fn num_qubits(&self) -> u8 {
         self.num_qubits
     }

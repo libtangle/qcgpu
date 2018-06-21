@@ -58,6 +58,11 @@ static uint nth_cleared(uint n, uint target)
 
     return (n & mask) | ((n & not_mask) << 1);
 }
+
+///////////////////////////////////////////////
+// KERNELS
+///////////////////////////////////////////////
+
 /*
  * Applies a single qubit gate to the register.
  * The gate matrix must be given in the form:
@@ -124,6 +129,7 @@ __kernel void apply_controlled_gate(
 
 /*
  * Applies a controlled-controlled single qubit gate to the register.
+ * NOT MIGRATED
  */
 __kernel void apply_controlled_controlled_gate(
     __global complex_f *const amplitudes,
@@ -168,6 +174,7 @@ __kernel void apply_controlled_controlled_gate(
 
 /*
  * Swaps the states of two qubits in the register
+ * NOT MIGRATED
  */
 __kernel void swap(
     __global complex_f *const amplitudes,
@@ -188,59 +195,6 @@ __kernel void swap(
     amps[new_state] = amplitudes[state];
 }
 
-static uint pow_mod(uint x, uint y, uint n)
-{
-    uint r = 1;
-    while (y > 0)
-    {
-        if ((y & 1) == 1)
-        {
-            r = r * x % n;
-        }
-        y /= 2;
-        x = x * x % n;
-    }
-
-    return r;
-}
-
-/*
- *  Calculates f(a) = x^a mod N
- */
-__kernel void apply_pow_mod(
-    __global complex_f *const amplitudes,
-    __global complex_f *amps,
-    uint x,
-    uint n,
-    uint input_width,
-    uint output_width)
-{
-    uint input_bit_range_from = output_width;
-    uint input_bit_range_to = output_width + input_width - 1;
-    uint target_bit_range_from = 0;
-    uint target_bit_range_to = output_width - 1;
-
-    uint high_bit_mask = (1 << (input_bit_range_to + 1)) - 1;
-    uint target_bit_mask = ((1 << (1 + target_bit_range_to - target_bit_range_from)) - 1) << target_bit_range_from;
-
-    uint const state = get_global_id(0);
-
-    uint input = (state & high_bit_mask) >> input_bit_range_from;
-    uint result = (pow_mod(x, input, n) << target_bit_range_from) & target_bit_mask;
-    uint result_state = state ^ result;
-
-    if (result_state == state)
-    {
-        amps[state] = amplitudes[state];
-    }
-    else
-    {
-        amps[state] = amplitudes[result_state];
-        amps[result_state] = amplitudes[state];
-    }
-
-    amps[result_state] = amplitudes[state];
-}
 
 /**
  * Calculates The Probabilities Of A State Vector
