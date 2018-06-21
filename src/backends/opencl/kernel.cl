@@ -63,22 +63,16 @@ __kernel void apply_gate(
     complex_f D)
 {
     uint const state = get_global_id(0);
-    complex_f const amp = amplitudes[state];
 
     uint const zero_state = state & (~(1 << target));
     uint const one_state = state | (1 << target);
 
-    uint const bit_val = (((1 << target) & state) > 0) ? 1 : 0;
+    uint const target_bit_val = (((1 << target) & state) > 0) ? 1 : 0;
 
-    if (bit_val == 0)
+    if (target_bit_val == 0)
     {
-        // Bitval = 0
-
-        amps[state] = add(mul(A, amp), mul(B, amplitudes[one_state]));
-    }
-    else
-    {
-        amps[state] = add(mul(D, amp), mul(C, amplitudes[zero_state]));
+        amps[zero_state] = add(mul(A, amplitudes[zero_state]), mul(B, amplitudes[one_state]));
+        amps[one_state] = add(mul(D, amplitudes[one_state]), mul(C, amplitudes[zero_state]));
     }
 }
 
