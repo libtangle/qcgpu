@@ -1,179 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `qcgpu` crate.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, qcgpu">
-
-    <title>qcgpu - Rust</title>
-
-    <link rel="stylesheet" type="text/css" href="../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle">
-    
-    <link rel="stylesheet" type="text/css" href="../dark.css">
-    <link rel="stylesheet" type="text/css" href="../main.css" id="themeStyle">
-    <script src="../storage.js"></script>
-    
-
-    
-    
-</head>
-<body class="rustdoc mod">
-    <!--[if lte IE 8]>
-    <div class="warning">
-        This old browser is unsupported and will most likely display funky
-        things.
-    </div>
-    <![endif]-->
-
-    
-
-    <nav class="sidebar">
-        <div class="sidebar-menu">&#9776;</div>
-        
-        <p class='location'>Crate qcgpu</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'qcgpu', ty: 'mod', relpath: '../'};</script></div>
-    </nav>
-
-    <div class="theme-picker">
-        <button id="theme-picker" aria-label="Pick another theme!">
-            <img src="../brush.svg" width="18" alt="Pick another theme!">
-        </button>
-        <div id="theme-choices"></div>
-    </div>
-    <script src="../theme.js"></script>
-    <nav class="sub">
-        <form class="search-form js-only">
-            <div class="search-container">
-                <input class="search-input" name="search"
-                       autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
-                       type="search">
-            </div>
-        </form>
-    </nav>
-
-    <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Crate <a class="mod" href=''>qcgpu</a></span><span class='out-of-band'><span id='render-detail'>
-                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                       [<span class='inner'>&#x2212;</span>]
-                   </a>
-               </span><a class='srclink' href='../src/qcgpu/lib.rs.html#1-33' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'><p>An Open Source, High Performance &amp; Hardware Accelerated, Quantum Computer Simulator in Rust</p>
-<p>This crate is a library with the aim to provide fast and effecient simulation of algorithms
-for quantum computers, while also being easy to use and abstracting away the management of the
-OpenCL Devices</p>
-<p>The best place to start with this library is with the <a href="https://qcgpu.github.io/qcgpu/book">user guide</a>,
-along with the docs (you're looking at them) and the <a href="https://github.com/QCGPU/QCGPU-rust">source code</a></p>
-<h2 id="features" class="section-header"><a href="#features">Features</a></h2>
-<ul>
-<li>Simulation of arbitrary quantum algorithms</li>
-<li>Optional simulation of decoherence</li>
-<li>Optimized for maximally entangled states</li>
-<li>Accelerated with GPUs, FPGAs and other OpenCL devices</li>
-<li>Example implementations of Grover, Deutsch-Jozsa, Bernstein-Vazirani and Shors algorithm</li>
-<li>Implements Hadamard, Pauli and phase gates, with support for arbitrary gates</li>
-<li>Support for arbitrary controlled gates</li>
-</ul>
-</div><h2 id='reexports' class='section-header'><a href="#reexports">Re-exports</a></h2>
-<table><tr><td><code>pub use gates::<a class="struct" href="../qcgpu/gates/struct.Gate.html" title="struct qcgpu::gates::Gate">Gate</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `qcgpu` crate."><meta name="keywords" content="rust, rustlang, rust-lang, qcgpu"><title>qcgpu - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><p class='location'>Crate qcgpu</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'qcgpu', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='in-band'>Crate <a class="mod" href=''>qcgpu</a></span><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/qcgpu/lib.rs.html#1-75' title='goto source code'>[src]</a></span></h1><h2 id='reexports' class='section-header'><a href="#reexports">Re-exports</a></h2>
+<table><tr><td><code>pub use gate::<a class="fn" href="../qcgpu/gate/fn.h.html" title="fn qcgpu::gate::h">h</a>;</code></td></tr><tr><td><code>pub use gate::<a class="fn" href="../qcgpu/gate/fn.x.html" title="fn qcgpu::gate::x">x</a>;</code></td></tr><tr><td><code>pub use gate::<a class="fn" href="../qcgpu/gate/fn.y.html" title="fn qcgpu::gate::y">y</a>;</code></td></tr><tr><td><code>pub use gate::<a class="fn" href="../qcgpu/gate/fn.z.html" title="fn qcgpu::gate::z">z</a>;</code></td></tr><tr><td><code>pub use gate::<a class="struct" href="../qcgpu/gate/struct.Gate.html" title="struct qcgpu::gate::Gate">Gate</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class="mod" href="gates/index.html"
-                                  title='mod qcgpu::gates'>gates</a></td>
+                           <td><a class="mod" href="backends/index.html"
+                                  title='mod qcgpu::backends'>backends</a></td>
                            <td class='docblock-short'>
-                                <p>Gates and Gate Generation</p>
-
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="mod" href="error/index.html"
+                                  title='mod qcgpu::error'>error</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="mod" href="gate/index.html"
+                                  title='mod qcgpu::gate'>gate</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="mod" href="traits/index.html"
+                                  title='mod qcgpu::traits'>traits</a></td>
+                           <td class='docblock-short'>
+                                
                            </td>
                        </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class="struct" href="struct.State.html"
-                                  title='struct qcgpu::State'>State</a></td>
+                           <td><a class="struct" href="struct.Simulator.html"
+                                  title='struct qcgpu::Simulator'>Simulator</a></td>
                            <td class='docblock-short'>
-                                <p>Representation of a quantum register</p>
-
+                                
                            </td>
-                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
-<table>
-                       <tr class=' module-item'>
-                           <td><a class="fn" href="fn.gcd.html"
-                                  title='fn qcgpu::gcd'>gcd</a></td>
-                           <td class='docblock-short'>
-                                <p>Calculate the greatest common divisor (Euclid's algorithm)</p>
-
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class="fn" href="fn.get_width.html"
-                                  title='fn qcgpu::get_width'>get_width</a></td>
-                           <td class='docblock-short'>
-                                <p>Get the number of qubits needed to represent a number.</p>
-
-                           </td>
-                       </tr></table></section>
-    <section id='search' class="content hidden"></section>
-
-    <section class="footer"></section>
-
-    <aside id="help" class="hidden">
-        <div>
-            <h1 class="hidden">Help</h1>
-
-            <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
-
-                <dl>
-                    <dt><kbd>?</kbd></dt>
-                    <dd>Show this help dialog</dd>
-                    <dt><kbd>S</kbd></dt>
-                    <dd>Focus the search field</dd>
-                    <dt><kbd>↑</kbd></dt>
-                    <dd>Move up in search results</dd>
-                    <dt><kbd>↓</kbd></dt>
-                    <dd>Move down in search results</dd>
-                    <dt><kbd>↹</kbd></dt>
-                    <dd>Switch tab</dd>
-                    <dt><kbd>&#9166;</kbd></dt>
-                    <dd>Go to active search result</dd>
-                    <dt><kbd>+</kbd></dt>
-                    <dd>Expand all sections</dd>
-                    <dt><kbd>-</kbd></dt>
-                    <dd>Collapse all sections</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h2>Search Tricks</h2>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
-                </p>
-            </div>
-        </div>
-    </aside>
-
-    
-
-    <script>
-        window.rootPath = "../";
-        window.currentCrate = "qcgpu";
-    </script>
-    <script src="../main.js"></script>
-    <script defer src="../search-index.js"></script>
-</body>
-</html>
+                       </tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "qcgpu";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

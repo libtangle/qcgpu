@@ -1,60 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rand-0.4.2/src/seq.rs`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
-
-    <title>seq.rs.html -- source</title>
-
-    <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
-    
-    <link rel="stylesheet" type="text/css" href="../../dark.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
-    <script src="../../storage.js"></script>
-    
-
-    <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
-    
-</head>
-<body class="rustdoc source">
-    <!--[if lte IE 8]>
-    <div class="warning">
-        This old browser is unsupported and will most likely display funky
-        things.
-    </div>
-    <![endif]-->
-
-    
-
-    <nav class="sidebar">
-        <div class="sidebar-menu">&#9776;</div>
-        <a href='../../rand/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk.png' alt='logo' width='100'></a>
-        
-    </nav>
-
-    <div class="theme-picker">
-        <button id="theme-picker" aria-label="Pick another theme!">
-            <img src="../../brush.svg" width="18" alt="Pick another theme!">
-        </button>
-        <div id="theme-choices"></div>
-    </div>
-    <script src="../../theme.js"></script>
-    <nav class="sub">
-        <form class="search-form js-only">
-            <div class="search-container">
-                <input class="search-input" name="search"
-                       autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
-                       type="search">
-            </div>
-        </form>
-    </nav>
-
-    <section id='main' class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rand-0.5.2/src/seq.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>seq.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico"></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rand/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk.png' alt='logo' width='100'></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -389,16 +333,14 @@
 <span id="333">333</span>
 <span id="334">334</span>
 <span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2017 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
-<span class="comment">// http://rust-lang.org/COPYRIGHT.</span>
+<span class="comment">// https://rust-lang.org/COPYRIGHT.</span>
 <span class="comment">//</span>
 <span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
+<span class="comment">// https://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
+<span class="comment">// &lt;LICENSE-MIT or https://opensource.org/licenses/MIT&gt;, at your</span>
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
 
@@ -416,6 +358,7 @@
 <span class="doccomment">/// Randomly sample `amount` elements from a finite iterator.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The following can be returned:</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// - `Ok`: `Vec` of `amount` non-repeating randomly sampled elements. The order is not random.</span>
 <span class="doccomment">/// - `Err`: `Vec` of all the elements from `iterable` in sequential order. This happens when the</span>
 <span class="doccomment">///   length of `iterable` was less than `amount`. This is considered an error since exactly</span>
@@ -425,7 +368,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Example</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// ```</span>
 <span class="doccomment">/// use rand::{thread_rng, seq};</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let mut rng = thread_rng();</span>
@@ -434,7 +377,7 @@
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sample_iter</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">I</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">iterable</span>: <span class="ident">I</span>, <span class="ident">amount</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span>
     <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">T</span><span class="op">&gt;</span>,
-          <span class="ident">R</span>: <span class="ident">Rng</span>,
+          <span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span>,
 {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">iterable</span>.<span class="ident">into_iter</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reservoir</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">amount</span>);
@@ -470,7 +413,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Example</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// ```</span>
 <span class="doccomment">/// use rand::{thread_rng, seq};</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let mut rng = thread_rng();</span>
@@ -478,7 +421,7 @@
 <span class="doccomment">/// println!(&quot;{:?}&quot;, seq::sample_slice(&amp;mut rng, &amp;values, 3));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sample_slice</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>], <span class="ident">amount</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span>,
+    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span>,
           <span class="ident">T</span>: <span class="ident">Clone</span>
 {
     <span class="kw">let</span> <span class="ident">indices</span> <span class="op">=</span> <span class="ident">sample_indices</span>(<span class="ident">rng</span>, <span class="ident">slice</span>.<span class="ident">len</span>(), <span class="ident">amount</span>);
@@ -498,7 +441,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Example</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// ```</span>
 <span class="doccomment">/// use rand::{thread_rng, seq};</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let mut rng = thread_rng();</span>
@@ -506,7 +449,7 @@
 <span class="doccomment">/// println!(&quot;{:?}&quot;, seq::sample_slice_ref(&amp;mut rng, &amp;values, 3));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sample_slice_ref</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>], <span class="ident">amount</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span>
+    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span>
 {
     <span class="kw">let</span> <span class="ident">indices</span> <span class="op">=</span> <span class="ident">sample_indices</span>(<span class="ident">rng</span>, <span class="ident">slice</span>.<span class="ident">len</span>(), <span class="ident">amount</span>);
 
@@ -526,7 +469,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Panics if `amount &gt; length`</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sample_indices</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">length</span>: <span class="ident">usize</span>, <span class="ident">amount</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span>,
+    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span>,
 {
     <span class="kw">if</span> <span class="ident">amount</span> <span class="op">&gt;</span> <span class="ident">length</span> {
         <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;`amount` must be less than or equal to `slice.len()`&quot;</span>);
@@ -556,19 +499,17 @@
 <span class="doccomment">/// This allocates the entire `length` of indices and randomizes only the first `amount`.</span>
 <span class="doccomment">/// It then truncates to `amount` and returns.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This is better than using a HashMap &quot;cache&quot; when `amount &gt;= length / 2` since it does not</span>
-<span class="doccomment">/// require allocating an extra cache and is much faster.</span>
+<span class="doccomment">/// This is better than using a `HashMap` &quot;cache&quot; when `amount &gt;= length / 2`</span>
+<span class="doccomment">/// since it does not require allocating an extra cache and is much faster.</span>
 <span class="kw">fn</span> <span class="ident">sample_indices_inplace</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">length</span>: <span class="ident">usize</span>, <span class="ident">amount</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span>,
+    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span>,
 {
     <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">amount</span> <span class="op">&lt;=</span> <span class="ident">length</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">indices</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">length</span>);
     <span class="ident">indices</span>.<span class="ident">extend</span>(<span class="number">0</span>..<span class="ident">length</span>);
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">amount</span> {
         <span class="kw">let</span> <span class="ident">j</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="ident">i</span>, <span class="ident">length</span>);
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">indices</span>[<span class="ident">i</span>];
-        <span class="ident">indices</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">indices</span>[<span class="ident">j</span>];
-        <span class="ident">indices</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">tmp</span>;
+        <span class="ident">indices</span>.<span class="ident">swap</span>(<span class="ident">i</span>, <span class="ident">j</span>);
     }
     <span class="ident">indices</span>.<span class="ident">truncate</span>(<span class="ident">amount</span>);
     <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">indices</span>.<span class="ident">len</span>(), <span class="ident">amount</span>);
@@ -576,17 +517,17 @@
 }
 
 
-<span class="doccomment">/// This method performs a partial fisher-yates on a range of indices using a HashMap</span>
-<span class="doccomment">/// as a cache to record potential collisions.</span>
+<span class="doccomment">/// This method performs a partial fisher-yates on a range of indices using a</span>
+<span class="doccomment">/// `HashMap` as a cache to record potential collisions.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The cache avoids allocating the entire `length` of values. This is especially useful when</span>
-<span class="doccomment">/// `amount &lt;&lt;&lt; length`, i.e. select 3 non-repeating from 1_000_000</span>
+<span class="doccomment">/// `amount &lt;&lt;&lt; length`, i.e. select 3 non-repeating from `1_000_000`</span>
 <span class="kw">fn</span> <span class="ident">sample_indices_cache</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(
     <span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>,
     <span class="ident">length</span>: <span class="ident">usize</span>,
     <span class="ident">amount</span>: <span class="ident">usize</span>,
 ) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span>,
+    <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span>,
 {
     <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">amount</span> <span class="op">&lt;=</span> <span class="ident">length</span>);
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span><span class="op">=</span><span class="string">&quot;std&quot;</span>)]</span> <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cache</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">amount</span>);
@@ -620,14 +561,16 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> {<span class="ident">thread_rng</span>, <span class="ident">XorShiftRng</span>, <span class="ident">SeedableRng</span>};
+    <span class="kw">use</span> {<span class="ident">XorShiftRng</span>, <span class="ident">Rng</span>, <span class="ident">SeedableRng</span>};
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span><span class="op">=</span><span class="string">&quot;std&quot;</span>))]</span>
+    <span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">Vec</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_sample_iter</span>() {
         <span class="kw">let</span> <span class="ident">min_val</span> <span class="op">=</span> <span class="number">1</span>;
         <span class="kw">let</span> <span class="ident">max_val</span> <span class="op">=</span> <span class="number">100</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">test</span>::<span class="ident">rng</span>(<span class="number">401</span>);
         <span class="kw">let</span> <span class="ident">vals</span> <span class="op">=</span> (<span class="ident">min_val</span>..<span class="ident">max_val</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;&gt;</span>();
         <span class="kw">let</span> <span class="ident">small_sample</span> <span class="op">=</span> <span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="ident">vals</span>.<span class="ident">iter</span>(), <span class="number">5</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">large_sample</span> <span class="op">=</span> <span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="ident">vals</span>.<span class="ident">iter</span>(), <span class="ident">vals</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">5</span>).<span class="ident">unwrap_err</span>();
@@ -635,7 +578,7 @@
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">small_sample</span>.<span class="ident">len</span>(), <span class="number">5</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">large_sample</span>.<span class="ident">len</span>(), <span class="ident">vals</span>.<span class="ident">len</span>());
         <span class="comment">// no randomization happens when amount &gt;= len</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">large_sample</span>, <span class="ident">vals</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;&gt;</span>());
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">large_sample</span>, <span class="ident">vals</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>());
 
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">small_sample</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
             <span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">e</span> <span class="op">&gt;=</span> <span class="ident">min_val</span> <span class="op">&amp;&amp;</span> <span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">e</span> <span class="op">&lt;=</span> <span class="ident">max_val</span>
@@ -645,34 +588,34 @@
     <span class="kw">fn</span> <span class="ident">test_sample_slice_boundaries</span>() {
         <span class="kw">let</span> <span class="ident">empty</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">test</span>::<span class="ident">rng</span>(<span class="number">402</span>);
 
         <span class="comment">// sample 0 items</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="ident">empty</span>, <span class="number">0</span>), <span class="macro">vec</span><span class="macro">!</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="kw-2">&amp;</span>[<span class="number">42</span>, <span class="number">2</span>, <span class="number">42</span>], <span class="number">0</span>), <span class="macro">vec</span><span class="macro">!</span>[]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="ident">empty</span>, <span class="number">0</span>)[..], [<span class="number">0u8</span>; <span class="number">0</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="kw-2">&amp;</span>[<span class="number">42</span>, <span class="number">2</span>, <span class="number">42</span>], <span class="number">0</span>)[..], [<span class="number">0u8</span>; <span class="number">0</span>]);
 
         <span class="comment">// sample 1 item</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="kw-2">&amp;</span>[<span class="number">42</span>], <span class="number">1</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="number">42</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="kw-2">&amp;</span>[<span class="number">42</span>], <span class="number">1</span>)[..], [<span class="number">42</span>]);
         <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">42</span>], <span class="number">1</span>)[<span class="number">0</span>];
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span> <span class="op">==</span> <span class="number">1</span> <span class="op">||</span> <span class="ident">v</span> <span class="op">==</span> <span class="number">42</span>);
 
         <span class="comment">// sample &quot;all&quot; the items</span>
         <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="kw-2">&amp;</span>[<span class="number">42</span>, <span class="number">133</span>], <span class="number">2</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span> <span class="op">==</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">42</span>, <span class="number">133</span>] <span class="op">||</span> <span class="ident">v</span> <span class="op">==</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">133</span>, <span class="number">42</span>]);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..] <span class="op">==</span> [<span class="number">42</span>, <span class="number">133</span>] <span class="op">||</span> <span class="ident">v</span>[..] <span class="op">==</span> [<span class="number">133</span>, <span class="number">42</span>]);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_indices_inplace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="macro">vec</span><span class="macro">!</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_indices_inplace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">0</span>), <span class="macro">vec</span><span class="macro">!</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_indices_inplace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">1</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_indices_inplace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">0</span>, <span class="number">0</span>)[..], [<span class="number">0usize</span>; <span class="number">0</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_indices_inplace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">0</span>)[..], [<span class="number">0usize</span>; <span class="number">0</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_indices_inplace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">1</span>)[..], [<span class="number">0</span>]);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_indices_cache</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="macro">vec</span><span class="macro">!</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_indices_cache</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">0</span>), <span class="macro">vec</span><span class="macro">!</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sample_indices_cache</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">1</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_indices_cache</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">0</span>, <span class="number">0</span>)[..], [<span class="number">0usize</span>; <span class="number">0</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_indices_cache</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">0</span>)[..], [<span class="number">0usize</span>; <span class="number">0</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">sample_indices_cache</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="number">1</span>, <span class="number">1</span>)[..], [<span class="number">0</span>]);
 
         <span class="comment">// Make sure lucky 777&#39;s aren&#39;t lucky</span>
         <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">42</span>, <span class="number">777</span>];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">num_42</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">let</span> <span class="ident">total</span> <span class="op">=</span> <span class="number">1000</span>;
-        <span class="kw">for</span> _ <span class="kw">in</span> <span class="number">0</span>..<span class="ident">total</span> {
+        <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">total</span> {
             <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">sample_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r</span>, <span class="ident">slice</span>, <span class="number">1</span>);
             <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">v</span>.<span class="ident">len</span>(), <span class="number">1</span>);
             <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">v</span>[<span class="number">0</span>];
@@ -690,15 +633,12 @@
         <span class="kw">let</span> <span class="ident">xor_rng</span> <span class="op">=</span> <span class="ident">XorShiftRng</span>::<span class="ident">from_seed</span>;
 
         <span class="kw">let</span> <span class="ident">max_range</span> <span class="op">=</span> <span class="number">100</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> ::<span class="ident">test</span>::<span class="ident">rng</span>(<span class="number">403</span>);
 
         <span class="kw">for</span> <span class="ident">length</span> <span class="kw">in</span> <span class="number">1usize</span>..<span class="ident">max_range</span> {
             <span class="kw">let</span> <span class="ident">amount</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">gen_range</span>(<span class="number">0</span>, <span class="ident">length</span>);
-            <span class="kw">let</span> <span class="ident">seed</span>: [<span class="ident">u32</span>; <span class="number">4</span>] <span class="op">=</span> [
-                <span class="ident">r</span>.<span class="ident">next_u32</span>(), <span class="ident">r</span>.<span class="ident">next_u32</span>(), <span class="ident">r</span>.<span class="ident">next_u32</span>(), <span class="ident">r</span>.<span class="ident">next_u32</span>()
-            ];
-
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Selecting indices: len={}, amount={}, seed={:?}&quot;</span>, <span class="ident">length</span>, <span class="ident">amount</span>, <span class="ident">seed</span>);
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">seed</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">16</span>];
+            <span class="ident">r</span>.<span class="ident">fill</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">seed</span>);
 
             <span class="comment">// assert that the two index methods give exactly the same result</span>
             <span class="kw">let</span> <span class="ident">inplace</span> <span class="op">=</span> <span class="ident">sample_indices_inplace</span>(
@@ -723,75 +663,11 @@
 
             {
                 <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">sample_slice_ref</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">xor_rng</span>(<span class="ident">seed</span>), <span class="kw-2">&amp;</span><span class="ident">vec</span>, <span class="ident">amount</span>);
-                <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">regular</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;&gt;</span>();
+                <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">regular</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
                 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
             }
         }
     }
 }
 </pre>
-</section>
-    <section id='search' class="content hidden"></section>
-
-    <section class="footer"></section>
-
-    <aside id="help" class="hidden">
-        <div>
-            <h1 class="hidden">Help</h1>
-
-            <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
-
-                <dl>
-                    <dt><kbd>?</kbd></dt>
-                    <dd>Show this help dialog</dd>
-                    <dt><kbd>S</kbd></dt>
-                    <dd>Focus the search field</dd>
-                    <dt><kbd>↑</kbd></dt>
-                    <dd>Move up in search results</dd>
-                    <dt><kbd>↓</kbd></dt>
-                    <dd>Move down in search results</dd>
-                    <dt><kbd>↹</kbd></dt>
-                    <dd>Switch tab</dd>
-                    <dt><kbd>&#9166;</kbd></dt>
-                    <dd>Go to active search result</dd>
-                    <dt><kbd>+</kbd></dt>
-                    <dd>Expand all sections</dd>
-                    <dt><kbd>-</kbd></dt>
-                    <dd>Collapse all sections</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h2>Search Tricks</h2>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
-                </p>
-            </div>
-        </div>
-    </aside>
-
-    
-
-    <script>
-        window.rootPath = "../../";
-        window.currentCrate = "rand";
-    </script>
-    <script src="../../main.js"></script>
-    <script defer src="../../search-index.js"></script>
-</body>
-</html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "rand";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

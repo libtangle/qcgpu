@@ -1,60 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/ocl-core-0.9.0/src/types/abs.rs`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
-
-    <title>abs.rs.html -- source</title>
-
-    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle">
-    
-    <link rel="stylesheet" type="text/css" href="../../../dark.css">
-    <link rel="stylesheet" type="text/css" href="../../../main.css" id="themeStyle">
-    <script src="../../../storage.js"></script>
-    
-
-    
-    
-</head>
-<body class="rustdoc source">
-    <!--[if lte IE 8]>
-    <div class="warning">
-        This old browser is unsupported and will most likely display funky
-        things.
-    </div>
-    <![endif]-->
-
-    
-
-    <nav class="sidebar">
-        <div class="sidebar-menu">&#9776;</div>
-        
-        
-    </nav>
-
-    <div class="theme-picker">
-        <button id="theme-picker" aria-label="Pick another theme!">
-            <img src="../../../brush.svg" width="18" alt="Pick another theme!">
-        </button>
-        <div id="theme-choices"></div>
-    </div>
-    <script src="../../../theme.js"></script>
-    <nav class="sub">
-        <form class="search-form js-only">
-            <div class="search-container">
-                <input class="search-input" name="search"
-                       autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
-                       type="search">
-            </div>
-        </form>
-    </nav>
-
-    <section id='main' class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/ocl-core-0.9.0/src/types/abs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>abs.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1433,7 +1377,7 @@
         <span class="kw">let</span> <span class="ident">devices</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">functions</span>::<span class="ident">get_context_info</span>(<span class="self">self</span>, <span class="ident">ContextInfo</span>::<span class="ident">Devices</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">ContextInfoResult</span>::<span class="ident">Devices</span>(<span class="ident">ds</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">ds</span>),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OclCoreError</span>::<span class="ident">from</span>(<span class="ident">err</span>)),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         };
 
         <span class="kw">let</span> <span class="ident">devices</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">devices</span> {
@@ -1448,7 +1392,7 @@
         <span class="kw">let</span> <span class="ident">devices</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">functions</span>::<span class="ident">get_context_info</span>(<span class="self">self</span>, <span class="ident">ContextInfo</span>::<span class="ident">Devices</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">ContextInfoResult</span>::<span class="ident">Devices</span>(<span class="ident">ds</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">ds</span>),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OclCoreError</span>::<span class="ident">from</span>(<span class="ident">err</span>)),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         };
 
         <span class="kw">let</span> <span class="ident">devices</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">devices</span> {
@@ -1492,7 +1436,7 @@
         <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Void events may not be used.&quot;</span>);
     }
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">clone_from</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, _: <span class="ident">E</span>) {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">clone_from</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="ident">E</span>) {
         <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Void events may not be used.&quot;</span>);
     }
 }
@@ -1533,7 +1477,7 @@
 
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ClWaitListPtr</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Event</span>] {
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_ptr_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_event</span> {
-        <span class="self">self</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_event</span>
+        <span class="self">self</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_event</span>
     }
 
     <span class="kw">fn</span> <span class="ident">count</span> (<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
@@ -1543,7 +1487,7 @@
 
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ClWaitListPtr</span> <span class="kw">for</span> () {
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_ptr_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_event</span> {
-        <span class="ident">ptr</span>::<span class="ident">null</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_event</span>
+        <span class="ident">ptr</span>::<span class="ident">null</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_event</span>
     }
 
     <span class="kw">fn</span> <span class="ident">count</span> (<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
@@ -1566,7 +1510,7 @@
 
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">ClPlatformIdPtr</span> <span class="kw">for</span> () {
     <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">cl_platform_id</span> {
-        <span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="ident">cl_platform_id</span>
+        <span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="ident">cl_platform_id</span>
     }
 }
 
@@ -1579,7 +1523,7 @@
 
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">ClDeviceIdPtr</span> <span class="kw">for</span> () {
     <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">cl_device_id</span> {
-        <span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="ident">cl_device_id</span>
+        <span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="ident">cl_device_id</span>
     }
 }
 
@@ -1750,7 +1694,7 @@
             <span class="prelude-val">Ok</span>(<span class="ident">DeviceInfoResult</span>::<span class="ident">Platform</span>(<span class="ident">p</span>)) <span class="op">=&gt;</span> <span class="ident">p</span>,
             <span class="comment">// Ok(DeviceInfoResult::Error(e)) =&gt; return Err(*e),</span>
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         };
 
         <span class="ident">functions</span>::<span class="ident">get_platform_info</span>(<span class="kw-2">&amp;</span><span class="ident">platform</span>, <span class="ident">PlatformInfo</span>::<span class="ident">Version</span>)<span class="question-mark">?</span>.<span class="ident">as_opencl_version</span>()
@@ -1790,7 +1734,7 @@
         <span class="kw">match</span> <span class="ident">functions</span>::<span class="ident">get_context_info</span>(<span class="self">self</span>, <span class="ident">ContextInfo</span>::<span class="ident">Devices</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">ContextInfoResult</span>::<span class="ident">Devices</span>(<span class="ident">ds</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">ds</span>),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OclCoreError</span>::<span class="ident">from</span>(<span class="ident">err</span>)),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         }
     }
 
@@ -1900,7 +1844,7 @@
         <span class="kw">match</span> <span class="ident">functions</span>::<span class="ident">get_command_queue_info</span>(<span class="self">self</span>, <span class="ident">CommandQueueInfo</span>::<span class="ident">Device</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">CommandQueueInfoResult</span>::<span class="ident">Device</span>(<span class="ident">d</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">d</span>),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OclCoreError</span>::<span class="ident">from</span>(<span class="ident">err</span>)),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         }
     }
 
@@ -2050,7 +1994,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_void_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span> {
-        <span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>
+        <span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
@@ -2067,7 +2011,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">AsMem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MemMap</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">OclPrm</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">as_mem</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Mem</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Mem</span>) }
+        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Mem</span>) }
     }
 }
 
@@ -2112,7 +2056,7 @@
         <span class="kw">match</span> <span class="ident">functions</span>::<span class="ident">get_program_info</span>(<span class="self">self</span>, <span class="ident">ProgramInfo</span>::<span class="ident">Devices</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">ProgramInfoResult</span>::<span class="ident">Devices</span>(<span class="ident">d</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">d</span>),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OclCoreError</span>::<span class="ident">from</span>(<span class="ident">err</span>)),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         }
     }
 }
@@ -2196,7 +2140,7 @@
         <span class="kw">match</span> <span class="ident">functions</span>::<span class="ident">get_kernel_info</span>(<span class="self">self</span>, <span class="ident">KernelInfo</span>::<span class="ident">Program</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">KernelInfoResult</span>::<span class="ident">Program</span>(<span class="ident">d</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">d</span>),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OclCoreError</span>::<span class="ident">from</span>(<span class="ident">err</span>)),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         }
     }
 
@@ -2341,7 +2285,7 @@
     {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_valid</span>() {
             ::<span class="ident">set_event_callback</span>(<span class="self">self</span>, <span class="ident">CommandExecutionStatus</span>::<span class="ident">Complete</span>,
-                <span class="prelude-val">Some</span>(<span class="ident">callback_receiver</span>), <span class="ident">user_data_ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>)
+                <span class="prelude-val">Some</span>(<span class="ident">callback_receiver</span>), <span class="ident">user_data_ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>)
         } <span class="kw">else</span> {
             <span class="prelude-val">Err</span>(<span class="string">&quot;ocl_core::Event::set_callback: This event is null. Cannot set callback until \
                 internal event pointer is actually created by a `clCreate...` function.&quot;</span>.<span class="ident">into</span>())
@@ -2354,7 +2298,7 @@
         <span class="kw">match</span> <span class="ident">functions</span>::<span class="ident">get_event_info</span>(<span class="self">self</span>, <span class="ident">EventInfo</span>::<span class="ident">Context</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">EventInfoResult</span>::<span class="ident">Context</span>(<span class="ident">c</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">c</span>),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OclCoreError</span>::<span class="ident">from</span>(<span class="ident">err</span>)),
-            _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         }
     }
 
@@ -2524,68 +2468,4 @@
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">Sampler</span> {}
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">Sampler</span> {}
 </pre>
-</section>
-    <section id='search' class="content hidden"></section>
-
-    <section class="footer"></section>
-
-    <aside id="help" class="hidden">
-        <div>
-            <h1 class="hidden">Help</h1>
-
-            <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
-
-                <dl>
-                    <dt><kbd>?</kbd></dt>
-                    <dd>Show this help dialog</dd>
-                    <dt><kbd>S</kbd></dt>
-                    <dd>Focus the search field</dd>
-                    <dt><kbd>↑</kbd></dt>
-                    <dd>Move up in search results</dd>
-                    <dt><kbd>↓</kbd></dt>
-                    <dd>Move down in search results</dd>
-                    <dt><kbd>↹</kbd></dt>
-                    <dd>Switch tab</dd>
-                    <dt><kbd>&#9166;</kbd></dt>
-                    <dd>Go to active search result</dd>
-                    <dt><kbd>+</kbd></dt>
-                    <dd>Expand all sections</dd>
-                    <dt><kbd>-</kbd></dt>
-                    <dd>Collapse all sections</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h2>Search Tricks</h2>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
-                </p>
-            </div>
-        </div>
-    </aside>
-
-    
-
-    <script>
-        window.rootPath = "../../../";
-        window.currentCrate = "ocl_core";
-    </script>
-    <script src="../../../main.js"></script>
-    <script defer src="../../../search-index.js"></script>
-</body>
-</html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../../";window.currentCrate = "ocl_core";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script defer src="../../../search-index.js"></script></body></html>

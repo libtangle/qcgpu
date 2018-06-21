@@ -1,60 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/bitflags-1.0.2/src/lib.rs`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
-
-    <title>lib.rs.html -- source</title>
-
-    <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
-    
-    <link rel="stylesheet" type="text/css" href="../../dark.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
-    <script src="../../storage.js"></script>
-    
-
-    
-    
-</head>
-<body class="rustdoc source">
-    <!--[if lte IE 8]>
-    <div class="warning">
-        This old browser is unsupported and will most likely display funky
-        things.
-    </div>
-    <![endif]-->
-
-    
-
-    <nav class="sidebar">
-        <div class="sidebar-menu">&#9776;</div>
-        
-        
-    </nav>
-
-    <div class="theme-picker">
-        <button id="theme-picker" aria-label="Pick another theme!">
-            <img src="../../brush.svg" width="18" alt="Pick another theme!">
-        </button>
-        <div id="theme-choices"></div>
-    </div>
-    <script src="../../theme.js"></script>
-    <nav class="sub">
-        <form class="search-form js-only">
-            <div class="search-container">
-                <input class="search-input" name="search"
-                       autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
-                       type="search">
-            </div>
-        </form>
-    </nav>
-
-    <section id='main' class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/bitflags-1.0.3/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1214,6 +1158,65 @@
 <span id="1158">1158</span>
 <span id="1159">1159</span>
 <span id="1160">1160</span>
+<span id="1161">1161</span>
+<span id="1162">1162</span>
+<span id="1163">1163</span>
+<span id="1164">1164</span>
+<span id="1165">1165</span>
+<span id="1166">1166</span>
+<span id="1167">1167</span>
+<span id="1168">1168</span>
+<span id="1169">1169</span>
+<span id="1170">1170</span>
+<span id="1171">1171</span>
+<span id="1172">1172</span>
+<span id="1173">1173</span>
+<span id="1174">1174</span>
+<span id="1175">1175</span>
+<span id="1176">1176</span>
+<span id="1177">1177</span>
+<span id="1178">1178</span>
+<span id="1179">1179</span>
+<span id="1180">1180</span>
+<span id="1181">1181</span>
+<span id="1182">1182</span>
+<span id="1183">1183</span>
+<span id="1184">1184</span>
+<span id="1185">1185</span>
+<span id="1186">1186</span>
+<span id="1187">1187</span>
+<span id="1188">1188</span>
+<span id="1189">1189</span>
+<span id="1190">1190</span>
+<span id="1191">1191</span>
+<span id="1192">1192</span>
+<span id="1193">1193</span>
+<span id="1194">1194</span>
+<span id="1195">1195</span>
+<span id="1196">1196</span>
+<span id="1197">1197</span>
+<span id="1198">1198</span>
+<span id="1199">1199</span>
+<span id="1200">1200</span>
+<span id="1201">1201</span>
+<span id="1202">1202</span>
+<span id="1203">1203</span>
+<span id="1204">1204</span>
+<span id="1205">1205</span>
+<span id="1206">1206</span>
+<span id="1207">1207</span>
+<span id="1208">1208</span>
+<span id="1209">1209</span>
+<span id="1210">1210</span>
+<span id="1211">1211</span>
+<span id="1212">1212</span>
+<span id="1213">1213</span>
+<span id="1214">1214</span>
+<span id="1215">1215</span>
+<span id="1216">1216</span>
+<span id="1217">1217</span>
+<span id="1218">1218</span>
+<span id="1219">1219</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1432,10 +1435,39 @@
 <span class="doccomment">//!     assert_eq!(implemented_default, (Flags::A | Flags::C));</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Zero Flags</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Flags with a value equal to zero will have some strange behavior that one should be aware of.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//! #[macro_use]</span>
+<span class="doccomment">//! extern crate bitflags;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! bitflags! {</span>
+<span class="doccomment">//!     struct Flags: u32 {</span>
+<span class="doccomment">//!         const NONE = 0b00000000;</span>
+<span class="doccomment">//!         const SOME = 0b00000001;</span>
+<span class="doccomment">//!     }</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! fn main() {</span>
+<span class="doccomment">//!     let empty = Flags::empty();</span>
+<span class="doccomment">//!     let none = Flags::NONE;</span>
+<span class="doccomment">//!     let some = Flags::SOME;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     // Zero flags are treated as always present</span>
+<span class="doccomment">//!     assert!(empty.contains(Flags::NONE));</span>
+<span class="doccomment">//!     assert!(none.contains(Flags::NONE));</span>
+<span class="doccomment">//!     assert!(some.contains(Flags::NONE));</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     // Zero flags will be ignored when testing for emptiness</span>
+<span class="doccomment">//!     assert!(none.is_empty());</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! ```</span>
 
 <span class="attribute">#![<span class="ident">no_std</span>]</span>
-
-<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/bitflags/1.0.2&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/bitflags/1.0.3&quot;</span>)]</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
@@ -1641,7 +1673,11 @@
                             <span class="attribute">#[<span class="ident">inline</span>]</span>
                             $(<span class="question-mark">?</span> <span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>)<span class="kw-2">*</span>]</span>)<span class="op">*</span>
                             <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Flag</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-                                <span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Flag</span>.<span class="ident">bits</span> <span class="op">==</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Flag</span>.<span class="ident">bits</span>
+                                <span class="kw">if</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Flag</span>.<span class="ident">bits</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">bits</span> <span class="op">!=</span> <span class="number">0</span> {
+                                    <span class="bool-val">false</span>
+                                } <span class="kw">else</span> {
+                                    <span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Flag</span>.<span class="ident">bits</span> <span class="op">==</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Flag</span>.<span class="ident">bits</span>
+                                }
                             }
                         }
                     )<span class="op">+</span>
@@ -1960,8 +1996,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">hash_map</span>::<span class="ident">DefaultHasher</span>;
+    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
 
     <span class="macro">bitflags</span><span class="macro">!</span> {
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;&gt; The first principle is that you must not fool yourself — and&quot;</span>]</span>
@@ -2004,7 +2040,7 @@
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_bits</span>(){
+    <span class="kw">fn</span> <span class="ident">test_bits</span>() {
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">empty</span>().<span class="ident">bits</span>(), <span class="number">0b00000000</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">A</span>.<span class="ident">bits</span>(), <span class="number">0b00000001</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">ABC</span>.<span class="ident">bits</span>(), <span class="number">0b00000111</span>);
@@ -2021,7 +2057,10 @@
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">from_bits</span>(<span class="number">0b11</span>), <span class="prelude-val">Some</span>(<span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">B</span>));
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">from_bits</span>(<span class="number">0b1000</span>), <span class="prelude-val">None</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">AnotherSetOfFlags</span>::<span class="ident">from_bits</span>(<span class="op">!</span><span class="number">0_i8</span>), <span class="prelude-val">Some</span>(<span class="ident">AnotherSetOfFlags</span>::<span class="ident">ANOTHER_FLAG</span>));
+        <span class="macro">assert_eq</span><span class="macro">!</span>(
+            <span class="ident">AnotherSetOfFlags</span>::<span class="ident">from_bits</span>(<span class="op">!</span><span class="number">0_i8</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">AnotherSetOfFlags</span>::<span class="ident">ANOTHER_FLAG</span>)
+        );
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -2033,11 +2072,14 @@
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">from_bits_truncate</span>(<span class="number">0b1000</span>), <span class="ident">Flags</span>::<span class="ident">empty</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">from_bits_truncate</span>(<span class="number">0b1001</span>), <span class="ident">Flags</span>::<span class="ident">A</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">AnotherSetOfFlags</span>::<span class="ident">from_bits_truncate</span>(<span class="number">0_i8</span>), <span class="ident">AnotherSetOfFlags</span>::<span class="ident">empty</span>());
+        <span class="macro">assert_eq</span><span class="macro">!</span>(
+            <span class="ident">AnotherSetOfFlags</span>::<span class="ident">from_bits_truncate</span>(<span class="number">0_i8</span>),
+            <span class="ident">AnotherSetOfFlags</span>::<span class="ident">empty</span>()
+        );
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_is_empty</span>(){
+    <span class="kw">fn</span> <span class="ident">test_is_empty</span>() {
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">empty</span>().<span class="ident">is_empty</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">Flags</span>::<span class="ident">A</span>.<span class="ident">is_empty</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">Flags</span>::<span class="ident">ABC</span>.<span class="ident">is_empty</span>());
@@ -2096,7 +2138,7 @@
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_insert</span>(){
+    <span class="kw">fn</span> <span class="ident">test_insert</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">e1</span> <span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">A</span>;
         <span class="kw">let</span> <span class="ident">e2</span> <span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">B</span>;
         <span class="ident">e1</span>.<span class="ident">insert</span>(<span class="ident">e2</span>);
@@ -2108,7 +2150,7 @@
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_remove</span>(){
+    <span class="kw">fn</span> <span class="ident">test_remove</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">e1</span> <span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">B</span>;
         <span class="kw">let</span> <span class="ident">e2</span> <span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">C</span>;
         <span class="ident">e1</span>.<span class="ident">remove</span>(<span class="ident">e2</span>);
@@ -2123,10 +2165,10 @@
     <span class="kw">fn</span> <span class="ident">test_operators</span>() {
         <span class="kw">let</span> <span class="ident">e1</span> <span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">C</span>;
         <span class="kw">let</span> <span class="ident">e2</span> <span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">B</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">C</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="ident">e1</span> <span class="op">|</span> <span class="ident">e2</span>), <span class="ident">Flags</span>::<span class="ident">ABC</span>);     <span class="comment">// union</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="ident">e1</span> <span class="op">&amp;</span> <span class="ident">e2</span>), <span class="ident">Flags</span>::<span class="ident">C</span>);       <span class="comment">// intersection</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="ident">e1</span> <span class="op">-</span> <span class="ident">e2</span>), <span class="ident">Flags</span>::<span class="ident">A</span>);       <span class="comment">// set difference</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">e2</span>, <span class="ident">Flags</span>::<span class="ident">A</span>);             <span class="comment">// set complement</span>
+        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="ident">e1</span> <span class="op">|</span> <span class="ident">e2</span>), <span class="ident">Flags</span>::<span class="ident">ABC</span>); <span class="comment">// union</span>
+        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="ident">e1</span> <span class="op">&amp;</span> <span class="ident">e2</span>), <span class="ident">Flags</span>::<span class="ident">C</span>); <span class="comment">// intersection</span>
+        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="ident">e1</span> <span class="op">-</span> <span class="ident">e2</span>), <span class="ident">Flags</span>::<span class="ident">A</span>); <span class="comment">// set difference</span>
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">e2</span>, <span class="ident">Flags</span>::<span class="ident">A</span>); <span class="comment">// set complement</span>
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">e1</span> <span class="op">^</span> <span class="ident">e2</span>, <span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">B</span>); <span class="comment">// toggle</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">e3</span> <span class="op">=</span> <span class="ident">e1</span>;
         <span class="ident">e3</span>.<span class="ident">toggle</span>(<span class="ident">e2</span>);
@@ -2188,10 +2230,14 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_from_iterator</span>() {
         <span class="macro">assert_eq</span><span class="macro">!</span>([].<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Flags</span><span class="op">&gt;</span>(), <span class="ident">Flags</span>::<span class="ident">empty</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>([<span class="ident">Flags</span>::<span class="ident">A</span>, <span class="ident">Flags</span>::<span class="ident">B</span>].<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Flags</span><span class="op">&gt;</span>(),
-                   <span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">B</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>([<span class="ident">Flags</span>::<span class="ident">A</span>, <span class="ident">Flags</span>::<span class="ident">ABC</span>].<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Flags</span><span class="op">&gt;</span>(),
-                   <span class="ident">Flags</span>::<span class="ident">ABC</span>);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(
+            [<span class="ident">Flags</span>::<span class="ident">A</span>, <span class="ident">Flags</span>::<span class="ident">B</span>].<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Flags</span><span class="op">&gt;</span>(),
+            <span class="ident">Flags</span>::<span class="ident">A</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">B</span>
+        );
+        <span class="macro">assert_eq</span><span class="macro">!</span>(
+            [<span class="ident">Flags</span>::<span class="ident">A</span>, <span class="ident">Flags</span>::<span class="ident">ABC</span>].<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Flags</span><span class="op">&gt;</span>(),
+            <span class="ident">Flags</span>::<span class="ident">ABC</span>
+        );
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -2283,14 +2329,13 @@
 
         <span class="attribute">#[<span class="ident">test</span>]</span>
         <span class="kw">fn</span> <span class="ident">test_private</span>() {
-
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">PrivateFlags</span>::<span class="ident">Y</span>;
+            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">PrivateFlags</span>::<span class="ident">Y</span>;
         }
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_public</span>() {
-        <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">submodule</span>::<span class="ident">PublicFlags</span>::<span class="ident">X</span>;
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">submodule</span>::<span class="ident">PublicFlags</span>::<span class="ident">X</span>;
     }
 
     <span class="kw">mod</span> <span class="ident">t1</span> {
@@ -2362,7 +2407,7 @@
             <span class="kw">mod</span> <span class="ident">test</span> {
                 <span class="comment">// Note: due to `pub (in super)`,</span>
                 <span class="comment">// this cannot be accessed directly by the testing code.</span>
-                <span class="kw">pub</span> (<span class="kw">in</span> <span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">value</span>() <span class="op">-&gt;</span> <span class="ident">u8</span> {
+                <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">value</span>() <span class="op">-&gt;</span> <span class="ident">u8</span> {
                     <span class="kw">super</span>::<span class="ident">submodule</span>::<span class="ident">Test</span>::<span class="ident">FOO</span>.<span class="ident">bits</span>()
                 }
             }
@@ -2374,70 +2419,23 @@
 
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">module</span>::<span class="ident">value</span>(), <span class="number">1</span>)
     }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="kw">fn</span> <span class="ident">test_zero_value_flags</span>() {
+        <span class="macro">bitflags</span><span class="macro">!</span> {
+            <span class="kw">struct</span> <span class="ident">Flags</span>: <span class="ident">u32</span> {
+                <span class="kw">const</span> <span class="ident">NONE</span> <span class="op">=</span> <span class="number">0b0</span>;
+                <span class="kw">const</span> <span class="ident">SOME</span> <span class="op">=</span> <span class="number">0b1</span>;
+            }
+        }
+
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">empty</span>().<span class="ident">contains</span>(<span class="ident">Flags</span>::<span class="ident">NONE</span>));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">SOME</span>.<span class="ident">contains</span>(<span class="ident">Flags</span>::<span class="ident">NONE</span>));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">Flags</span>::<span class="ident">NONE</span>.<span class="ident">is_empty</span>());
+
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">Flags</span>::<span class="ident">empty</span>()), <span class="string">&quot;NONE&quot;</span>);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">Flags</span>::<span class="ident">SOME</span>), <span class="string">&quot;SOME&quot;</span>);
+    }
 }
 </pre>
-</section>
-    <section id='search' class="content hidden"></section>
-
-    <section class="footer"></section>
-
-    <aside id="help" class="hidden">
-        <div>
-            <h1 class="hidden">Help</h1>
-
-            <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
-
-                <dl>
-                    <dt><kbd>?</kbd></dt>
-                    <dd>Show this help dialog</dd>
-                    <dt><kbd>S</kbd></dt>
-                    <dd>Focus the search field</dd>
-                    <dt><kbd>↑</kbd></dt>
-                    <dd>Move up in search results</dd>
-                    <dt><kbd>↓</kbd></dt>
-                    <dd>Move down in search results</dd>
-                    <dt><kbd>↹</kbd></dt>
-                    <dd>Switch tab</dd>
-                    <dt><kbd>&#9166;</kbd></dt>
-                    <dd>Go to active search result</dd>
-                    <dt><kbd>+</kbd></dt>
-                    <dd>Expand all sections</dd>
-                    <dt><kbd>-</kbd></dt>
-                    <dd>Collapse all sections</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h2>Search Tricks</h2>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
-                </p>
-            </div>
-        </div>
-    </aside>
-
-    
-
-    <script>
-        window.rootPath = "../../";
-        window.currentCrate = "bitflags";
-    </script>
-    <script src="../../main.js"></script>
-    <script defer src="../../search-index.js"></script>
-</body>
-</html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "bitflags";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

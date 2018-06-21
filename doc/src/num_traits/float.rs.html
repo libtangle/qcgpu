@@ -1,60 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/num-traits-0.2.2/src/float.rs`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
-
-    <title>float.rs.html -- source</title>
-
-    <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
-    
-    <link rel="stylesheet" type="text/css" href="../../dark.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
-    <script src="../../storage.js"></script>
-    
-
-    
-    
-</head>
-<body class="rustdoc source">
-    <!--[if lte IE 8]>
-    <div class="warning">
-        This old browser is unsupported and will most likely display funky
-        things.
-    </div>
-    <![endif]-->
-
-    
-
-    <nav class="sidebar">
-        <div class="sidebar-menu">&#9776;</div>
-        
-        
-    </nav>
-
-    <div class="theme-picker">
-        <button id="theme-picker" aria-label="Pick another theme!">
-            <img src="../../brush.svg" width="18" alt="Pick another theme!">
-        </button>
-        <div id="theme-choices"></div>
-    </div>
-    <script src="../../theme.js"></script>
-    <nav class="sub">
-        <form class="search-form js-only">
-            <div class="search-container">
-                <input class="search-input" name="search"
-                       autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
-                       type="search">
-            </div>
-        </form>
-    </nav>
-
-    <section id='main' class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/num-traits-0.2.5/src/float.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>float.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -2065,6 +2009,23 @@
 <span id="2009">2009</span>
 <span id="2010">2010</span>
 <span id="2011">2011</span>
+<span id="2012">2012</span>
+<span id="2013">2013</span>
+<span id="2014">2014</span>
+<span id="2015">2015</span>
+<span id="2016">2016</span>
+<span id="2017">2017</span>
+<span id="2018">2018</span>
+<span id="2019">2019</span>
+<span id="2020">2020</span>
+<span id="2021">2021</span>
+<span id="2022">2022</span>
+<span id="2023">2023</span>
+<span id="2024">2024</span>
+<span id="2025">2025</span>
+<span id="2026">2026</span>
+<span id="2027">2027</span>
+<span id="2028">2028</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">mem</span>;
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ops</span>::<span class="ident">Neg</span>;
@@ -2623,7 +2584,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">is_sign_negative</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="kw">let</span> (_, _, <span class="ident">sign</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">integer_decode</span>();
+        <span class="kw">let</span> (<span class="kw">_</span>, <span class="kw">_</span>, <span class="ident">sign</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">integer_decode</span>();
         <span class="ident">sign</span> <span class="op">&lt;</span> <span class="number">0</span>
     }
 
@@ -2829,17 +2790,19 @@
         <span class="kw">let</span> <span class="ident">bits</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>) };
         <span class="kw">match</span> (<span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">MAN_MASK</span>, <span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">EXP_MASK</span>) {
             (<span class="number">0</span>, <span class="number">0</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Zero</span>,
-            (_, <span class="number">0</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Subnormal</span>,
+            (<span class="kw">_</span>, <span class="number">0</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Subnormal</span>,
             (<span class="number">0</span>, <span class="ident">EXP_MASK</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Infinite</span>,
-            (_, <span class="ident">EXP_MASK</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Nan</span>,
-            _ <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Normal</span>,
+            (<span class="kw">_</span>, <span class="ident">EXP_MASK</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Nan</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Normal</span>,
         }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">to_degrees</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span> <span class="op">*</span> (<span class="number">180.0</span> <span class="op">/</span> <span class="ident">f32</span>::<span class="ident">consts</span>::<span class="ident">PI</span>)
+        <span class="comment">// Use a constant for better precision.</span>
+        <span class="kw">const</span> <span class="ident">PIS_IN_180</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="number">57.2957795130823208767981548141051703_f32</span>;
+        <span class="self">self</span> <span class="op">*</span> <span class="ident">PIS_IN_180</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2899,16 +2862,19 @@
         <span class="kw">let</span> <span class="ident">bits</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>) };
         <span class="kw">match</span> (<span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">MAN_MASK</span>, <span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident">EXP_MASK</span>) {
             (<span class="number">0</span>, <span class="number">0</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Zero</span>,
-            (_, <span class="number">0</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Subnormal</span>,
+            (<span class="kw">_</span>, <span class="number">0</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Subnormal</span>,
             (<span class="number">0</span>, <span class="ident">EXP_MASK</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Infinite</span>,
-            (_, <span class="ident">EXP_MASK</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Nan</span>,
-            _ <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Normal</span>,
+            (<span class="kw">_</span>, <span class="ident">EXP_MASK</span>) <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Nan</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">FpCategory</span>::<span class="ident">Normal</span>,
         }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">to_degrees</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="comment">// The division here is correctly rounded with respect to the true</span>
+        <span class="comment">// value of 180/π. (This differs from f32, where a constant must be</span>
+        <span class="comment">// used to ensure a correctly rounded result.)</span>
         <span class="self">self</span> <span class="op">*</span> (<span class="number">180.0</span> <span class="op">/</span> <span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>)
     }
 
@@ -3300,8 +3266,10 @@
     <span class="kw">fn</span> <span class="ident">is_sign_negative</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
 
     <span class="doccomment">/// Fused multiply-add. Computes `(self * a) + b` with only one rounding</span>
-    <span class="doccomment">/// error. This produces a more accurate result with better performance than</span>
-    <span class="doccomment">/// a separate multiplication operation followed by an add.</span>
+    <span class="doccomment">/// error, yielding a more accurate result than an unfused multiply-add.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Using `mul_add` can be more performant than an unfused multiply-add if</span>
+    <span class="doccomment">/// the target architecture has a dedicated `fma` CPU instruction.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use num_traits::Float;</span>
@@ -4076,70 +4044,16 @@
             <span class="macro">assert</span><span class="macro">!</span>((<span class="ident">Float</span>::<span class="ident">to_radians</span>(<span class="ident">deg</span>) <span class="op">-</span> <span class="ident">rad</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="number">1e-5</span>);
         }
     }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="comment">// This fails with the forwarded `std` implementation in Rust 1.8.</span>
+    <span class="comment">// To avoid the failure, the test is limited to `no_std` builds.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
+    <span class="kw">fn</span> <span class="ident">to_degrees_rounding</span>() {
+        <span class="kw">use</span> <span class="ident">float</span>::<span class="ident">FloatCore</span>;
+
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">FloatCore</span>::<span class="ident">to_degrees</span>(<span class="number">1_f32</span>), <span class="number">57.2957795130823208767981548141051703</span>);
+    }
 }
 </pre>
-</section>
-    <section id='search' class="content hidden"></section>
-
-    <section class="footer"></section>
-
-    <aside id="help" class="hidden">
-        <div>
-            <h1 class="hidden">Help</h1>
-
-            <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
-
-                <dl>
-                    <dt><kbd>?</kbd></dt>
-                    <dd>Show this help dialog</dd>
-                    <dt><kbd>S</kbd></dt>
-                    <dd>Focus the search field</dd>
-                    <dt><kbd>↑</kbd></dt>
-                    <dd>Move up in search results</dd>
-                    <dt><kbd>↓</kbd></dt>
-                    <dd>Move down in search results</dd>
-                    <dt><kbd>↹</kbd></dt>
-                    <dd>Switch tab</dd>
-                    <dt><kbd>&#9166;</kbd></dt>
-                    <dd>Go to active search result</dd>
-                    <dt><kbd>+</kbd></dt>
-                    <dd>Expand all sections</dd>
-                    <dt><kbd>-</kbd></dt>
-                    <dd>Collapse all sections</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h2>Search Tricks</h2>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
-                </p>
-            </div>
-        </div>
-    </aside>
-
-    
-
-    <script>
-        window.rootPath = "../../";
-        window.currentCrate = "num_traits";
-    </script>
-    <script src="../../main.js"></script>
-    <script defer src="../../search-index.js"></script>
-</body>
-</html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "num_traits";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

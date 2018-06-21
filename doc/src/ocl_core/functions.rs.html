@@ -1,60 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/ocl-core-0.9.0/src/functions.rs`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
-
-    <title>functions.rs.html -- source</title>
-
-    <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
-    
-    <link rel="stylesheet" type="text/css" href="../../dark.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
-    <script src="../../storage.js"></script>
-    
-
-    
-    
-</head>
-<body class="rustdoc source">
-    <!--[if lte IE 8]>
-    <div class="warning">
-        This old browser is unsupported and will most likely display funky
-        things.
-    </div>
-    <![endif]-->
-
-    
-
-    <nav class="sidebar">
-        <div class="sidebar-menu">&#9776;</div>
-        
-        
-    </nav>
-
-    <div class="theme-picker">
-        <button id="theme-picker" aria-label="Pick another theme!">
-            <img src="../../brush.svg" width="18" alt="Pick another theme!">
-        </button>
-        <div id="theme-choices"></div>
-    </div>
-    <script src="../../theme.js"></script>
-    <nav class="sub">
-        <form class="search-form js-only">
-            <div class="search-container">
-                <input class="search-input" name="search"
-                       autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
-                       type="search">
-            </div>
-        </form>
-    </nav>
-
-    <section id='main' class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/ocl-core-0.9.0/src/functions.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>functions.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -3835,7 +3779,7 @@
 
 
 <span class="doccomment">/// Don&#39;t be a dummy. Buckle your `_dummy_callback`.</span>
-<span class="kw">pub</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">_dummy_event_callback</span>(_: <span class="ident">ffi</span>::<span class="ident">cl_event</span>, _: <span class="ident">i32</span>, _: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) {}
+<span class="kw">pub</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">_dummy_event_callback</span>(<span class="kw">_</span>: <span class="ident">ffi</span>::<span class="ident">cl_event</span>, <span class="kw">_</span>: <span class="ident">i32</span>, <span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) {}
 
 
 <span class="doccomment">/// If `event_status` is `CommandExecutionStatus::Complete`, the `cl_event`</span>
@@ -3851,10 +3795,10 @@
         <span class="ident">user_data</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>)
 {
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;event_debug_print&quot;</span>))]</span>
-    <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">src_event_ptr</span>;
+    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">src_event_ptr</span>;
 
     <span class="kw">if</span> <span class="ident">event_status</span> <span class="op">==</span> <span class="ident">CommandExecutionStatus</span>::<span class="ident">Complete</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">user_data</span>.<span class="ident">is_null</span>() {
-        <span class="kw">let</span> <span class="ident">tar_event_ptr</span> <span class="op">=</span> <span class="ident">user_data</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="ident">cl_event</span>;
+        <span class="kw">let</span> <span class="ident">tar_event_ptr</span> <span class="op">=</span> <span class="ident">user_data</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="ident">cl_event</span>;
 
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">user_event</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">from_raw</span>(<span class="ident">tar_event_ptr</span>);
@@ -4003,7 +3947,7 @@
                 }
             },
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ProgramBuildError</span>::<span class="ident">InfoResult</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">err</span>))),
-            _ <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Unexpected &#39;ProgramBuildInfoResult&#39; variant.&quot;</span>),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Unexpected &#39;ProgramBuildInfoResult&#39; variant.&quot;</span>),
         }
     }
 
@@ -4386,7 +4330,7 @@
         <span class="ident">device</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_device_id</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_device_info</span>,
         <span class="ident">result_size</span> <span class="kw">as</span> <span class="ident">size_t</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -4397,12 +4341,12 @@
             <span class="kw">let</span> <span class="ident">max_wi_dims</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">get_device_info</span>(<span class="ident">device</span>, <span class="ident">DeviceInfo</span>::<span class="ident">MaxWorkItemDimensions</span>)<span class="question-mark">?</span> {
                 <span class="ident">DeviceInfoResult</span>::<span class="ident">MaxWorkItemDimensions</span>(<span class="ident">d</span>) <span class="op">=&gt;</span> <span class="ident">d</span>,
                 <span class="comment">// Ok(DeviceInfoResult::Error(err)) =&gt; return Err(*err),</span>
-                _ <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;get_device_info(): Error determining dimensions for \
+                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;get_device_info(): Error determining dimensions for \
                     &#39;DeviceInfo::MaxWorkItemSizes&#39; due to mismatched variants.&quot;</span>),
             };
             <span class="ident">DeviceInfoResult</span>::<span class="ident">from_bytes_max_work_item_sizes</span>(<span class="ident">request</span>, <span class="ident">result</span>, <span class="ident">max_wi_dims</span>)
         },
-        _ <span class="op">=&gt;</span> <span class="ident">DeviceInfoResult</span>::<span class="ident">from_bytes</span>(<span class="ident">request</span>, <span class="ident">result</span>)
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">DeviceInfoResult</span>::<span class="ident">from_bytes</span>(<span class="ident">request</span>, <span class="ident">result</span>)
     }
 }
 
@@ -4416,7 +4360,7 @@
     <span class="comment">//                    out_devices: *mut cl_device_id,</span>
     <span class="comment">//                    num_devices_ret: *mut cl_uint) -&gt; cl_int;</span>
 
-    <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">device_version</span>;
+    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">device_version</span>;
     <span class="macro">unimplemented</span><span class="macro">!</span>();
 }
 
@@ -4499,7 +4443,7 @@
 
     <span class="comment">// [FIXME]: Disabled:</span>
     <span class="kw">let</span> <span class="ident">user_data_ptr</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">user_data</span> {
-        <span class="prelude-val">Some</span>(_) <span class="op">=&gt;</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
+        <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
         <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
     };
 
@@ -4556,7 +4500,7 @@
 
     <span class="comment">// [FIXME]: Disabled:</span>
     <span class="kw">let</span> <span class="ident">user_data_ptr</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">user_data</span> {
-        <span class="prelude-val">Some</span>(_) <span class="op">=&gt;</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
+        <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
         <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
     };
 
@@ -4711,7 +4655,7 @@
         };
 
         <span class="kw">let</span> <span class="ident">fn_ptr</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">clGetExtensionFunctionAddressForPlatform</span>(<span class="ident">plat</span>.<span class="ident">as_ptr</span>(),
-            <span class="ident">fn_name</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _);
+            <span class="ident">fn_name</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>);
 
         <span class="kw">if</span> <span class="ident">fn_ptr</span>.<span class="ident">is_null</span>() {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="string">&quot;Unable to get extension function \
@@ -4835,7 +4779,7 @@
         <span class="ident">queue</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_command_queue</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_command_queue_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5098,7 +5042,7 @@
         <span class="ident">buffer</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">flags</span>.<span class="ident">bits</span>(),
         <span class="ident">buffer_create_type</span> <span class="kw">as</span> <span class="ident">cl_buffer_create_type</span>,
-        <span class="kw-2">&amp;</span><span class="ident">buffer_create_info_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>,
+        <span class="kw-2">&amp;</span><span class="ident">buffer_create_info_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>,
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">errcode</span>,
     ) };
 
@@ -5200,7 +5144,7 @@
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="macro">vec</span><span class="macro">!</span>[]);
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">image_formats</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">cl_image_format</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="number">0</span>..(<span class="ident">num_image_formats</span> <span class="kw">as</span> <span class="ident">usize</span>)).<span class="ident">map</span>(<span class="op">|</span>_<span class="op">|</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">image_formats</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">cl_image_format</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="number">0</span>..(<span class="ident">num_image_formats</span> <span class="kw">as</span> <span class="ident">usize</span>)).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
            <span class="ident">ImageFormat</span>::<span class="ident">new_raw</span>()
         } ).<span class="ident">collect</span>();
 
@@ -5211,7 +5155,7 @@
         <span class="ident">flags</span>.<span class="ident">bits</span>() <span class="kw">as</span> <span class="ident">cl_mem_flags</span>,
         <span class="ident">image_type</span> <span class="kw">as</span> <span class="ident">cl_mem_object_type</span>,
         <span class="ident">num_image_formats</span>,
-        <span class="ident">image_formats</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">cl_image_format</span>,
+        <span class="ident">image_formats</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">cl_image_format</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">cl_uint</span>,
     ) };
 
@@ -5245,7 +5189,7 @@
         <span class="ident">obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_mem</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_mem_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">eval_errcode</span>(<span class="ident">errcode</span>, <span class="ident">result</span>, <span class="string">&quot;clGetMemObjectInfo&quot;</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>)<span class="question-mark">?</span>;
@@ -5278,7 +5222,7 @@
         <span class="ident">obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_mem</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_image_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5361,7 +5305,7 @@
         <span class="ident">obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_sampler</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_sampler_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5387,14 +5331,14 @@
     <span class="kw">let</span> <span class="ident">ks_lens</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">src_strings</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">cs</span><span class="op">|</span> <span class="ident">cs</span>.<span class="ident">as_bytes</span>().<span class="ident">len</span>()).<span class="ident">collect</span>();
 
     <span class="comment">// Pointers to each string:</span>
-    <span class="kw">let</span> <span class="ident">kern_string_ptrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> _<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">src_strings</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">cs</span><span class="op">|</span> <span class="ident">cs</span>.<span class="ident">as_ptr</span>()).<span class="ident">collect</span>();
+    <span class="kw">let</span> <span class="ident">kern_string_ptrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">src_strings</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">cs</span><span class="op">|</span> <span class="ident">cs</span>.<span class="ident">as_ptr</span>()).<span class="ident">collect</span>();
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errcode</span>: <span class="ident">cl_int</span> <span class="op">=</span> <span class="number">0</span>;
 
     <span class="kw">let</span> <span class="ident">program_ptr</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">clCreateProgramWithSource</span>(
         <span class="ident">context</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">kern_string_ptrs</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">cl_uint</span>,
-        <span class="ident">kern_string_ptrs</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> _,
+        <span class="ident">kern_string_ptrs</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>,
         <span class="ident">ks_lens</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">errcode</span>,
     ) };
@@ -5430,12 +5374,12 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">binary_status</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">iter</span>::<span class="ident">repeat</span>(<span class="number">0</span>).<span class="ident">take</span>(<span class="ident">devices</span>.<span class="ident">len</span>()).<span class="ident">collect</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errcode</span>: <span class="ident">cl_int</span> <span class="op">=</span> <span class="number">0</span>;
 
-    <span class="kw">let</span> <span class="ident">ptrs</span> <span class="op">=</span> <span class="ident">binaries</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">bin</span><span class="op">|</span> <span class="ident">bin</span>.<span class="ident">as_ptr</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;&gt;</span>();
+    <span class="kw">let</span> <span class="ident">ptrs</span> <span class="op">=</span> <span class="ident">binaries</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">bin</span><span class="op">|</span> <span class="ident">bin</span>.<span class="ident">as_ptr</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
 
     <span class="kw">let</span> <span class="ident">program</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">clCreateProgramWithBinary</span>(
         <span class="ident">context</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">devices</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>,
-        <span class="ident">devices</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_device_id</span>,
+        <span class="ident">devices</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_device_id</span>,
         <span class="ident">lengths</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">ptrs</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>,
         <span class="ident">binary_status</span>.<span class="ident">as_mut_ptr</span>(),
@@ -5461,7 +5405,7 @@
     <span class="comment">//                                  device_list: *const cl_device_id,</span>
     <span class="comment">//                                  kernel_names: *mut char,</span>
     <span class="comment">//                                  errcode_ret: *mut cl_int) -&gt; cl_program;</span>
-    <span class="kw">let</span> _ <span class="op">=</span>  <span class="ident">device_version</span>;
+    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span>  <span class="ident">device_version</span>;
     <span class="macro">unimplemented</span><span class="macro">!</span>();
 }
 
@@ -5574,7 +5518,7 @@
     <span class="comment">//                 header_include_names: *const *const c_char,</span>
     <span class="comment">//                 pfn_notify: extern fn (program: cl_program, user_data: *mut c_void),</span>
     <span class="comment">//                 user_data: *mut c_void) -&gt; cl_int;</span>
-    <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">device_version</span>;
+    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">device_version</span>;
     <span class="macro">unimplemented</span><span class="macro">!</span>();
 }
 
@@ -5591,7 +5535,7 @@
     <span class="comment">//               pfn_notify: extern fn (program: cl_program, user_data: *mut c_void),</span>
     <span class="comment">//               user_data: *mut c_void,</span>
     <span class="comment">//               errcode_ret: *mut cl_int) -&gt; cl_program;</span>
-    <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">device_version</span>;
+    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">device_version</span>;
     <span class="macro">unimplemented</span><span class="macro">!</span>();
 }
 
@@ -5631,7 +5575,7 @@
         <span class="ident">program</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_program</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_program_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5650,13 +5594,13 @@
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">binary_ptrs</span> <span class="op">=</span> <span class="ident">binaries</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">vec</span><span class="op">|</span> {
         <span class="ident">vec</span>.<span class="ident">as_ptr</span>()
-    }).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;&gt;</span>();
+    }).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
 
     <span class="kw">let</span> <span class="ident">errcode</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">clGetProgramInfo</span>(
         <span class="ident">program</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_program</span>,
         <span class="ident">ProgramInfo</span>::<span class="ident">Binaries</span> <span class="kw">as</span> <span class="ident">cl_program_info</span>,
         <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="ident">binary_ptrs</span>.<span class="ident">len</span>(),
-        <span class="ident">binary_ptrs</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">binary_ptrs</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5669,7 +5613,7 @@
         <span class="ident">ProgramInfo</span>::<span class="ident">Binaries</span> <span class="op">=&gt;</span> {
             <span class="ident">get_program_info_binaries</span>(<span class="ident">program</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">b</span><span class="op">|</span> <span class="ident">ProgramInfoResult</span>::<span class="ident">Binaries</span>(<span class="ident">b</span>))
         },
-        _ <span class="op">=&gt;</span> {
+        <span class="kw">_</span> <span class="op">=&gt;</span> {
             <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">get_program_info_raw</span>(<span class="ident">program</span>, <span class="ident">request</span>)<span class="question-mark">?</span>;
             <span class="ident">ProgramInfoResult</span>::<span class="ident">from_bytes</span>(<span class="ident">request</span>, <span class="ident">result</span>)
         },
@@ -5705,7 +5649,7 @@
         <span class="ident">device_obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_device_id</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_program_build_info</span>,
         <span class="ident">result_size</span> <span class="kw">as</span> <span class="ident">size_t</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5809,7 +5753,7 @@
         <span class="ident">obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_kernel</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_kernel_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5861,7 +5805,7 @@
         <span class="ident">arg_index</span> <span class="kw">as</span> <span class="ident">cl_uint</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_kernel_arg_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5914,7 +5858,7 @@
         <span class="ident">device_obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_device_id</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_kernel_work_group_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -5962,7 +5906,7 @@
         <span class="kw-2">*</span><span class="ident">event</span>.<span class="ident">as_ptr_ref</span>(),
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_event_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -6086,7 +6030,7 @@
         <span class="ident">event</span>,
         <span class="ident">request</span> <span class="kw">as</span> <span class="ident">cl_profiling_info</span>,
         <span class="ident">result_size</span>,
-        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="ident">result</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -6218,9 +6162,9 @@
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">buffer</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">block</span> <span class="kw">as</span> <span class="ident">cl_uint</span>,
-        <span class="kw-2">&amp;</span><span class="ident">buffer_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">host_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">buffer_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">host_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">buffer_row_pitch_bytes</span>,
         <span class="ident">buffer_slc_pitch_bytes</span>,
         <span class="ident">host_row_pitch_bytes</span>,
@@ -6317,9 +6261,9 @@
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">buffer</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">block</span> <span class="kw">as</span> <span class="ident">cl_uint</span>,
-        <span class="kw-2">&amp;</span><span class="ident">buffer_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">host_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">buffer_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">host_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">buffer_row_pitch_bytes</span>,
         <span class="ident">buffer_slc_pitch_bytes</span>,
         <span class="ident">host_row_pitch_bytes</span>,
@@ -6363,7 +6307,7 @@
     <span class="kw">let</span> <span class="ident">errcode</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">clEnqueueFillBuffer</span>(
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">buffer</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
-        <span class="kw-2">&amp;</span><span class="ident">pattern</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>,
+        <span class="kw-2">&amp;</span><span class="ident">pattern</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>,
         <span class="ident">pattern_size</span>,
         <span class="ident">offset_bytes</span>,
         <span class="ident">size_bytes</span>,
@@ -6442,9 +6386,9 @@
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">src_buffer</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">dst_buffer</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
-        <span class="kw-2">&amp;</span><span class="ident">src_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">dst_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">src_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">dst_origin_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region_bytes</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">src_row_pitch_bytes</span>,
         <span class="ident">src_slc_pitch_bytes</span>,
         <span class="ident">dst_row_pitch_bytes</span>,
@@ -6547,8 +6491,8 @@
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">image</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">block</span> <span class="kw">as</span> <span class="ident">cl_uint</span>,
-        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">row_pitch_bytes</span>,
         <span class="ident">slc_pitch_bytes</span>,
         <span class="ident">data</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_mem</span>,
@@ -6593,8 +6537,8 @@
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">image</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">block</span> <span class="kw">as</span> <span class="ident">cl_uint</span>,
-        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">input_row_pitch_bytes</span>,
         <span class="ident">input_slc_pitch_bytes</span>,
         <span class="ident">data</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">cl_mem</span>,
@@ -6645,9 +6589,9 @@
     <span class="kw">let</span> <span class="ident">errcode</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">clEnqueueFillImage</span>(
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">image</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
-        <span class="ident">color</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>,
-        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="ident">color</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>,
+        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">wait_list_len</span>,
         <span class="ident">wait_list_ptr</span>,
         <span class="ident">new_event_ptr</span>,
@@ -6678,9 +6622,9 @@
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">src_image</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">dst_image</span>.<span class="ident">as_ptr</span>(),
-        <span class="kw-2">&amp;</span><span class="ident">src_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">dst_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">src_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">dst_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">wait_list_len</span>,
         <span class="ident">wait_list_ptr</span>,
         <span class="ident">new_event_ptr</span>,
@@ -6715,8 +6659,8 @@
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">src_image</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">dst_buffer</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
-        <span class="kw-2">&amp;</span><span class="ident">src_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">src_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">dst_offset_bytes</span>,
         <span class="ident">wait_list_len</span>,
         <span class="ident">wait_list_ptr</span>,
@@ -6753,8 +6697,8 @@
         <span class="ident">src_buffer</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">dst_image</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">src_offset_bytes</span>,
-        <span class="kw-2">&amp;</span><span class="ident">dst_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">dst_origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">wait_list_len</span>,
         <span class="ident">wait_list_ptr</span>,
         <span class="ident">new_event_ptr</span>,
@@ -6877,8 +6821,8 @@
         <span class="ident">image</span>.<span class="ident">as_mem</span>().<span class="ident">as_ptr</span>(),
         <span class="ident">block</span> <span class="kw">as</span> <span class="ident">cl_uint</span>,
         <span class="ident">map_flags</span>.<span class="ident">bits</span>(),
-        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
-        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">origin</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
+        <span class="kw-2">&amp;</span><span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>,
         <span class="ident">row_pitch_bytes</span>,
         <span class="ident">slc_pitch_bytes</span>,
         <span class="ident">wait_list_len</span>,
@@ -6898,7 +6842,7 @@
     <span class="comment">//     None, image.as_mem().clone(), command_queue.clone()), &quot;clEnqueueMapImage&quot;, None::&lt;String&gt;)</span>
 
     <span class="ident">eval_errcode</span>(<span class="ident">errcode</span>, <span class="ident">mapped_ptr</span>, <span class="string">&quot;clEnqueueMapImage&quot;</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>)
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ptr</span><span class="op">|</span> <span class="ident">MemMap</span>::<span class="ident">from_raw</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>))
+        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ptr</span><span class="op">|</span> <span class="ident">MemMap</span>::<span class="ident">from_raw</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>))
 }
 
 <span class="doccomment">/// Enqueues a command to unmap a previously mapped region of a memory object.</span>
@@ -6957,7 +6901,7 @@
     <span class="kw">let</span> <span class="ident">errcode</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">clEnqueueMigrateMemObjects</span>(
         <span class="ident">command_queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">mem_objects</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>,
-        <span class="ident">mem_objects</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_mem</span>,
+        <span class="ident">mem_objects</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cl_mem</span>,
         <span class="ident">flags</span>.<span class="ident">bits</span>(),
         <span class="ident">wait_list_len</span>,
         <span class="ident">wait_list_ptr</span>,
@@ -7274,7 +7218,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default_platform_idx</span>() <span class="op">-&gt;</span> <span class="ident">usize</span> {
     <span class="kw">match</span> <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;OCL_DEFAULT_PLATFORM_IDX&quot;</span>) {
         <span class="prelude-val">Ok</span>(<span class="ident">s</span>) <span class="op">=&gt;</span> <span class="ident">s</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>().<span class="ident">unwrap_or</span>(<span class="number">0</span>),
-        <span class="prelude-val">Err</span>(_) <span class="op">=&gt;</span> <span class="number">0</span>,
+        <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="number">0</span>,
     }
 }
 
@@ -7306,9 +7250,9 @@
             <span class="string">&quot;ACCELERATOR&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">DeviceType</span>::<span class="ident">ACCELERATOR</span>),
             <span class="string">&quot;CUSTOM&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">DeviceType</span>::<span class="ident">CUSTOM</span>),
             <span class="string">&quot;ALL&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">DeviceType</span>::<span class="ident">ALL</span>),
-            _ <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ApiWrapperError</span>::<span class="ident">DefaultDeviceTypeInvalidType</span>(<span class="ident">s</span>.<span class="ident">to_owned</span>()).<span class="ident">into</span>()),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ApiWrapperError</span>::<span class="ident">DefaultDeviceTypeInvalidType</span>(<span class="ident">s</span>.<span class="ident">to_owned</span>()).<span class="ident">into</span>()),
         },
-        <span class="prelude-val">Err</span>(_) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">DeviceType</span>::<span class="ident">ALL</span>),
+        <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">DeviceType</span>::<span class="ident">ALL</span>),
     }
 }
 
@@ -7354,7 +7298,7 @@
             <span class="kw-2">*</span><span class="ident">event</span>.<span class="ident">as_ptr_ref</span>(),
             <span class="ident">ffi</span>::<span class="ident">CL_EVENT_COMMAND_EXECUTION_STATUS</span>,
             <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">cl_int</span><span class="op">&gt;</span>(),
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">status_int</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">status_int</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
             <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
         )
     };
@@ -7373,7 +7317,7 @@
             <span class="kw-2">*</span><span class="ident">event</span>.<span class="ident">as_ptr_ref</span>(),
             <span class="ident">ffi</span>::<span class="ident">CL_EVENT_COMMAND_EXECUTION_STATUS</span>,
             <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">cl_int</span><span class="op">&gt;</span>(),
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">status_int</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">status_int</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
             <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
         )
     };
@@ -7419,7 +7363,7 @@
     } <span class="kw">else</span> {
         <span class="kw">match</span> <span class="ident">get_context_info</span>(<span class="ident">context</span>, <span class="ident">ContextInfo</span>::<span class="ident">Devices</span>) {
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>),
-            _ <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(()),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(()),
         }
     }
 }
@@ -7431,7 +7375,7 @@
         <span class="prelude-val">Ok</span>(<span class="ident">DeviceInfoResult</span>::<span class="ident">Extensions</span>(<span class="ident">extensions</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">extensions</span>.<span class="ident">contains</span>(<span class="ident">CL_GL_SHARING_EXT</span>)),
         <span class="comment">// Ok(DeviceInfoResult::Error(err)) =&gt; Err(*err),</span>
         <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>),
-        _ <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
     }
 }
 
@@ -7445,7 +7389,7 @@
         <span class="ident">queue</span>.<span class="ident">as_ptr</span>(),
         <span class="ident">CommandQueueInfo</span>::<span class="ident">Context</span> <span class="kw">as</span> <span class="ident">cl_command_queue_info</span>,
         <span class="ident">result_size</span>,
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">result</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">result</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">size_t</span>,
     ) };
 
@@ -7460,68 +7404,4 @@
 <span class="comment">//============================================================================</span>
 <span class="comment">//============================================================================</span>
 </pre>
-</section>
-    <section id='search' class="content hidden"></section>
-
-    <section class="footer"></section>
-
-    <aside id="help" class="hidden">
-        <div>
-            <h1 class="hidden">Help</h1>
-
-            <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
-
-                <dl>
-                    <dt><kbd>?</kbd></dt>
-                    <dd>Show this help dialog</dd>
-                    <dt><kbd>S</kbd></dt>
-                    <dd>Focus the search field</dd>
-                    <dt><kbd>↑</kbd></dt>
-                    <dd>Move up in search results</dd>
-                    <dt><kbd>↓</kbd></dt>
-                    <dd>Move down in search results</dd>
-                    <dt><kbd>↹</kbd></dt>
-                    <dd>Switch tab</dd>
-                    <dt><kbd>&#9166;</kbd></dt>
-                    <dd>Go to active search result</dd>
-                    <dt><kbd>+</kbd></dt>
-                    <dd>Expand all sections</dd>
-                    <dt><kbd>-</kbd></dt>
-                    <dd>Collapse all sections</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h2>Search Tricks</h2>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
-                </p>
-            </div>
-        </div>
-    </aside>
-
-    
-
-    <script>
-        window.rootPath = "../../";
-        window.currentCrate = "ocl_core";
-    </script>
-    <script src="../../main.js"></script>
-    <script defer src="../../search-index.js"></script>
-</body>
-</html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "ocl_core";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>
