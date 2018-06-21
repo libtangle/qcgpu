@@ -64,7 +64,7 @@ fn main() {
 
 ## License
 
-This software is licensed under the MIT licence (see `LICENSE.md`)
+This software is licensed under the MIT licence (see `LICENSE`)
 
 Copyright (c) 2018 Adam Kelly
 
