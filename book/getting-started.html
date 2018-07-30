@@ -9,8 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="">
-
         <link rel="stylesheet" href="book.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
@@ -18,7 +16,7 @@
         <link rel="shortcut icon" href="favicon.png">
 
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
 
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
@@ -136,14 +134,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="getting-started.html#getting-started" id="getting-started"><h1>Getting Started</h1></a>
-<a class="header" href="getting-started.html#installing-the-requirements" id="installing-the-requirements"><h2>Installing The Requirements</h2></a>
+                        <a class="header" href="#getting-started" id="getting-started"><h1>Getting Started</h1></a>
+<a class="header" href="#installing-the-requirements" id="installing-the-requirements"><h2>Installing The Requirements</h2></a>
 <p>To use QCGPU, you will need Rust and OpenCL installed.</p>
 <p>The setup process for OpenCL will be different for every device. All apple devices (MacOS / OSX) will have OpenCL already installed.
 For some hints on how to install on linux, look at the <a href="https://github.com/QCGPU/qcgpu-rust/blob/master/EC2-install.md">AWS EC2 Install Instructions</a>.
 There is also a good chance that it is installed already. Check that <code>clinfo</code> for some other diagnostic command will run.</p>
 <p>Rust is very easy to install. Check out <a href="https://www.rustup.rs">rustup</a>.</p>
-<a class="header" href="getting-started.html#adding-the-dependency" id="adding-the-dependency"><h2>Adding The Dependency</h2></a>
+<a class="header" href="#adding-the-dependency" id="adding-the-dependency"><h2>Adding The Dependency</h2></a>
 <p>To use the library with rust, you must add the following to your <code>cargo.toml</code> file:</p>
 <pre><code class="language-toml">[dependencies]
 qcgpu = &quot;0.1&quot;
@@ -197,9 +195,10 @@ qcgpu = &quot;0.1&quot;
         
 
         
-
-        
         <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var path_to_root = "";
+        </script>
         
         
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
@@ -212,6 +211,8 @@ qcgpu = &quot;0.1&quot;
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        
+
         
 
     </body>

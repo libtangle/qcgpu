@@ -9,8 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="">
-
         <link rel="stylesheet" href="book.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
@@ -18,7 +16,7 @@
         <link rel="shortcut icon" href="favicon.png">
 
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
 
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
@@ -136,24 +134,24 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="print.html#qcgpu" id="qcgpu"><h1>QCGPU</h1></a>
+                        <a class="header" href="#qcgpu" id="qcgpu"><h1>QCGPU</h1></a>
 <p><strong>QCGPU</strong> is a high performance, hardware accelerated quantum computer simulator written with <a href="https://rust-lang.org/">Rust</a> and <a href="https://www.khronos.org/opencl/">OpenCL</a>.</p>
 <p>QCGPU is free and open source. The source code is available on <a href="https://github.com/qcgpu/qcgpu-rust">GitHub</a>. Please report any places where the documentation is unclear, or where examples could be added or improved by creating an <a href="https://github.com/qcgpu/qcgpu-rust/issues">issue</a>.</p>
-<a class="header" href="print.html#help-wanted" id="help-wanted"><h2>Help Wanted</h2></a>
+<a class="header" href="#help-wanted" id="help-wanted"><h2>Help Wanted</h2></a>
 <p>Please request any functionality you would like, need or appreciate by creating an <a href="https://github.com/qcgpu/qcgpu-rust/issues">issue</a>. If you would like to add functionality or fix issues, please create a <a href="https://github.com/qcgpu/qcgpu-rust/pulls">pull request</a> and I will get back to you (usually within the day).</p>
 <p>Any other feedback, suggestions or even tiny bits of criticism are welcome. When in doubt, file an <a href="https://github.com/qcgpu/qcgpu-rust/issues">issue</a>!</p>
-<a class="header" href="print.html#api-docs" id="api-docs"><h2>API Docs</h2></a>
+<a class="header" href="#api-docs" id="api-docs"><h2>API Docs</h2></a>
 <p>Alongside this guide, you may also want the <a href="https://qcgpu.github.com/qcgpu/documentation">documentation</a>.</p>
-<a class="header" href="print.html#license" id="license"><h2>License</h2></a>
+<a class="header" href="#license" id="license"><h2>License</h2></a>
 <p>QCGPU is licensed under the <a href="https://github.com/qcgpu/qcgpu-rust/blob/master/LICENSE">MIT</a> License.</p>
-<a class="header" href="print.html#getting-started" id="getting-started"><h1>Getting Started</h1></a>
-<a class="header" href="print.html#installing-the-requirements" id="installing-the-requirements"><h2>Installing The Requirements</h2></a>
+<a class="header" href="#getting-started" id="getting-started"><h1>Getting Started</h1></a>
+<a class="header" href="#installing-the-requirements" id="installing-the-requirements"><h2>Installing The Requirements</h2></a>
 <p>To use QCGPU, you will need Rust and OpenCL installed.</p>
 <p>The setup process for OpenCL will be different for every device. All apple devices (MacOS / OSX) will have OpenCL already installed.
 For some hints on how to install on linux, look at the <a href="https://github.com/QCGPU/qcgpu-rust/blob/master/EC2-install.md">AWS EC2 Install Instructions</a>.
 There is also a good chance that it is installed already. Check that <code>clinfo</code> for some other diagnostic command will run.</p>
 <p>Rust is very easy to install. Check out <a href="https://www.rustup.rs">rustup</a>.</p>
-<a class="header" href="print.html#adding-the-dependency" id="adding-the-dependency"><h2>Adding The Dependency</h2></a>
+<a class="header" href="#adding-the-dependency" id="adding-the-dependency"><h2>Adding The Dependency</h2></a>
 <p>To use the library with rust, you must add the following to your <code>cargo.toml</code> file:</p>
 <pre><code class="language-toml">[dependencies]
 qcgpu = &quot;0.1&quot;
@@ -162,10 +160,10 @@ qcgpu = &quot;0.1&quot;
 <pre><code>extern crate qcgpu;
 </code></pre>
 <p>to <code>lib.rs</code> or <code>main.rs</code>, depending on if you are writing an executable or a library.</p>
-<a class="header" href="print.html#user-guide" id="user-guide"><h1>User Guide</h1></a>
+<a class="header" href="#user-guide" id="user-guide"><h1>User Guide</h1></a>
 <p>This chapter covers the usage of the QCGPU library. It will also contain some information about the mathematics that each of the functions represents.</p>
 <p>All aspects of the library are covered by this chapter, whereas complete examples (in the form of algorithm implementations) are available in the <a href="../algorithms/algorithms.html">Algorithms Chapter</a></p>
-<a class="header" href="print.html#quantum-registers" id="quantum-registers"><h1>Quantum Registers</h1></a>
+<a class="header" href="#quantum-registers" id="quantum-registers"><h1>Quantum Registers</h1></a>
 <p>All of the simulation is done through quantum registers. QCGPU provides a struct as a register, but that contains fields to do with the OpenCL buffers and related items, so the creation of registers should be done through the provided methods.</p>
 <p>The library is optimized for complex superpositions, so the registers are all dense. This means that the number of qubits you can initialize is directly related to the capacity / available memory of the device.</p>
 <p>The register struct is called <code>State</code> and is available through <code>qcgpu::State</code>.</p>
@@ -195,9 +193,9 @@ let mut register = State::from_bit_string(&quot;|0100&gt;&quot;, 0);
 </code></pre></pre>
 <p>The second argument is the same as before. The register that is outputed from this method is equivilent to the state</p>
 <p>\[ \lvert 0100 \rangle\]</p>
-<a class="header" href="print.html#quantum-gates" id="quantum-gates"><h1>Quantum Gates</h1></a>
+<a class="header" href="#quantum-gates" id="quantum-gates"><h1>Quantum Gates</h1></a>
 <p>Gates are used to manipulate quantum registers and to implement quantum algorithms.</p>
-<a class="header" href="print.html#built-in-gates" id="built-in-gates"><h2>Built In Gates</h2></a>
+<a class="header" href="#built-in-gates" id="built-in-gates"><h2>Built In Gates</h2></a>
 <p>There are a number of gates built in to QCGPU. They can all be applied the same way:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -240,7 +238,7 @@ use qcgpu::State;
 let mut state = State::new(5, 0);
 state.apply_controlled_gate(x(), 0, 1);
 #}</code></pre></pre>
-<a class="header" href="print.html#user-defined-gates" id="user-defined-gates"><h2>User Defined Gates</h2></a>
+<a class="header" href="#user-defined-gates" id="user-defined-gates"><h2>User Defined Gates</h2></a>
 <p>Gates in QCGPU are represented by the <code>Gate</code> struct, available through <code>qcgpu::Gate</code>.</p>
 <p>It is defined as follows:</p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -279,9 +277,9 @@ let x = Gate {
 let mut state = State::new(1, 0);
 state.apply_gate(x, 0);
 #}</code></pre></pre>
-<a class="header" href="print.html#quantum-operations" id="quantum-operations"><h1>Quantum Operations</h1></a>
+<a class="header" href="#quantum-operations" id="quantum-operations"><h1>Quantum Operations</h1></a>
 <p>There are a number of operations you can preform on quantum registers with QCGPU.</p>
-<a class="header" href="print.html#measurement" id="measurement"><h2>Measurement</h2></a>
+<a class="header" href="#measurement" id="measurement"><h2>Measurement</h2></a>
 <p>You can measure the register in two ways. You can either do a single measurement and return an integer with the measured value or you can measure multiple times and return a <code>HashMap&lt;String, i32&gt;</code>, with the key being the bitstring, and the value being the number of times it was measured.</p>
 <p>The measurements don't collapse the state.</p>
 <p>They are used as follows:</p>
@@ -303,7 +301,7 @@ use qcgpu::State;
 let mut state = State::new(5, 0);
 state.measure_first(3, 1000); // Measures the first 3 qubits 1000 times, returns a HashMap&lt;String, i32&gt;
 #}</code></pre></pre>
-<a class="header" href="print.html#probability" id="probability"><h2>Probability</h2></a>
+<a class="header" href="#probability" id="probability"><h2>Probability</h2></a>
 <p>QCGPU provides another method for getting the probability of each outcome.</p>
 <p>The probability is calculated for a state \(\lvert \psi \rangle = \sum_{j = 0}^{2^n - 1} \alpha_j \lvert j \rangle\),</p>
 <p>\[P(j) = |\alpha_j|^2\]</p>
@@ -317,7 +315,7 @@ let mut state = State::new(1, 0);
 state.h(0);
 state.get_probabilities(); // [0.5, 0.5]
 #}</code></pre></pre>
-<a class="header" href="print.html#examples" id="examples"><h1>Examples</h1></a>
+<a class="header" href="#examples" id="examples"><h1>Examples</h1></a>
 <p>Here is a complete example of using QCGPU to simulate the bell state.</p>
 <pre><pre class="playpen"><code class="language-rust">extern crate qcgpu;
 
@@ -341,7 +339,7 @@ fn main() {
 <pre><code class="language-shell">Measured: {&quot;00&quot;: 516, &quot;11&quot;: 484}
 </code></pre>
 <p>For more, non trivial examples, see the <a href="../algorithms/algorithms.html">Algorithms</a></p>
-<a class="header" href="print.html#decoherence" id="decoherence"><h1>Decoherence</h1></a>
+<a class="header" href="#decoherence" id="decoherence"><h1>Decoherence</h1></a>
 <p>QCGPU provides a way to easily simulate the effects of decoherence on the quantum computer. The effects are simulated by a random gate, corresponding to a random rotation around the \(z\) axis of the bloch sphere.</p>
 <p>The angle of the rotation is a normal distrobuted value, with the varience as the strength factor <code>d</code>.</p>
 <p>To avoid performance costs when not being used, decoherence can be enabled via a feature.</p>
@@ -366,10 +364,10 @@ register.set_decoherence(0.4);
 #fn main() {
 register.decohere();
 #}</code></pre></pre>
-<a class="header" href="print.html#algorithms" id="algorithms"><h1>Algorithms</h1></a>
+<a class="header" href="#algorithms" id="algorithms"><h1>Algorithms</h1></a>
 <p>The following chapter details some implementations of non trivial quantum algorithms. They are based on the source code from <a href="http://www.libquantum.de/">libquantum</a> along with the lecture notes from <a href="https://cs.uwaterloo.ca/%7Ewatrous/LectureNotes.html">the University of Waterloo</a>.</p>
 <p>Note that some implementations may not yet be complete.</p>
-<a class="header" href="print.html#bernstein-vazirani-algorithm" id="bernstein-vazirani-algorithm"><h1>Bernstein-Vazirani Algorithm</h1></a>
+<a class="header" href="#bernstein-vazirani-algorithm" id="bernstein-vazirani-algorithm"><h1>Bernstein-Vazirani Algorithm</h1></a>
 <p>This algorithm finds a hidden integer \(a \in { 0, 1}^n\)from
 an oracle \(f_a\)which returns a bit \(a \cdot x \equiv \sum_i a_i x_i \mod 2\)
 for an input \(x \in {0,1}^n\).</p>
@@ -380,7 +378,7 @@ oracle with the inputs \(x = 1,2,\dots,2^i,2^{n-1}\), where each
 query reveals the \(i\)th bit of \(a\) (\(a_i\)).
 This is the optimal classical solution, and is O(n). Using a quantum oracle and the
 Bernstein-Vazirani algorithm, \(a\) can be found with just one query to the oracle.</p>
-<a class="header" href="print.html#the-algorithm" id="the-algorithm"><h2>The Algorithm</h2></a>
+<a class="header" href="#the-algorithm" id="the-algorithm"><h2>The Algorithm</h2></a>
 <ol>
 <li>Initialize \(n\) qubits in the state \(\lvert 0, \dots, 0\rangle\).</li>
 <li>Apply the Hadamard gate \(H\) to each qubit.</li>
@@ -423,7 +421,7 @@ fn main() {
     // Measurement Results: {&quot;0000000001100101&quot;: 1000}
 }
 </code></pre></pre>
-<a class="header" href="print.html#deutsch-jozsa-algorithm" id="deutsch-jozsa-algorithm"><h1>Deutsch-Jozsa Algorithm</h1></a>
+<a class="header" href="#deutsch-jozsa-algorithm" id="deutsch-jozsa-algorithm"><h1>Deutsch-Jozsa Algorithm</h1></a>
 <p>This algorithm was the first to show that quantum computers could have a speedup over classical computers.</p>
 <p>Consider a function \(f(x)\) which takes an input of an \(n\)-bit string \(x\) and returns 0 or 1.</p>
 <p>Suppose that \(f(x)\) is either a <strong>constant</strong> function that has the same value \(c \in {0, 1},  \forall x\), or a <strong>balanced</strong> function, where the value is 0 for half of the inputs, and 1 for the other half.</p>
@@ -431,7 +429,7 @@ fn main() {
 <p>Using classical computing, in the worst case, this requires \(2^{n-1}+1\) function evaluations.
 Using quantum computing, this can be done with just one function evaluation.</p>
 <p>The function \(f\), to be used in a quantum computer, must be specified by an oracle circuit \(U_{f}\) such that \(U_{f} \lvert x \rangle = (-1)^{f(x)}\lvert x \rangle\).</p>
-<a class="header" href="print.html#the-algorithm-1" id="the-algorithm-1"><h2>The Algorithm</h2></a>
+<a class="header" href="#the-algorithm-1" id="the-algorithm-1"><h2>The Algorithm</h2></a>
 <ol>
 <li>Initialize \(n\) qubits in the state \(\lvert 0, \dots, 0\rangle\).</li>
 <li>Apply the Hadamard gate \(H\) to each qubit.</li>
@@ -490,7 +488,7 @@ fn main() {
     );
 }
 </code></pre></pre>
-<a class="header" href="print.html#grovers-algorithm" id="grovers-algorithm"><h1>Grovers Algorithm</h1></a>
+<a class="header" href="#grovers-algorithm" id="grovers-algorithm"><h1>Grovers Algorithm</h1></a>
 <p>Given an unstructured set \(N = {a_1, a_2,\dots,a_n}\), find
 a given element \(a_i \in N\).</p>
 <p>This implementation looks for a given number \(target\) in the set \({0,1,\dots, \text{regwidth}}\).</p>
@@ -614,10 +612,10 @@ fn get_bit(number: i32, n: i32) -&gt; i32 {
     0
 }
 </code></pre></pre>
-<a class="header" href="print.html#shors-algorithm" id="shors-algorithm"><h1>Shors Algorithm</h1></a>
+<a class="header" href="#shors-algorithm" id="shors-algorithm"><h1>Shors Algorithm</h1></a>
 <p>This algorithm finds the prime factors (\)u\) and \(v\)) of an odd, composite integer \(n\),
 that is not a prime power.</p>
-<a class="header" href="print.html#the-algorithm-2" id="the-algorithm-2"><h2>The Algorithm</h2></a>
+<a class="header" href="#the-algorithm-2" id="the-algorithm-2"><h2>The Algorithm</h2></a>
 <p>(pseudo code)</p>
 <pre><code class="language-pseudo">Repeat
     Randomly choose \\(a \in \{ 2, \dots, n - 1 \}\\)
@@ -678,7 +676,7 @@ fn main() {
     }
 }
 </code></pre></pre>
-<a class="header" href="print.html#order-finding" id="order-finding"><h2>Order Finding</h2></a>
+<a class="header" href="#order-finding" id="order-finding"><h2>Order Finding</h2></a>
 <p>Given a positive integer \(n \geq 2\) and an element \(a \in \mathbb{Z}_n^* \),
 Find the order of \(a\) in \(\mathbb{Z}_n^*\).</p>
 <p>Order finding is the only quantum part in shors algorithm.</p>
@@ -700,7 +698,7 @@ fn find_order(a: i32, n: i32) -&gt; i32 {
     unimplemented!()
 }
 #}</code></pre></pre>
-<a class="header" href="print.html#super-dense-coding" id="super-dense-coding"><h1>Super Dense Coding</h1></a>
+<a class="header" href="#super-dense-coding" id="super-dense-coding"><h1>Super Dense Coding</h1></a>
 <p>if Alice and Bob share a pair of entangled qubits, then Alice can encode two classical bits into her one entangled qubit,
 send it to Bob, and Bob can decode it with the help of his entangled qubit.</p>
 <pre><pre class="playpen"><code class="language-rust">extern crate qcgpu;
@@ -780,17 +778,12 @@ fn main() {
         
 
         
-        <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
-                window.print();
-            })
-        </script>
-        
-
-        
 
         
         <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var path_to_root = "";
+        </script>
         
         
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
@@ -803,6 +796,18 @@ fn main() {
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+        
         
 
     </body>

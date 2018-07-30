@@ -9,20 +9,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="../">
-
-        <link rel="stylesheet" href="book.css">
+        <link rel="stylesheet" href="../book.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
 
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -72,7 +70,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="qcgpu.html"><strong aria-hidden="true">1.</strong> QCGPU</a></li><li><ol class="section"><li><a href="getting-started.html"><strong aria-hidden="true">1.1.</strong> Getting Started</a></li></ol></li><li><a href="user-guide/user-guide.html"><strong aria-hidden="true">2.</strong> User Guide</a></li><li><ol class="section"><li><a href="user-guide/registers.html"><strong aria-hidden="true">2.1.</strong> Quantum Registers</a></li><li><a href="user-guide/gates.html" class="active"><strong aria-hidden="true">2.2.</strong> Quantum Gates</a></li><li><a href="user-guide/operations.html"><strong aria-hidden="true">2.3.</strong> Quantum Operations</a></li><li><a href="user-guide/examples.html"><strong aria-hidden="true">2.4.</strong> Examples</a></li><li><a href="user-guide/decoherence.html"><strong aria-hidden="true">2.5.</strong> Decoherence</a></li></ol></li><li><a href="algorithms/algorithms.html"><strong aria-hidden="true">3.</strong> Algorithms</a></li><li><ol class="section"><li><a href="algorithms/bernstein-vazirani.html"><strong aria-hidden="true">3.1.</strong> Bernstein-Vazirani</a></li><li><a href="algorithms/deutsch-jozsa.html"><strong aria-hidden="true">3.2.</strong> Deutsch-Jozsa</a></li><li><a href="algorithms/grover.html"><strong aria-hidden="true">3.3.</strong> Grovers</a></li><li><a href="algorithms/shor.html"><strong aria-hidden="true">3.4.</strong> Shors</a></li><li><a href="algorithms/super-dense.html"><strong aria-hidden="true">3.5.</strong> Super Dense Coding</a></li></ol></li></ol>
+            <ol class="chapter"><li><a href="../qcgpu.html"><strong aria-hidden="true">1.</strong> QCGPU</a></li><li><ol class="section"><li><a href="../getting-started.html"><strong aria-hidden="true">1.1.</strong> Getting Started</a></li></ol></li><li><a href="../user-guide/user-guide.html"><strong aria-hidden="true">2.</strong> User Guide</a></li><li><ol class="section"><li><a href="../user-guide/registers.html"><strong aria-hidden="true">2.1.</strong> Quantum Registers</a></li><li><a href="../user-guide/gates.html" class="active"><strong aria-hidden="true">2.2.</strong> Quantum Gates</a></li><li><a href="../user-guide/operations.html"><strong aria-hidden="true">2.3.</strong> Quantum Operations</a></li><li><a href="../user-guide/examples.html"><strong aria-hidden="true">2.4.</strong> Examples</a></li><li><a href="../user-guide/decoherence.html"><strong aria-hidden="true">2.5.</strong> Decoherence</a></li></ol></li><li><a href="../algorithms/algorithms.html"><strong aria-hidden="true">3.</strong> Algorithms</a></li><li><ol class="section"><li><a href="../algorithms/bernstein-vazirani.html"><strong aria-hidden="true">3.1.</strong> Bernstein-Vazirani</a></li><li><a href="../algorithms/deutsch-jozsa.html"><strong aria-hidden="true">3.2.</strong> Deutsch-Jozsa</a></li><li><a href="../algorithms/grover.html"><strong aria-hidden="true">3.3.</strong> Grovers</a></li><li><a href="../algorithms/shor.html"><strong aria-hidden="true">3.4.</strong> Shors</a></li><li><a href="../algorithms/super-dense.html"><strong aria-hidden="true">3.5.</strong> Super Dense Coding</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -105,7 +103,7 @@
                         <h1 class="menu-title">QCGPU User Guide</h1> 
 
                         <div class="right-buttons">
-                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
                         </div>
@@ -136,9 +134,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="user-guide/gates.html#quantum-gates" id="quantum-gates"><h1>Quantum Gates</h1></a>
+                        <a class="header" href="#quantum-gates" id="quantum-gates"><h1>Quantum Gates</h1></a>
 <p>Gates are used to manipulate quantum registers and to implement quantum algorithms.</p>
-<a class="header" href="user-guide/gates.html#built-in-gates" id="built-in-gates"><h2>Built In Gates</h2></a>
+<a class="header" href="#built-in-gates" id="built-in-gates"><h2>Built In Gates</h2></a>
 <p>There are a number of gates built in to QCGPU. They can all be applied the same way:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -181,7 +179,7 @@ use qcgpu::State;
 let mut state = State::new(5, 0);
 state.apply_controlled_gate(x(), 0, 1);
 #}</code></pre></pre>
-<a class="header" href="user-guide/gates.html#user-defined-gates" id="user-defined-gates"><h2>User Defined Gates</h2></a>
+<a class="header" href="#user-defined-gates" id="user-defined-gates"><h2>User Defined Gates</h2></a>
 <p>Gates in QCGPU are represented by the <code>Gate</code> struct, available through <code>qcgpu::Gate</code>.</p>
 <p>It is defined as follows:</p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -226,13 +224,13 @@ state.apply_gate(x, 0);
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="user-guide/registers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../user-guide/registers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="user-guide/operations.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../user-guide/operations.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -244,13 +242,13 @@ state.apply_gate(x, 0);
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="user-guide/registers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../user-guide/registers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="user-guide/operations.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../user-guide/operations.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -265,21 +263,24 @@ state.apply_gate(x, 0);
         
 
         
+        <script src="../searchindex.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var path_to_root = "../";
+        </script>
+        
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
 
-        
-        <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
-        
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        
+
         
 
     </body>
