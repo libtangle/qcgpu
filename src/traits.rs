@@ -1,6 +1,6 @@
+use failure::Error;
 use gate::Gate;
 use std::fmt::{Debug, Display};
-use failure::Error;
 
 pub trait Backend: Debug + Display {
     fn num_qubits(&self) -> u8;

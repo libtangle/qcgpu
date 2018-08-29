@@ -1,11 +1,11 @@
-use traits::Backend;
 use gate::Gate;
+use traits::Backend;
 
-use ocl::{Buffer, MemFlags, ProQue};
+use failure::Error;
 use num_complex::{Complex, Complex32};
+use ocl::{Buffer, MemFlags, ProQue};
 use rand::random;
 use std::fmt;
-use failure::Error;
 
 // OpenCL Kernel
 pub static KERNEL: &'static str = include_str!("kernel.cl");
@@ -65,7 +65,8 @@ impl OpenCL {
     fn get_probabilities(&self) -> Result<Vec<f32>, Error> {
         let result_buffer: Buffer<f32> = self.pro_que.create_buffer()?;
 
-        let apply = self.pro_que
+        let apply = self
+            .pro_que
             .kernel_builder("calculate_probabilities")
             .arg(&self.buffer)
             .arg(&result_buffer)
@@ -84,7 +85,8 @@ impl OpenCL {
 
 impl Backend for OpenCL {
     fn apply_gate(&mut self, gate: Gate, target: u8) -> Result<(), Error> {
-        let apply = self.pro_que
+        let apply = self
+            .pro_que
             .kernel_builder("apply_gate")
             .global_work_size(&self.buffer.len() / 2)
             .arg(&self.buffer)
@@ -103,12 +105,13 @@ impl Backend for OpenCL {
     }
 
     fn apply_controlled_gate(&mut self, gate: Gate, control: u8, target: u8) -> Result<(), Error> {
-        let apply = self.pro_que
+        let apply = self
+            .pro_que
             .kernel_builder("apply_controlled_gate")
             .global_work_size(&self.buffer.len() / 2)
             .arg(&self.buffer)
-            .arg(control)
-            .arg(target)
+            .arg(i32::from(control))
+            .arg(i32::from(target))
             .arg(gate.a)
             .arg(gate.b)
             .arg(gate.c)

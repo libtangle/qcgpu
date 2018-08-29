@@ -6,16 +6,16 @@ extern crate rand;
 #[macro_use]
 extern crate failure_derive;
 
+pub mod backends;
 pub mod error;
 pub mod gate;
 pub mod traits;
-pub mod backends;
 
 use backends::OpenCL;
 pub use gate::{h, x, y, z, Gate};
 
-use std::fmt;
 use failure::Error;
+use std::fmt;
 
 #[derive(Debug)]
 pub struct Simulator {
