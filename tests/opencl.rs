@@ -1,6 +1,7 @@
 extern crate qcgpu;
 
 use qcgpu::Simulator;
+use qcgpu::gate::x;
 
 fn create_simulator(n: u8) -> Simulator {
     let sim = Simulator::new_opencl(n);
@@ -87,5 +88,14 @@ fn can_apply_cx_gate() {
                 "Error applying controlled not gate to simulator"
             );
         }
+    }
+}
+
+#[test]
+fn can_perform_measurement() {
+    for n in 1..25 {
+        let mut sim = create_simulator(n);
+        sim.apply_all(x()).unwrap();
+        assert_eq!(sim.measure().unwrap() as i32, 2i32.pow(n as u32) - 1);
     }
 }
