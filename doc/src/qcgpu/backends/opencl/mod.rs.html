@@ -192,15 +192,20 @@
 <span id="192">192</span>
 <span id="193">193</span>
 <span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
 </pre><pre class="rust ">
-<span class="kw">use</span> <span class="ident">traits</span>::<span class="ident">Backend</span>;
 <span class="kw">use</span> <span class="ident">gate</span>::<span class="ident">Gate</span>;
+<span class="kw">use</span> <span class="ident">traits</span>::<span class="ident">Backend</span>;
 
-<span class="kw">use</span> <span class="ident">ocl</span>::{<span class="ident">Buffer</span>, <span class="ident">MemFlags</span>, <span class="ident">ProQue</span>};
+<span class="kw">use</span> <span class="ident">failure</span>::<span class="ident">Error</span>;
 <span class="kw">use</span> <span class="ident">num_complex</span>::{<span class="ident">Complex</span>, <span class="ident">Complex32</span>};
+<span class="kw">use</span> <span class="ident">ocl</span>::{<span class="ident">Buffer</span>, <span class="ident">MemFlags</span>, <span class="ident">ProQue</span>};
 <span class="kw">use</span> <span class="ident">rand</span>::<span class="ident">random</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">failure</span>::<span class="ident">Error</span>;
 
 <span class="comment">// OpenCL Kernel</span>
 <span class="kw">pub</span> <span class="kw">static</span> <span class="ident">KERNEL</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="macro">include_str</span><span class="macro">!</span>(<span class="string">&quot;kernel.cl&quot;</span>);
@@ -260,7 +265,8 @@
     <span class="kw">fn</span> <span class="ident">get_probabilities</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">result_buffer</span>: <span class="ident">Buffer</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pro_que</span>.<span class="ident">create_buffer</span>()<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">apply</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pro_que</span>
+        <span class="kw">let</span> <span class="ident">apply</span> <span class="op">=</span> <span class="self">self</span>
+            .<span class="ident">pro_que</span>
             .<span class="ident">kernel_builder</span>(<span class="string">&quot;calculate_probabilities&quot;</span>)
             .<span class="ident">arg</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>)
             .<span class="ident">arg</span>(<span class="kw-2">&amp;</span><span class="ident">result_buffer</span>)
@@ -279,7 +285,8 @@
 
 <span class="kw">impl</span> <span class="ident">Backend</span> <span class="kw">for</span> <span class="ident">OpenCL</span> {
     <span class="kw">fn</span> <span class="ident">apply_gate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">gate</span>: <span class="ident">Gate</span>, <span class="ident">target</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">apply</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pro_que</span>
+        <span class="kw">let</span> <span class="ident">apply</span> <span class="op">=</span> <span class="self">self</span>
+            .<span class="ident">pro_que</span>
             .<span class="ident">kernel_builder</span>(<span class="string">&quot;apply_gate&quot;</span>)
             .<span class="ident">global_work_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="number">2</span>)
             .<span class="ident">arg</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>)
@@ -298,12 +305,13 @@
     }
 
     <span class="kw">fn</span> <span class="ident">apply_controlled_gate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">gate</span>: <span class="ident">Gate</span>, <span class="ident">control</span>: <span class="ident">u8</span>, <span class="ident">target</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">apply</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pro_que</span>
+        <span class="kw">let</span> <span class="ident">apply</span> <span class="op">=</span> <span class="self">self</span>
+            .<span class="ident">pro_que</span>
             .<span class="ident">kernel_builder</span>(<span class="string">&quot;apply_controlled_gate&quot;</span>)
             .<span class="ident">global_work_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="number">2</span>)
             .<span class="ident">arg</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>)
-            .<span class="ident">arg</span>(<span class="ident">control</span>)
-            .<span class="ident">arg</span>(<span class="ident">target</span>)
+            .<span class="ident">arg</span>(<span class="ident">i32</span>::<span class="ident">from</span>(<span class="ident">control</span>))
+            .<span class="ident">arg</span>(<span class="ident">i32</span>::<span class="ident">from</span>(<span class="ident">target</span>))
             .<span class="ident">arg</span>(<span class="ident">gate</span>.<span class="ident">a</span>)
             .<span class="ident">arg</span>(<span class="ident">gate</span>.<span class="ident">b</span>)
             .<span class="ident">arg</span>(<span class="ident">gate</span>.<span class="ident">c</span>)
@@ -319,7 +327,9 @@
 
     <span class="doccomment">/// Measure the whole register, leaving the register in</span>
     <span class="doccomment">/// the measured state</span>
-    <span class="kw">fn</span> <span class="ident">measure</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// </span>
+    <span class="doccomment">/// Note: Currently this leaves the register in the unmeasured state.</span>
+    <span class="kw">fn</span> <span class="ident">measure</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">probabilities</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_probabilities</span>()<span class="question-mark">?</span>;
 
         <span class="comment">// A key must be generated on the host, as most</span>
@@ -339,13 +349,13 @@
             <span class="ident">i</span> <span class="op">+=</span> <span class="number">1</span>;
         }
 
-        <span class="prelude-val">Ok</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>)
+        <span class="prelude-val">Ok</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">u64</span>)
     }
 
     <span class="doccomment">/// Measure the value of a single qubit, leaving the register in</span>
     <span class="doccomment">/// the state where only that qubit (or any entangled qubits) have</span>
     <span class="doccomment">/// been collapsed</span>
-    <span class="kw">fn</span> <span class="ident">measure_qubit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">_target</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">measure_qubit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">_target</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 

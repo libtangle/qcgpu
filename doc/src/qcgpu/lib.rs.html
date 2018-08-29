@@ -82,16 +82,16 @@
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">failure_derive</span>;
 
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">backends</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">error</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">gate</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">traits</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">backends</span>;
 
 <span class="kw">use</span> <span class="ident">backends</span>::<span class="ident">OpenCL</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">gate</span>::{<span class="ident">h</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>, <span class="ident">Gate</span>};
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">failure</span>::<span class="ident">Error</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Simulator</span> {
@@ -136,7 +136,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cx</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">control</span>: <span class="ident">u8</span>, <span class="ident">target</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">backend</span>.<span class="ident">apply_controlled_gate</span>(<span class="ident">x</span>(), <span class="ident">control</span>, <span class="ident">target</span>)
     }
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">measure</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">measure</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">backend</span>.<span class="ident">measure</span>()
     }
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">num_qubits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u8</span> {

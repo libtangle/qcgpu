@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/libc-0.2.42/src/unix/bsd/apple/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script src="../../../../../storage.js"></script><link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico"></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../libc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../../../../settings.html"><img src="../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/Users/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/libc-0.2.43/src/unix/bsd/apple/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script src="../../../../../storage.js"></script><link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico"></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../libc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../../../../settings.html"><img src="../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -2538,6 +2538,26 @@
 <span id="2538">2538</span>
 <span id="2539">2539</span>
 <span id="2540">2540</span>
+<span id="2541">2541</span>
+<span id="2542">2542</span>
+<span id="2543">2543</span>
+<span id="2544">2544</span>
+<span id="2545">2545</span>
+<span id="2546">2546</span>
+<span id="2547">2547</span>
+<span id="2548">2548</span>
+<span id="2549">2549</span>
+<span id="2550">2550</span>
+<span id="2551">2551</span>
+<span id="2552">2552</span>
+<span id="2553">2553</span>
+<span id="2554">2554</span>
+<span id="2555">2555</span>
+<span id="2556">2556</span>
+<span id="2557">2557</span>
+<span id="2558">2558</span>
+<span id="2559">2559</span>
+<span id="2560">2560</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! Apple (ios/darwin)-specific definitions</span>
 <span class="doccomment">//!</span>
@@ -3090,6 +3110,14 @@
         <span class="kw">pub</span> <span class="ident">shm_internal</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">c_void</span>,
 
     }
+
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">arphdr</span> {
+        <span class="kw">pub</span> <span class="ident">ar_hrd</span>: <span class="ident">u16</span>,
+        <span class="kw">pub</span> <span class="ident">ar_pro</span>: <span class="ident">u16</span>,
+        <span class="kw">pub</span> <span class="ident">ar_hln</span>: <span class="ident">u8</span>,
+        <span class="kw">pub</span> <span class="ident">ar_pln</span>: <span class="ident">u8</span>,
+        <span class="kw">pub</span> <span class="ident">ar_op</span>: <span class="ident">u16</span>,
+    }
 }
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_UTX_USERSIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">256</span>;
@@ -3298,16 +3326,8 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_RETURN_DATA_ADDR</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x100000</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_RETURN_4K_DATA_ADDR</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x800000</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_ALIAS_MASK</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0xFF000000</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_USER_ALLOCATE</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="ident">VM_FLAGS_FIXED</span> <span class="op">|</span> <span class="ident">VM_FLAGS_ANYWHERE</span> <span class="op">|</span>
-                                            <span class="ident">VM_FLAGS_PURGABLE</span> <span class="op">|</span>
-                                            <span class="ident">VM_FLAGS_RANDOM_ADDR</span> <span class="op">|</span>
-                                            <span class="ident">VM_FLAGS_NO_CACHE</span> <span class="op">|</span>
-                                            <span class="ident">VM_FLAGS_OVERWRITE</span> <span class="op">|</span>
-                                            <span class="ident">VM_FLAGS_SUPERPAGE_MASK</span> <span class="op">|</span>
-                                            <span class="ident">VM_FLAGS_ALIAS_MASK</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_USER_MAP</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="ident">VM_FLAGS_USER_ALLOCATE</span> <span class="op">|</span>
-                                       <span class="ident">VM_FLAGS_RETURN_4K_DATA_ADDR</span> <span class="op">|</span>
-                                       <span class="ident">VM_FLAGS_RETURN_DATA_ADDR</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_USER_ALLOCATE</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0xff07401b</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_USER_MAP</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0xff97401b</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VM_FLAGS_USER_REMAP</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="ident">VM_FLAGS_FIXED</span> <span class="op">|</span> <span class="ident">VM_FLAGS_ANYWHERE</span> <span class="op">|</span>
                                         <span class="ident">VM_FLAGS_RANDOM_ADDR</span> <span class="op">|</span>
                                         <span class="ident">VM_FLAGS_OVERWRITE</span> <span class="op">|</span>
@@ -3618,6 +3638,13 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TIOCPTYGNAME</span>: ::<span class="ident">c_uint</span> <span class="op">=</span> <span class="number">0x40807453</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TIOCPTYUNLK</span>: ::<span class="ident">c_uint</span> <span class="op">=</span> <span class="number">0x20007452</span>;
 
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FIONCLEX</span>: ::<span class="ident">c_uint</span> <span class="op">=</span> <span class="number">0x20006602</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FIONREAD</span>: ::<span class="ident">c_ulong</span> <span class="op">=</span> <span class="number">0x4004667f</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FIOASYNC</span>: ::<span class="ident">c_ulong</span> <span class="op">=</span> <span class="number">0x8004667d</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FIOSETOWN</span>: ::<span class="ident">c_ulong</span> <span class="op">=</span> <span class="number">0x8004667c</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FIOGETOWN</span>: ::<span class="ident">c_ulong</span> <span class="op">=</span> <span class="number">0x4004667b</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FIODTYPE</span>: ::<span class="ident">c_ulong</span> <span class="op">=</span> <span class="number">0x4004667a</span>;
+
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">B0</span>: <span class="ident">speed_t</span> <span class="op">=</span> <span class="number">0</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">B50</span>: <span class="ident">speed_t</span> <span class="op">=</span> <span class="number">50</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">B75</span>: <span class="ident">speed_t</span> <span class="op">=</span> <span class="number">75</span>;
@@ -3692,6 +3719,7 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_SC_XOPEN_UNIX</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">115</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_SC_XOPEN_VERSION</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">116</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_SC_XOPEN_XCU_VERSION</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">121</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_SC_PHYS_PAGES</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">200</span>;
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PTHREAD_PROCESS_PRIVATE</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">2</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PTHREAD_PROCESS_SHARED</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">1</span>;
@@ -4400,6 +4428,9 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Q_GETQUOTA</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x300</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Q_SETQUOTA</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x400</span>;
 
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RENAME_SWAP</span>: ::<span class="ident">c_uint</span> <span class="op">=</span> <span class="number">0x00000002</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RENAME_EXCL</span>: ::<span class="ident">c_uint</span> <span class="op">=</span> <span class="number">0x00000004</span>;
+
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RTLD_LOCAL</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x4</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RTLD_FIRST</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x100</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RTLD_NODELETE</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x80</span>;
@@ -4782,10 +4813,14 @@
 <span class="comment">// sizeof(int32_t)</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BPF_ALIGNMENT</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">4</span>;
 
+<span class="comment">// sys/spawn.h:</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POSIX_SPAWN_RESETIDS</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x01</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POSIX_SPAWN_SETPGROUP</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x02</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POSIX_SPAWN_SETSIGDEF</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x04</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POSIX_SPAWN_SETSIGMASK</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x08</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POSIX_SPAWN_SETEXEC</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x40</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POSIX_SPAWN_START_SUSPENDED</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x80</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POSIX_SPAWN_CLOEXEC_DEFAULT</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x4000</span>;
 
 <span class="comment">// sys/ipc.h:</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IPC_CREAT</span>: ::<span class="ident">c_int</span> <span class="op">=</span> <span class="number">0x200</span>;
@@ -4992,6 +5027,11 @@
                       <span class="ident">size</span>: ::<span class="ident">size_t</span>, <span class="ident">flags</span>: ::<span class="ident">c_int</span>) <span class="op">-&gt;</span> ::<span class="ident">ssize_t</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">removexattr</span>(<span class="ident">path</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">c_char</span>, <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">c_char</span>,
                        <span class="ident">flags</span>: ::<span class="ident">c_int</span>) <span class="op">-&gt;</span> ::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">renamex_np</span>(<span class="ident">from</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">c_char</span>, <span class="ident">to</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">c_char</span>,
+                      <span class="ident">flags</span>: ::<span class="ident">c_uint</span>) <span class="op">-&gt;</span> ::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">renameatx_np</span>(<span class="ident">fromfd</span>: ::<span class="ident">c_int</span>, <span class="ident">from</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">c_char</span>,
+                        <span class="ident">tofd</span>: ::<span class="ident">c_int</span>, <span class="ident">to</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">c_char</span>,
+                        <span class="ident">flags</span>: ::<span class="ident">c_uint</span>) <span class="op">-&gt;</span> ::<span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fremovexattr</span>(<span class="ident">filedes</span>: ::<span class="ident">c_int</span>, <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">c_char</span>,
                         <span class="ident">flags</span>: ::<span class="ident">c_int</span>) <span class="op">-&gt;</span> ::<span class="ident">c_int</span>;
 
