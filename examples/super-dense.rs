@@ -9,7 +9,7 @@ extern crate qcgpu;
 use failure::Error;
 use qcgpu::Simulator;
 
-fn superdense(input: &str) -> Result<u8, Error> {
+fn superdense(input: &str) -> Result<u64, Error> {
     let mut state = Simulator::new_opencl(2)?;
     let input_str = String::from(input);
 

@@ -60,7 +60,7 @@ impl Simulator {
     pub fn cx(&mut self, control: u8, target: u8) -> Result<(), Error> {
         self.backend.apply_controlled_gate(x(), control, target)
     }
-    pub fn measure(&mut self) -> Result<u8, Error> {
+    pub fn measure(&mut self) -> Result<u64, Error> {
         self.backend.measure()
     }
     pub fn num_qubits(&mut self) -> u8 {

@@ -127,7 +127,9 @@ impl Backend for OpenCL {
 
     /// Measure the whole register, leaving the register in
     /// the measured state
-    fn measure(&mut self) -> Result<u8, Error> {
+    /// 
+    /// Note: Currently this leaves the register in the unmeasured state.
+    fn measure(&mut self) -> Result<u64, Error> {
         let probabilities = self.get_probabilities()?;
 
         // A key must be generated on the host, as most
@@ -147,13 +149,13 @@ impl Backend for OpenCL {
             i += 1;
         }
 
-        Ok(i as u8)
+        Ok(i as u64)
     }
 
     /// Measure the value of a single qubit, leaving the register in
     /// the state where only that qubit (or any entangled qubits) have
     /// been collapsed
-    fn measure_qubit(&mut self, _target: u8) -> Result<u8, Error> {
+    fn measure_qubit(&mut self, _target: u8) -> Result<u64, Error> {
         unimplemented!()
     }
 
