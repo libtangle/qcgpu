@@ -1,9 +1,0 @@
-[book]
-authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
-description = "The user guide / prose documentation for QCGPU"
-title = "QCGPU User Guide"
-multilingual = false
-src = "src"
-
-[output.html]
-mathjax-support = true
