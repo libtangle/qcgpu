@@ -31,4 +31,4 @@ def y():
     return Gate(np.matrix([[0, -1j], [1j, 0]]))
 
 def z():
-    return Gate(np.matrix([[1, 0], [0, -1j]]))
+    return Gate(np.matrix([[1, 0], [0, -1]]))
