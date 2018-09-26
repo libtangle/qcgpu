@@ -30,7 +30,6 @@ class Backend:
         self.num_qubits = num_qubits
         self.dtype = dtype
 
-        # Setup the opencl context, queue and program
         self.context = cl.create_some_context()
         self.queue = cl.CommandQueue(self.context)
         self.program = cl.Program(self.context, kernel).build()

@@ -32,3 +32,12 @@ def y():
 
 def z():
     return Gate(np.matrix([[1, 0], [0, -1]]))
+
+def s():
+    return Gate(np.matrix([[1, 0], [0, 1j]]))
+
+def t():
+    return Gate(np.matrix([[1, 0], [0, np.exp(np.pi * 1j / 4)]]))
+
+def sqrt_x():
+    return Gate(0.5 * np.matrix([[1+1j, 1-1j], [1-1j, 1+1j]]))

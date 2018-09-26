@@ -21,6 +21,12 @@ class State:
 
         self.backend.apply_gate(gate, target)
 
+
+    def apply_all(self, gate):
+        # TODO: Check that gate is correct
+        for i in range(self.num_qubits):
+            self.apply_gate(gate, i)
+
     def apply_controlled_gate(self, gate, control, target):
         if not isinstance(target, int) or target < 0:
             raise ValueError("target must be an int > 0")
@@ -32,23 +38,11 @@ class State:
 
         self.backend.apply_controlled_gate(gate, control, target)
 
-
-
-
-
-
-
-
-
-
     def amplitudes(self):
         return self.backend.amplitudes()
     
     def probabilities(self):
         return self.backend.probabilities()
-
-    def sum(self):
-        return cl.array.sum(self.backend.buffer)
 
     def __repr__(self):
         """A string representation of the state"""
