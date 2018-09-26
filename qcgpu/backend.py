@@ -111,3 +111,5 @@ class Backend:
 
         return out.get()
         
+    def release(self):
+        self.buffer.base_data.release()

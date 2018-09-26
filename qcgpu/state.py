@@ -44,6 +44,9 @@ class State:
     def probabilities(self):
         return self.backend.probabilities()
 
+    def flush(self):
+        self.backend.release()
+
     def __repr__(self):
         """A string representation of the state"""
 
