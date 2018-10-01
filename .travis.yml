@@ -4,10 +4,13 @@ python:
   - "3.6.6"
   - "3.7-dev"
 
+dist: trusty
+
 addons:
   apt:
     packages:
       - opencl-headers
+      - fglrx
 
 git:
   depth: false
