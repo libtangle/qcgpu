@@ -13,7 +13,9 @@ git:
   depth: false
 
 install:
-  - pip install .
+    # There is sometimes issues with the install order so do this bad boi first
+  - pip install mako pybind11
+  - pip install -e .
 
 script:
   - "python setup.py test"
