@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["h","Hadamard Gate"],["x","Pauli X / NOT Gate"],["y","Pauli Y Gate"],["z","Pauli Z Gate"]],"struct":[["Gate","Representation of a gate"]]});

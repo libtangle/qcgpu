@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["backends",""],["error",""],["gate",""],["traits",""]],"struct":[["Simulator",""]]});
