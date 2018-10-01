@@ -18,6 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    setup_requires=['pytest-runner', 'pyopencl', 'pybind11', 'numpy'],
+    setup_requires=['pytest-runner', 'mako', 'pyopencl', 'pybind11', 'numpy'],
     tests_require=["pytest"]
 )

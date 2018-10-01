@@ -4,6 +4,11 @@ python:
   - "3.6"
   - "3.7-dev"
 
+os: osx
+
+git:
+  depth: false
+
 install:
   - pip install .
 
