@@ -10,6 +10,7 @@ addons:
   apt:
     packages:
       - opencl-headers
+      - ocl-icd-opencl-dev
       - fglrx
 
 git:
