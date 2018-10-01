@@ -36,18 +36,3 @@ TODO: Fix this link
 
 .. _PyPI: https://pypi.python.org/pypi/qcgpu
 
-
-Configuration
-=============
-
-The ``sphinx_rtd_theme`` is highly customizable on both the page level and on a global level.
-To see all the possible configuration options read the configuring docs
-`here <https://sphinx-rtd-theme.readthedocs.io/en/latest/configuring.html>`__.
-
-
-Contributing
-============
-
-If you would like to help improve the theme or have more control
-over the theme in case of a fork please read our contributing guide
-`here <https://sphinx-rtd-theme.readthedocs.io/en/latest/contributing.html>`__.
