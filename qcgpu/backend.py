@@ -121,18 +121,17 @@ class Backend:
 
         return kernel(self.buffer, target).get()
 
-    def measure_qubit(self, target):
+    def measure_qubit(self, target, samples):
         probability_of_0 = self.qubit_probability(target)
 
         total = 0
-        samples = 10000000.0
 
-        for i in range(int(samples)):
+        for i in range(samples):
             outcome = 1 if random.random() > probability_of_0 else 0
             total = total + outcome
             
         
-        return total / samples
+        return total
 
 
     def amplitudes(self):
