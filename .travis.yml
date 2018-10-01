@@ -18,6 +18,7 @@ git:
 
 install:
     # There is sometimes issues with the install order so do this bad boi first
+  - pip install pybind11
   - pip install -r requirements.txt
   - pip install -e .
 
