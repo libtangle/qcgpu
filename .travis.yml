@@ -27,3 +27,15 @@ install:
 
 script:
   - python3 setup.py test
+
+after_success:
+  - make html
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  local-dir: build/html
+  on:
+    branch: master

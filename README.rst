@@ -1,6 +1,9 @@
 QCGPU
 =====
 
+.. image:: https://img.shields.io/travis/QCGPU/qcgpu.svg?style=for-the-badge   
+   :alt: Travis (.org)   
+   :target: https://travis-ci.org/QCGPU/qcgpu
 .. image:: https://img.shields.io/pypi/v/qcgpu.svg?style=for-the-badge
    :target: https://pypi.python.org/pypi/qcgpu
    :alt: PyPi Version
