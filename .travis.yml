@@ -4,8 +4,10 @@ python:
   - "3.6.6"
   - "3.7-dev"
 
-os: osx
-osx_image: xcode9.3
+addons:
+  apt:
+    packages:
+      - opencl-headers
 
 git:
   depth: false
