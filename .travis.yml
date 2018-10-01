@@ -20,7 +20,6 @@ git:
   depth: false
 
 install:
-  - brew install python3
     # There is sometimes issues with the install order so do this bad boi first
   - pip3 install pybind11
   - pip3 install -r requirements.txt
