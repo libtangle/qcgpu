@@ -1,26 +1,30 @@
-language: python
-python:
-  - "2.7.15"
-  - "3.6.6"
-  - "3.7-dev"
+language: generic
+os: osx
 
-dist: trusty
+# language: python
+# python:
+#   - "2.7.15"
+#   - "3.6.6"
+#   - "3.7-dev"
 
-addons:
-  apt:
-    packages:
-      - opencl-headers
-      - ocl-icd-opencl-dev
-      - fglrx
+# dist: trusty
+
+# addons:
+#   apt:
+#     packages:
+#       - opencl-headers
+#       - ocl-icd-opencl-dev
+#       - fglrx
 
 git:
   depth: false
 
 install:
+  - brew install python3
     # There is sometimes issues with the install order so do this bad boi first
-  - pip install pybind11
-  - pip install -r requirements.txt
-  - pip install -e .
+  - pip3 install pybind11
+  - pip3 install -r requirements.txt
+  - pip3 install -e .
 
 script:
-  - python test.py
+  - python3 test.py
