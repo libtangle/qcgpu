@@ -18,8 +18,8 @@ git:
 
 install:
     # There is sometimes issues with the install order so do this bad boi first
-  - pip install mako pybind11
+  - pip install -r requirements.txt
   - pip install -e .
 
 script:
-  - "python setup.py test"
+  - python setup.py test
