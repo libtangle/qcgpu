@@ -1,3 +1,0 @@
-# QCGPU
-
-> The Python Edition
