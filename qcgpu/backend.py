@@ -45,51 +45,32 @@ class Backend:
     def apply_gate(self, gate, target):
         """Applies a gate to the quantum register"""
 
-        kernel = self.program.apply_gate
-        kernel.set_scalar_arg_dtypes([
-            None,
-            np.int32,
-            self.dtype,
-            self.dtype,
-            self.dtype,
-            self.dtype,
-        ])
-        kernel(
+        self.program.apply_gate(
             self.queue,
-            [self.buffer.shape[0] / 2],
+            [int(self.buffer.shape[0] / 2)],
             None,
             self.buffer.data,
             np.int32(target),
-            gate.a,
-            gate.b,
-            gate.c,
-            gate.d
+            self.dtype(gate.a),
+            self.dtype(gate.b),
+            self.dtype(gate.c),
+            self.dtype(gate.d)
         )
 
     def apply_controlled_gate(self, gate, control, target):
         """Applies a controlled gate to the quantum register"""
 
-        kernel = self.program.apply_controlled_gate
-        kernel.set_scalar_arg_dtypes([
-            None,
-            np.int32,
-            np.int32,
-            self.dtype,
-            self.dtype,
-            self.dtype,
-            self.dtype,
-        ])
-        kernel(
+        self.program.apply_controlled_gate(
             self.queue,
-            [self.buffer.shape[0] / 2],
+            [int(self.buffer.shape[0] / 2)],
             None,
             self.buffer.data,
             np.int32(control),
             np.int32(target),
-            gate.a,
-            gate.b,
-            gate.c,
-            gate.d
+            self.dtype(gate.a),
+            self.dtype(gate.b),
+            self.dtype(gate.c),
+            self.dtype(gate.d)
         )
     
     def qubit_probability(self, target):

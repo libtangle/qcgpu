@@ -1,4 +1,4 @@
-from backend import Backend
+from qcgpu.backend import Backend
 import pyopencl as cl
 import numpy as np
 

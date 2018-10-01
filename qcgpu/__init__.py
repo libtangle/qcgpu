@@ -1,2 +1,2 @@
-import gate
-from state import State
+import qcgpu.gate
+from qcgpu.state import State

@@ -1,6 +1,6 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.rst", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -10,7 +10,7 @@ setuptools.setup(
     author_email="adamkelly2201@gmail.com",
     description="An OpenCL based quantum computer simulator",
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/rst",
     url="https://github.com/qcgpu/qcgpu",
     packages=setuptools.find_packages(),
     classifiers=[
