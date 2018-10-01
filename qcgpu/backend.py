@@ -1,7 +1,9 @@
 import os
+import random
+import numpy as np
 import pyopencl as cl
 import pyopencl.array as pycl_array
-import numpy as np
+from pyopencl.reduction import ReductionKernel
 
 # Get the OpenCL kernel
 kernel_path = os.path.join(
@@ -90,6 +92,49 @@ class Backend:
             gate.d
         )
     
+    def qubit_probability(self, target):
+        """Get the probability of a single qubit begin measured as '0'"""
+
+        preamble = """
+        #include <pyopencl-complex.h>
+
+        float probability(int target, int i, cfloat_t amp) {
+            if ((i & (1 << target )) != 0) {
+                return 0;
+            }
+            // return 6.0;
+            float abs = cfloat_abs(amp);
+            return abs * abs;
+        }
+        """
+        
+
+        kernel = ReductionKernel(
+            self.context, 
+            np.float, 
+            neutral = "0",
+            reduce_expr="a + b",
+            map_expr="probability(target, i, amps[i])",
+            arguments="__global cfloat_t *amps, __global int target",
+            preamble=preamble
+        )
+
+        return kernel(self.buffer, target).get()
+
+    def measure_qubit(self, target):
+        probability_of_0 = self.qubit_probability(target)
+
+        total = 0
+        samples = 10000000.0
+
+        for i in range(int(samples)):
+            outcome = 1 if random.random() > probability_of_0 else 0
+            total = total + outcome
+            
+        
+        return total / samples
+
+
     def amplitudes(self):
         """Gets the probability amplitudes"""
         return self.buffer.get()
