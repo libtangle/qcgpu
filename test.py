@@ -1,1 +1,3 @@
+import qcgpu
+
 print('worked')
