@@ -1,3 +1,0 @@
-import qcgpu
-
-print('worked')

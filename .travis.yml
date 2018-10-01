@@ -26,4 +26,4 @@ install:
   - pip3 install -e .
 
 script:
-  - python3 test.py
+  - python3 setup.py test
