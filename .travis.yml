@@ -28,7 +28,8 @@ os: osx
 # script:
 #   - python3 setup.py test
 install:
-  - pip3 install Sphinx
+  - pip3 install Sphinx sphinx_rtd_theme 
+#   - pip install Sphinx sphinx_rtd_theme 
 
 after_success:
   - make html
@@ -38,6 +39,6 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
   keep-history: true
-  local-dir: ./build/html
+  local-dir: ./build
   on:
     branch: master

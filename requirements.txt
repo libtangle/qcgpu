@@ -4,3 +4,4 @@ pybind11==2.2.4
 pyopencl==2018.2
 scipy==1.1.0
 Sphinx==1.8.1
+sphinx_rtd_theme 
