@@ -150,6 +150,17 @@ __kernel void apply_controlled_controlled_gate(
 
 
 /**
+ * Get a single amplitude
+ */
+__kernel void get_single_amplitude(
+    __global cfloat_t *const amplitudes,
+    __global cfloat_t *out,
+    int i)
+{
+    out[0] = amplitudes[i];
+}
+
+/**
  * Calculates The Probabilities Of A State Vector
  */
 __kernel void calculate_probabilities(

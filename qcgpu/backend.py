@@ -4,6 +4,8 @@ import numpy as np
 import pyopencl as cl
 import pyopencl.array as pycl_array
 from pyopencl.reduction import ReductionKernel
+from collections import defaultdict
+
 
 # Get the OpenCL kernel
 kernel_path = os.path.join(
@@ -34,7 +36,7 @@ class Backend:
 
         self.context = cl.create_some_context()
         self.queue = cl.CommandQueue(self.context)
-        self.program = cl.Program(self.context, kernel).build()
+        self.program = cl.Program(self.context, kernel).build(options="-cl-no-signed-zeros -cl-mad-enable -cl-fast-relaxed-math")
 
         # Buffer for the state vector
         self.buffer = pycl_array.to_device(
@@ -73,6 +75,26 @@ class Backend:
             self.dtype(gate.d)
         )
     
+    def measure(self, samples=1):
+        """Measure the state of a register"""
+        # This is a really horrible method that needs a rewrite - the memory
+        # is attrocious
+
+        probabilities = self.probabilities()
+
+        choices = np.random.choice(
+            np.arange(0, 2**self.num_qubits), 
+            samples, 
+            p=probabilities
+        )
+        
+        results = defaultdict(int)
+        for i in choices:
+            results[np.binary_repr(i, width=self.num_qubits)] += 1
+        
+        return dict(results)
+       
+
     def qubit_probability(self, target):
         """Get the probability of a single qubit begin measured as '0'"""
 
@@ -105,15 +127,38 @@ class Backend:
     def measure_qubit(self, target, samples):
         probability_of_0 = self.qubit_probability(target)
 
-        total = 0
-
-        for i in range(samples):
-            outcome = 1 if random.random() > probability_of_0 else 0
-            total = total + outcome
-            
         
-        return total
 
+
+        choices = np.random.choice(
+            [0, 1], 
+            samples, 
+            p=[probability_of_0, 1-probability_of_0]
+        )
+        
+        results = defaultdict(int)
+        for i in choices:
+            results[np.binary_repr(i, width=1)] += 1
+        
+        return dict(results)
+
+    def single_amplitude(self, i):
+        """Gets a single probability amplitude"""
+        out = pycl_array.to_device(
+            self.queue,
+            np.empty(1, dtype=np.complex64)
+        )
+
+        self.program.get_single_amplitude(
+            self.queue, 
+            (1, ), 
+            None, 
+            self.buffer.data,
+            out.data,
+            np.int32(i)
+        )
+
+        return out[0]
 
     def amplitudes(self):
         """Gets the probability amplitudes"""

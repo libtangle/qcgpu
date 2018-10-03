@@ -41,6 +41,9 @@ class State:
     def measure_qubit(self, target, samples=1):
         return self.backend.measure_qubit(target, samples)
 
+    def measure(self, samples=1):
+        return self.backend.measure(samples)
+
     def amplitudes(self):
         return self.backend.amplitudes()
     
