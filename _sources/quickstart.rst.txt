@@ -1,3 +1,4 @@
+===============
 Getting Started
 ===============
 
@@ -36,3 +37,6 @@ along with how often they occurred.
 .. code-block:: python
 
     {'00': 486, '11': 514}
+
+There are a few different ways to do things using QCGPU, 
+so you should check out the rest of the documentation too

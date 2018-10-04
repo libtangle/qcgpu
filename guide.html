@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>User Guide</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Quantum Registers" href="registers.html" />
+  <link rel="prev" title="Getting Started" href="quickstart.html" /> 
+  </head>
+
+  <body><div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    <span class="site-name">QCGPU</span>
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  <div class="nav-item">
+    <a href="install.html"
+       class="nav-link  router-link-active">
+       None
+    </a>
+  </div>
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  <div class="nav-item">
+    <a href="install.html"
+       class="nav-link  router-link-active">
+       None
+    </a>
+  </div>
+
+
+
+            
+          </navlinks><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+  <div class="sidebar-group">
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="registers.html">Quantum Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html">Quantum Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html">Quantum Operations</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+        </sidebar>
+
+      <page>
+          <div class="content">
+            
+  <div class="section" id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<p>This section covers the full usage of QCGPU.
+It will also contain some information about what each part represents.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="registers.html">Quantum Registers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="registers.html#using-the-state-class">Using the <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="registers.html#mathematical-description">Mathematical Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gates.html">Quantum Gates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#built-in-gates">Built-In Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#applying-a-gate-to-a-whole-register">Applying A Gate To A Whole Register</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#user-defined-gates">User Defined Gates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Quantum Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="operations.html#measurement">Measurement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html#probability">Probability</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner">
+  <span class="prev">
+    <a href="quickstart.html"
+       title="previous chapter">← Getting Started</a>
+  </span>
+  <span class="next">
+    <a href="registers.html"
+       title="next chapter">Quantum Registers →</a>
+  </span>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']]}
+    });
+    </script>
+
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+            </div>
+          </div>
+      </page>
+  </div></body>
+</html>

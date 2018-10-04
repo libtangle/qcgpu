@@ -60,7 +60,8 @@
   <div class="sidebar-group">
     <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a></li>
 </ul>
 
   </div>
@@ -81,9 +82,8 @@ quantum circuits.
 It takes advantage of hardware acceleration with
 OpenCL.
 Read the <a class="reference external" href="https://arxiv.org/abs/1805.00988">research paper</a>.</p>
-</div>
 <div class="section" id="table-of-contents">
-<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h1>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
@@ -92,8 +92,28 @@ Read the <a class="reference external" href="https://arxiv.org/abs/1805.00988">r
 <li class="toctree-l2"><a class="reference internal" href="install.html#installing-from-source">Installing from Source</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="registers.html">Quantum Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="registers.html#using-the-state-class">Using the <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registers.html#mathematical-description">Mathematical Description</a></li>
 </ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html">Quantum Gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#built-in-gates">Built-In Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#applying-a-gate-to-a-whole-register">Applying A Gate To A Whole Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#user-defined-gates">User Defined Gates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html">Quantum Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operations.html#measurement">Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operations.html#probability">Probability</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -105,11 +125,15 @@ Read the <a class="reference external" href="https://arxiv.org/abs/1805.00988">r
     <a href="install.html"
        title="next chapter">Installation →</a>
   </span>
-<div class="footer" role="contentinfo">
-      &#169; Copyright 2018, Adam Kelly.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
-</div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']]}
+    });
+    </script>
+
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
             </div>
           </div>
       </page>

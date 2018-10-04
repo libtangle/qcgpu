@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Quantum Registers</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Quantum Gates" href="gates.html" />
+  <link rel="prev" title="User Guide" href="guide.html" /> 
+  </head>
+
+  <body><div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    <span class="site-name">QCGPU</span>
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  <div class="nav-item">
+    <a href="install.html"
+       class="nav-link ">
+       None
+    </a>
+  </div>
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  <div class="nav-item">
+    <a href="install.html"
+       class="nav-link ">
+       None
+    </a>
+  </div>
+
+
+
+            
+          </navlinks><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+  <div class="sidebar-group">
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="guide.html">User Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quantum Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html">Quantum Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html">Quantum Operations</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+        </sidebar>
+
+      <page>
+          <div class="content">
+            
+  <div class="section" id="quantum-registers">
+<h1>Quantum Registers<a class="headerlink" href="#quantum-registers" title="Permalink to this headline">¶</a></h1>
+<p>QCGPU provides a class to represent the register, <code class="docutils literal notranslate"><span class="pre">qcgpu.State</span></code>. The
+register class stores (on the OpenCL device) a state vector. This state
+vector is a chunk of memory, the size of which is:</p>
+<div class="math notranslate nohighlight">
+\[64 \cdot 2^n \text{ bits}.\]</div>
+<p>This means you would need just 2kb of memory to have a 5 qubit register,
+a 30 qubit register would take up 9gb of memory.</p>
+<p>This is something to be aware of, as the state vector must fit in the
+memory of the device you wish to use.</p>
+<div class="section" id="using-the-state-class">
+<h2>Using the <code class="docutils literal notranslate"><span class="pre">State</span></code> class<a class="headerlink" href="#using-the-state-class" title="Permalink to this headline">¶</a></h2>
+<p>To create a new register, you can use</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qcgpu</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will create a 5 qubit register.</p>
+<p>When you run this, you may be prompted to choose a device. This is
+normal, as you can have more than 1 device that supports OpenCL in your
+computer. Just choose the one you want.</p>
+</div>
+<div class="section" id="mathematical-description">
+<h2>Mathematical Description<a class="headerlink" href="#mathematical-description" title="Permalink to this headline">¶</a></h2>
+<p>This class represents a state vector <span class="math notranslate nohighlight">\(\lvert \psi \rangle\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[\lvert \psi \rangle = \sum_{j = 0}^{2^n - 1} \alpha_j \lvert j \rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of qubits, <span class="math notranslate nohighlight">\(\alpha_j\)</span> is the
+amplitude and the state is <span class="math notranslate nohighlight">\(j\)</span> runs overall <span class="math notranslate nohighlight">\(2^n\)</span> basis
+states.</p>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner">
+  <span class="prev">
+    <a href="guide.html"
+       title="previous chapter">← User Guide</a>
+  </span>
+  <span class="next">
+    <a href="gates.html"
+       title="next chapter">Quantum Gates →</a>
+  </span>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']]}
+    });
+    </script>
+
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+            </div>
+          </div>
+      </page>
+  </div></body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Quantum Gates</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Quantum Operations" href="operations.html" />
+  <link rel="prev" title="Quantum Registers" href="registers.html" /> 
+  </head>
+
+  <body><div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    <span class="site-name">QCGPU</span>
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  <div class="nav-item">
+    <a href="install.html"
+       class="nav-link ">
+       None
+    </a>
+  </div>
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  <div class="nav-item">
+    <a href="install.html"
+       class="nav-link ">
+       None
+    </a>
+  </div>
+
+
+
+            
+          </navlinks><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+  <div class="sidebar-group">
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="guide.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="registers.html">Quantum Registers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quantum Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html">Quantum Operations</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+        </sidebar>
+
+      <page>
+          <div class="content">
+            
+  <div class="section" id="quantum-gates">
+<h1>Quantum Gates<a class="headerlink" href="#quantum-gates" title="Permalink to this headline">¶</a></h1>
+<p>In quantum computing, gates are used to manipulate quantum registers and
+to implement quantum algorithms.</p>
+<div class="section" id="built-in-gates">
+<h2>Built-In Gates<a class="headerlink" href="#built-in-gates" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of gates built into QCGPU. They can all be applied
+the same way:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qcgpu</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">state</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Applies the Hadamard (H) gate to the first qubit.</span>
+<span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Applies a pauli-x (NOT) gate to the second qubit.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">h</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> can be replaced with any of the following:</p>
+<ul class="simple">
+<li>The Hadamard gate: <strong>h</strong> - <code class="docutils literal notranslate"><span class="pre">state.h(0)</span></code></li>
+<li>The S gate: <strong>s</strong> - <code class="docutils literal notranslate"><span class="pre">state.s(0)</span></code></li>
+<li>The T gate: <strong>t</strong> - <code class="docutils literal notranslate"><span class="pre">state.t(0)</span></code></li>
+<li>The Pauli-X / NOT gate: <strong>x</strong> - <code class="docutils literal notranslate"><span class="pre">state.x(0)</span></code></li>
+<li>The Pauli-Y gate: <strong>y</strong> - <code class="docutils literal notranslate"><span class="pre">state.y(0)</span></code></li>
+<li>The Pauli-Z gate: <strong>z</strong> - <code class="docutils literal notranslate"><span class="pre">state.z(0)</span></code></li>
+<li>The CNOT gate: <strong>cx</strong> -
+<code class="docutils literal notranslate"><span class="pre">state.cx(0,</span> <span class="pre">1)</span> <span class="pre">#</span> <span class="pre">CNOT</span> <span class="pre">with</span> <span class="pre">control</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">target</span> <span class="pre">=</span> <span class="pre">1</span></code></li>
+<li>The SWAP gate: <strong>swap</strong> -
+<code class="docutils literal notranslate"><span class="pre">state.swap(0,1)</span> <span class="pre">#</span> <span class="pre">Swaps</span> <span class="pre">the</span> <span class="pre">0th</span> <span class="pre">and</span> <span class="pre">1st</span> <span class="pre">qubit</span></code></li>
+<li>The Toffoli gate: <strong>toffoli</strong> -
+<code class="docutils literal notranslate"><span class="pre">state.toffoli(0,</span> <span class="pre">1,</span> <span class="pre">2)</span> <span class="pre">#</span> <span class="pre">Toffoli</span> <span class="pre">with</span> <span class="pre">controls</span> <span class="pre">=</span> <span class="pre">(0,</span> <span class="pre">1),</span> <span class="pre">target</span> <span class="pre">=</span> <span class="pre">2</span></code></li>
+</ul>
+<p>These are all shorthand methods for the application of arbitrary gates.
+For example, the application of a Hadamard gate above is shorthand for</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qcgpu</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">gate</span><span class="o">.</span><span class="n">h</span><span class="p">()</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">register</span><span class="o">.</span><span class="n">apply_gate</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also use any of the gates as controlled gates. For example, the
+application of the CNOT gate above is shorthand for</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qcgpu</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">gate</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">register</span><span class="o">.</span><span class="n">apply_controlled_gate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="applying-a-gate-to-a-whole-register">
+<h2>Applying A Gate To A Whole Register<a class="headerlink" href="#applying-a-gate-to-a-whole-register" title="Permalink to this headline">¶</a></h2>
+<p>There is a convenience method to apply a gate to every qubit in the register.
+The following applies a Hadamard gate to the whole register,</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qcgpu</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">gate</span><span class="o">.</span><span class="n">h</span><span class="p">()</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">register</span><span class="o">.</span><span class="n">apply_all</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="user-defined-gates">
+<h2>User Defined Gates<a class="headerlink" href="#user-defined-gates" title="Permalink to this headline">¶</a></h2>
+<p>Gates in QCGPU are represented by the <code class="docutils literal notranslate"><span class="pre">qcgpu.Gate</span></code> class.</p>
+<p>The only gates that can be defined by the user are single qubit gates.</p>
+<p>The process of creating a gate is</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qcgpu</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">gate_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="p">])</span>
+
+<span class="n">gate</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">Gate</span><span class="p">(</span><span class="n">gate_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The input to the <code class="docutils literal notranslate"><span class="pre">Gate</span></code> constructor is checked to be a 2x2 unitary
+matrix.</p>
+<p>This newly created gate can then be applied the long hand way,</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qcgpu</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">qcgpu</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">register</span><span class="o">.</span><span class="n">apply_gate</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner">
+  <span class="prev">
+    <a href="registers.html"
+       title="previous chapter">← Quantum Registers</a>
+  </span>
+  <span class="next">
+    <a href="operations.html"
+       title="next chapter">Quantum Operations →</a>
+  </span>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']]}
+    });
+    </script>
+
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+            </div>
+          </div>
+      </page>
+  </div></body>
+</html>
