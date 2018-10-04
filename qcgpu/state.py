@@ -1,7 +1,7 @@
 """
 Quantum Register Object
 """
-
+import qcgpu
 from qcgpu.backend import Backend
 import pyopencl as cl
 import numpy as np
@@ -110,3 +110,32 @@ class State:
 
         # TODO: Finish this method
         return np.array_str(self.backend.buffer)
+
+
+    # Gates
+    def h(self, target):
+        self.apply_gate(qcgpu.gate.h(), target)
+
+    def x(self, target):
+        self.apply_gate(qcgpu.gate.x(), target)
+
+    def y(self, target):
+        self.apply_gate(qcgpu.gate.y(), target)
+
+    def z(self, target):
+        self.apply_gate(qcgpu.gate.z(), target)
+
+    def s(self, target):
+        self.apply_gate(qcgpu.gate.s(), target)
+
+    def t(self, target):
+        self.apply_gate(qcgpu.gate.t(), target)
+
+    def sqrt_x(self, target):
+        self.apply_gate(qcgpu.gate.sqrt_x(), target)
+
+    def cx(self, control, target):
+        self.apply_gate(qcgpu.gate.x(), control, target)
+
+    def cnot(self, control, target):
+        self.apply_controlled_gate(qcgpu.gate.x(), control, target)
