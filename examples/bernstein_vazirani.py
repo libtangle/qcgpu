@@ -33,20 +33,22 @@ the original hidden integer.
 def bernstein_vazirani():
     import qcgpu
 
+    num_qubits = 7 # The number of qubits to use
     a = 101 # The hidden integer, bitstring is 1100101
 
-    register = qcgpu.State(16) # Create a new quantum register
+    register = qcgpu.State(num_qubits) # Create a new quantum register
 
     register.apply_all(qcgpu.gate.h()) # Apply a hadamard gate to each qubit
 
     # Apply the inner products oracle
-    for i in range(16):
+    for i in range(num_qubits):
         if a & (1 << i) != 0:
             register.z(i)
 
     register.apply_all(qcgpu.gate.h()) # Apply a hadamard gate to each qubit
 
-    register.measure(samples=1000) # Measure the register (sample 1000 times)
+    results = register.measure(samples=1000) # Measure the register (sample 1000 times)
+    print(results)
 
 if __name__== "__main__":
   bernstein_vazirani()
