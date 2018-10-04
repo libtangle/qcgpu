@@ -1,3 +1,4 @@
+=====
 QCGPU
 =====
 
@@ -23,16 +24,16 @@ Read the `research paper`_.
 .. _`research paper`: https://arxiv.org/abs/1805.00988
 
 
-
 Table of Contents
 ==================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    
    install
-   Getting started <quickstart>
-   Software reference <_autodoc/qcgpu>
+   quickstart
+   guide
+   
 
 .. Python Modules
     ==============
