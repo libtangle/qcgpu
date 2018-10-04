@@ -3,8 +3,16 @@ import pyopencl as cl
 import numpy as np
 
 class State:
-    """Represents the state of a quantum register"""
+    """  Creates a new quantum register.
+
+    Args:
+        num_qubits (int): The number of qubits to create in the register
+
+    Returns:
+        State: A representation of the quantum register
+    """
     def __init__(self, num_qubits):
+        
         if not isinstance(num_qubits, int):
             raise ValueError("num_qubits must be an int")
         if num_qubits <= 0:

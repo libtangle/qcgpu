@@ -43,3 +43,4 @@ def t():
 
 def sqrt_x():
     return Gate(0.5 * np.array([[1+1j, 1-1j], [1-1j, 1+1j]]))
+

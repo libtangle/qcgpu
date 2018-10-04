@@ -23,6 +23,7 @@ def bench_qcgpu(n, depth):
 
             if q != 0:
                 state.apply_controlled_gate(x, q, 0)
+
     return time.time() - start
 
 # Qiskit Implementation
@@ -34,6 +35,8 @@ def bench_qiskit(n, depth):
     c = ClassicalRegister(n)
     qc = QuantumCircuit(q, c)
     
+    start = time.time()
+
     for level in range(depth):
         for i in range(n):
             qc.h(q[i])
@@ -41,11 +44,10 @@ def bench_qiskit(n, depth):
 
             if i != 0:
                 qc.cx(q[i], q[0])
-    qc.measure(q, c)
 
-    start = time.time()
-    
     job_sim = execute(qc, "local_statevector_simulator")
+
+    job_sim.result()
     
     return time.time() - start
 
@@ -68,28 +70,26 @@ def bench_projectq(n, depth):
             if q != qbits[0]:
                 ops.CNOT | (q, qbits[0])
 
-    runtime = time.time() - start
-
     for q in qbits:
         ops.Measure | q
-    eng.flush()
-    return runtime
+    return time.time() - start
 
 # Reporting
 
-functions = bench_qcgpu, bench_qiskit, bench_projectq
+functions = bench_qcgpu, bench_qiskit#, bench_projectq
+# functions = bench_qiskit,
 
 times = {f.__name__: [] for f in functions}
 
 names = []
 means = []
 
-samples = 10
+samples = 100
 for i in range(samples):  # adjust accordingly so whole thing takes a few sec
     progress = i / samples
     print("\rProgress: [{0:50s}] {1:.1f}%".format('#' * int(progress * 50), progress*100), end="", flush=True)
     func = random.choice(functions)
-    t = func(5,1)
+    t = func(20,10)
     times[func.__name__].append(t)
 
 print('')
