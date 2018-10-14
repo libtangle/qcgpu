@@ -1,4 +1,17 @@
 import numpy as np
+import functools
+
+def memoize(func):
+    cache = func.cache = {}
+
+    @functools.wraps(func)
+    def memoized_func():
+        key = 'a'
+        if key not in cache:
+            cache[key] = func()
+        return cache[key]
+
+    return memoized_func
 
 class Gate:
     def __init__(self, gate):
@@ -23,24 +36,31 @@ class Gate:
     def __repr__(self):
         return '[{:.4f}, {:.4f}]\n[{:.4f}, {:.4f}]'.format(self.a, self.b, self.c, self.d)
 
+@memoize
 def h():
     return Gate(np.array([[1, 1], [1, -1]]) / np.sqrt(2))
 
+@memoize
 def x():
     return Gate(np.array([[0, 1], [1, 0]]))
 
+@memoize
 def y():
     return Gate(np.array([[0, -1j], [1j, 0]]))
 
+@memoize
 def z():
     return Gate(np.array([[1, 0], [0, -1]]))
 
+@memoize
 def s():
     return Gate(np.array([[1, 0], [0, 1j]]))
 
+@memoize
 def t():
     return Gate(np.array([[1, 0], [0, np.exp(np.pi * 1j / 4)]]))
 
+@memoize
 def sqrt_x():
     return Gate(0.5 * np.array([[1+1j, 1-1j], [1-1j, 1+1j]]))
 
