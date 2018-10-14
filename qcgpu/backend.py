@@ -41,7 +41,7 @@ class Backend:
         # Buffer for the state vector
         self.buffer = pycl_array.to_device(
             self.queue,
-            np.eye(2**num_qubits, 1, dtype=dtype)
+            np.eye(1, 2**num_qubits, dtype=dtype)
         )
 
     def apply_gate(self, gate, target):
@@ -49,7 +49,7 @@ class Backend:
 
         self.program.apply_gate(
             self.queue,
-            [int(self.buffer.shape[0] / 2)],
+            [int(self.buffer.shape[1] / 2)],
             None,
             self.buffer.data,
             np.int32(target),
@@ -64,7 +64,7 @@ class Backend:
 
         self.program.apply_controlled_gate(
             self.queue,
-            [int(self.buffer.shape[0] / 2)],
+            [int(self.buffer.shape[1] / 2)],
             None,
             self.buffer.data,
             np.int32(control),
@@ -126,9 +126,6 @@ class Backend:
 
     def measure_qubit(self, target, samples):
         probability_of_0 = self.qubit_probability(target)
-
-        
-
 
         choices = np.random.choice(
             [0, 1], 

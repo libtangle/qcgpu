@@ -97,10 +97,10 @@ class State:
         return self.backend.measure(samples)
 
     def amplitudes(self):
-        return self.backend.amplitudes()
+        return self.backend.amplitudes()[0]
     
     def probabilities(self):
-        return self.backend.probabilities()
+        return self.backend.probabilities()[0]
 
     def flush(self):
         self.backend.release()
@@ -135,7 +135,28 @@ class State:
         self.apply_gate(qcgpu.gate.sqrt_x(), target)
 
     def cx(self, control, target):
-        self.apply_gate(qcgpu.gate.x(), control, target)
+        self.apply_controlled_gate(qcgpu.gate.x(), control, target)
 
     def cnot(self, control, target):
         self.apply_controlled_gate(qcgpu.gate.x(), control, target)
+
+    def u(self, target, theta, phi, lda):
+        a = np.exp(-1j * (phi + lda) / 2) * np.cos(theta / 2)
+        b = - np.exp(-1j * (phi - lda) / 2) * np.sin(theta / 2)
+        c = np.exp(1j * (phi - lda) / 2) * np.sin(theta / 2)    
+        d = np.exp(1j * (phi + lda) / 2) * np.cos(theta / 2)
+    
+        gate_matrix = np.array([
+            [a, b],
+            [c, d]
+        ])
+        self.apply_gate(qcgpu.Gate(gate_matrix), target)
+
+    def u1(self, target, lda):
+        self.u(target, 0, 0, lda)
+
+    def u2(self, target, phi, lda):
+        self.u(target, np.pi / 2, phi, lda)
+
+    def u3(self, target, theta, phi, lda):
+        self.u(target, theta, phi, lda)

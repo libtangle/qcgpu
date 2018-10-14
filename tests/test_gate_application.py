@@ -9,7 +9,7 @@ def test_application_x():
     x = qcgpu.gate.x()
     s.apply_gate(x, 0)
 
-    res = np.array([[0,1,0,0,0,0,0,0]]).astype(np.complex64).transpose()
+    res = np.array([0,1,0,0,0,0,0,0]).astype(np.complex64).transpose()
     amps = s.amplitudes()
 
     assert np.allclose(res, amps)
@@ -20,7 +20,7 @@ def test_apply_all_x():
     x = qcgpu.gate.x()
     s.apply_all(x)
 
-    res = np.array([[0,0,0,0,0,0,0,1]]).astype(np.complex64).transpose()
+    res = np.array([0,0,0,0,0,0,0,1]).astype(np.complex64).transpose()
     amps = s.amplitudes()
 
     assert np.allclose(res, amps)
@@ -31,7 +31,7 @@ def test_application_h():
     h = qcgpu.gate.h()
     s.apply_gate(h, 1)
 
-    res = (1/np.sqrt(2)) * np.array([[1,0,1,0,0,0,0,0]]).astype(np.complex64).transpose()
+    res = (1/np.sqrt(2)) * np.array([1,0,1,0,0,0,0,0]).astype(np.complex64).transpose()
     amps = s.amplitudes()
 
     assert np.allclose(res, amps)
@@ -53,7 +53,7 @@ def test_apply_cnot_1():
     x = qcgpu.gate.x()
     s.apply_controlled_gate(x, 0, 1)
 
-    res = np.array([[1,0,0,0]]).astype(np.complex64).transpose()
+    res = np.array([1,0,0,0]).astype(np.complex64).transpose()
     amps = s.amplitudes()
 
     assert np.allclose(res, amps)
@@ -65,7 +65,7 @@ def test_apply_cnot_2():
     s.apply_gate(x, 0)
     s.apply_controlled_gate(x, 0, 1)
 
-    res = np.array([[0,0,0,1]]).astype(np.complex64).transpose()
+    res = np.array([0,0,0,1]).astype(np.complex64).transpose()
     amps = s.amplitudes()
 
     assert np.allclose(res, amps)
