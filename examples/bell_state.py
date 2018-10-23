@@ -15,7 +15,7 @@ def bell_state():
 
     print("Creating Bell State")
 
-    state = qcgpu.state(2)
+    state = qcgpu.State(2)
 
     state.h(0)
     state.cx(0, 1)

@@ -81,7 +81,8 @@ class Backend:
         # is attrocious
 
         probabilities = self.probabilities()
-
+        # print(probabilities)
+        # print(np.sum(self.amplitudes()))
         choices = np.random.choice(
             np.arange(0, 2**self.num_qubits), 
             samples, 
@@ -170,7 +171,7 @@ class Backend:
 
         self.program.calculate_probabilities(
             self.queue,
-            self.buffer.shape,
+            out.shape,
             None,
             self.buffer.data,
             out.data
