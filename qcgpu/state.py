@@ -73,7 +73,6 @@ class State:
 
         self.backend.apply_gate(gate, target)
 
-
     def apply_all(self, gate):
         # TODO: Check that gate is correct
         for i in range(self.num_qubits):
@@ -92,6 +91,9 @@ class State:
 
     def measure_qubit(self, target, samples=1):
         return self.backend.measure_qubit(target, samples)
+
+    def measure_collapse(self, target):
+        return self.backend.measure_collapse(target)
 
     def measure(self, samples=1):
         return self.backend.measure(samples)

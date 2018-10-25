@@ -202,6 +202,26 @@ __kernel void initialize_register(
         amplitudes[state] = cfloat_new(0, 0);
     }
 }
+
+/**
+ * Collapses a qubit in the register
+ */
+__kernel void collapse(
+    __global cfloat_t *amplitudes, 
+    int const target,
+    int const outcome, 
+    float const norm)
+{
+    int const state = get_global_id(0);
+
+    if (((state >> target) & 1) == outcome) {
+        amplitudes[state] = cfloat_mul(amplitudes[state], cfloat_new(norm, 0.0));
+    }
+    else
+    {
+        amplitudes[state] = cfloat_new(0.0, 0.0);
+    }
+}
 """
 
 
@@ -265,6 +285,9 @@ class Backend:
             self.dtype(gate.d)
         )
     
+    def seed(self, val):
+        random.seed(val)
+        
     def measure(self, samples=1):
         """Measure the state of a register"""
         # This is a really horrible method that needs a rewrite - the memory
@@ -314,6 +337,29 @@ class Backend:
         )
 
         return kernel(self.buffer, target).get()
+
+    def measure_collapse(self, target):
+        probability_of_0 = self.qubit_probability(target)
+        random_number = random.random()
+
+        if random_number <= probability_of_0:
+            outcome = '0'
+            norm = 1 / np.sqrt(probability_of_0)
+        else:
+            outcome = '1'
+            norm = 1 / np.sqrt(1 - probability_of_0)
+
+        self.program.collapse(
+            self.queue,
+            [int(self.buffer.shape[1])],
+            # self.buffer.shape,
+            None,
+            self.buffer.data,
+            np.int32(target),
+            np.int32(outcome),
+            np.float32(norm)
+        )
+        return outcome
 
     def measure_qubit(self, target, samples):
         probability_of_0 = self.qubit_probability(target)
