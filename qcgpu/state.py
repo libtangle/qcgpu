@@ -67,7 +67,8 @@ class State:
                 is to be applied to.
         """
         if not isinstance(target, int) or target < 0:
-            raise ValueError("target must be an int > 0")
+            print(target)
+            raise ValueError("target must be an int >= 0")
 
         # TODO: Check that gate is correct
 
@@ -80,10 +81,10 @@ class State:
 
     def apply_controlled_gate(self, gate, control, target):
         if not isinstance(target, int) or target < 0:
-            raise ValueError("target must be an int > 0")
+            raise ValueError("target must be an int >= 0")
         
         if not isinstance(control, int) or control < 0:
-            raise ValueError("control must be an int > 0")
+            raise ValueError("control must be an int >= 0")
 
         # TODO: Check that gate is correct
 
@@ -103,9 +104,6 @@ class State:
     
     def probabilities(self):
         return self.backend.probabilities()[0]
-
-    def flush(self):
-        self.backend.release()
 
     def __repr__(self):
         """A string representation of the state"""
@@ -153,7 +151,7 @@ class State:
             [c, d]
         ])
         self.apply_gate(qcgpu.Gate(gate_matrix), target)
-
+    
     def u1(self, target, lda):
         self.u(target, 0, 0, lda)
 
@@ -162,3 +160,25 @@ class State:
 
     def u3(self, target, theta, phi, lda):
         self.u(target, theta, phi, lda)
+
+    def cu(self, control, target, theta, phi, lda):
+        a = np.exp(-1j * (phi + lda) / 2) * np.cos(theta / 2)
+        b = - np.exp(-1j * (phi - lda) / 2) * np.sin(theta / 2)
+        c = np.exp(1j * (phi - lda) / 2) * np.sin(theta / 2)    
+        d = np.exp(1j * (phi + lda) / 2) * np.cos(theta / 2)
+    
+        gate_matrix = np.array([
+            [a, b],
+            [c, d]
+        ])
+        self.apply_controlled_gate(qcgpu.Gate(gate_matrix), control, target)
+
+
+    def cu1(self, control, target, lda):
+        self.cu(control, target, 0, 0, lda)
+
+    def cu2(self, control, target, phi, lda):
+        self.cu(control, target, np.pi / 2, phi, lda)
+
+    def cu3(self, control, target, theta, phi, lda):
+        self.cu(control, target, theta, phi, lda)

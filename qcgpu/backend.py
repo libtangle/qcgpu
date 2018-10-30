@@ -6,7 +6,6 @@ import pyopencl.array as pycl_array
 from pyopencl.reduction import ReductionKernel
 from collections import defaultdict
 
-
 # Get the OpenCL kernel
 kernel = """
 #include <pyopencl-complex.h>
@@ -224,6 +223,10 @@ __kernel void collapse(
 }
 """
 
+# Setup the OpenCL Context here to not prompt every execution
+context = None
+program = None
+
 
 class Backend:
     """
@@ -234,7 +237,11 @@ class Backend:
     class.
     """
 
+    # @profile
     def __init__(self, num_qubits, dtype=np.complex64):
+        if not context:
+            create_context()
+        
         """
         Initialize a new OpenCL Backend
 
@@ -244,9 +251,7 @@ class Backend:
         self.num_qubits = num_qubits
         self.dtype = dtype
 
-        self.context = cl.create_some_context()
-        self.queue = cl.CommandQueue(self.context)
-        self.program = cl.Program(self.context, kernel).build(options="-cl-no-signed-zeros -cl-mad-enable -cl-fast-relaxed-math")
+        self.queue = cl.CommandQueue(context)
 
         # Buffer for the state vector
         self.buffer = pycl_array.to_device(
@@ -256,10 +261,9 @@ class Backend:
 
     def apply_gate(self, gate, target):
         """Applies a gate to the quantum register"""
-
-        self.program.apply_gate(
+        program.apply_gate(
             self.queue,
-            [int(self.buffer.shape[1] / 2)],
+            [int(2**self.num_qubits / 2)],
             None,
             self.buffer.data,
             np.int32(target),
@@ -272,9 +276,9 @@ class Backend:
     def apply_controlled_gate(self, gate, control, target):
         """Applies a controlled gate to the quantum register"""
 
-        self.program.apply_controlled_gate(
+        program.apply_controlled_gate(
             self.queue,
-            [int(self.buffer.shape[1] / 2)],
+            [int(2**self.num_qubits / 2)],
             None,
             self.buffer.data,
             np.int32(control),
@@ -327,7 +331,7 @@ class Backend:
         
 
         kernel = ReductionKernel(
-            self.context, 
+            context, 
             np.float, 
             neutral = "0",
             reduce_expr="a + b",
@@ -349,10 +353,10 @@ class Backend:
             outcome = '1'
             norm = 1 / np.sqrt(1 - probability_of_0)
 
-        self.program.collapse(
+        program.collapse(
             self.queue,
-            [int(self.buffer.shape[1])],
-            # self.buffer.shape,
+            [int(2**self.num_qubits)],
+            # 2**self.num_qubits,
             None,
             self.buffer.data,
             np.int32(target),
@@ -383,7 +387,7 @@ class Backend:
             np.empty(1, dtype=np.complex64)
         )
 
-        self.program.get_single_amplitude(
+        program.get_single_amplitude(
             self.queue, 
             (1, ), 
             None, 
@@ -405,7 +409,7 @@ class Backend:
             np.zeros(2**self.num_qubits, dtype=np.float32)
         )
 
-        self.program.calculate_probabilities(
+        program.calculate_probabilities(
             self.queue,
             out.shape,
             None,
@@ -417,3 +421,9 @@ class Backend:
         
     def release(self):
         self.buffer.base_data.release()
+    
+def create_context():
+    global context
+    global program
+    context = cl.create_some_context()
+    program = cl.Program(context, kernel).build(options="-cl-no-signed-zeros -cl-mad-enable -cl-fast-relaxed-math")
