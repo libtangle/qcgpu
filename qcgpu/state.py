@@ -89,6 +89,20 @@ class State:
         # TODO: Check that gate is correct
 
         self.backend.apply_controlled_gate(gate, control, target)
+    
+    def apply_controlled_controlled_gate(self, gate, control, control2, target):
+        if not isinstance(target, int) or target < 0:
+            raise ValueError("target must be an int >= 0")
+        
+        if not isinstance(control, int) or control < 0:
+            raise ValueError("control must be an int >= 0")
+
+        if not isinstance(control2, int) or control2 < 0:
+            raise ValueError("control must be an int >= 0")
+
+        # TODO: Check that gate is correct
+
+        self.backend.apply_controlled_controlled_gate(gate, control, control2, target)
 
     def measure_qubit(self, target, samples=1):
         return self.backend.measure_qubit(target, samples)
@@ -98,6 +112,9 @@ class State:
 
     def measure(self, samples=1):
         return self.backend.measure(samples)
+
+    def measure_first(self, num=1, samples=1):
+        return self.backend.measure_first(num, samples)
 
     def amplitudes(self):
         return self.backend.amplitudes()[0]
@@ -139,6 +156,9 @@ class State:
 
     def cnot(self, control, target):
         self.apply_controlled_gate(qcgpu.gate.x(), control, target)
+
+    def toffoli(self, control, control2, target):
+        self.apply_controlled_controlled_gate(qcgpu.gate.x(), control, control2, target)
 
     def u(self, target, theta, phi, lda):
         a = np.exp(-1j * (phi + lda) / 2) * np.cos(theta / 2)

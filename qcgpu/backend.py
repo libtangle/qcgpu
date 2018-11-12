@@ -86,52 +86,41 @@ __kernel void apply_controlled_gate(
     {
         amplitudes[one_state] = cfloat_add(cfloat_mul(D, one_amp), cfloat_mul(C, zero_amp));
     }
-
-
 }
 
 /*
  * Applies a controlled-controlled single qubit gate to the register.
- * NOT MIGRATED
  */
 __kernel void apply_controlled_controlled_gate(
-    __global cfloat_t *const amplitudes,
-    __global cfloat_t *amps,
-    int control1,
-    int control2,
+    __global cfloat_t *amplitudes,
+    int control,
+    int control_2,
     int target,
     cfloat_t A,
     cfloat_t B,
     cfloat_t C,
     cfloat_t D)
 {
-    int const state = get_global_id(0);
-    cfloat_t const amp = amplitudes[state];
+    int const global_id = get_global_id(0);
+    int const zero_state = nth_cleared(global_id, target);
+    int const one_state = zero_state | (1 << target); // Set the target bit
 
-    int const zero_state = state & (~(1 << target));
-    int const one_state = state | (1 << target);
+    int const control_val_zero = (((1 << control) & zero_state) > 0) ? 1 : 0;
+    int const control_val_one = (((1 << control) & one_state) > 0) ? 1 : 0;
+    int const control_val_two_zero = (((1 << control_2) & zero_state) > 0) ? 1 : 0;
+    int const control_val_two_one = (((1 << control_2) & one_state) > 0) ? 1 : 0;
 
-    int const bit_val = (((1 << target) & state) > 0) ? 1 : 0;
-    int const control1_val = (((1 << control1) & state) > 0) ? 1 : 0;
-    int const control2_val = (((1 << control2) & state) > 0) ? 1 : 0;
+    cfloat_t const zero_amp = amplitudes[zero_state];
+    cfloat_t const one_amp = amplitudes[one_state];
 
-    if (control1_val == 0 || control2_val == 0)
+    if (control_val_zero == 1 && control_val_two_zero == 1)
     {
-        // Control is 0, don't apply gate
-        amps[state] = amp;
+        amplitudes[zero_state] = cfloat_add(cfloat_mul(A, zero_amp), cfloat_mul(B, one_amp));
     }
-    else
+
+    if (control_val_one == 1 && control_val_two_one == 1)
     {
-        // control is 1, apply gate.
-        if (bit_val == 0)
-        {
-            // Bitval = 0
-            amps[state] = cfloat_add(cfloat_mul(A, amp), cfloat_mul(B, amplitudes[one_state]));
-        }
-        else
-        {
-            amps[state] = cfloat_add(cfloat_mul(D, amp), cfloat_mul(C, amplitudes[zero_state]));
-        }
+        amplitudes[one_state] = cfloat_add(cfloat_mul(D, one_amp), cfloat_mul(C, zero_amp));
     }
 }
 
@@ -289,6 +278,23 @@ class Backend:
             self.dtype(gate.d)
         )
     
+    def apply_controlled_controlled_gate(self, gate, control1, control2, target):
+        """Applies a controlled controlled gate (such as a toffoli gate) to the quantum register"""
+
+        program.apply_controlled_controlled_gate(
+            self.queue,
+            [int(2**self.num_qubits / 2)],
+            None,
+            self.buffer.data,
+            np.int32(control1),
+            np.int32(control2),
+            np.int32(target),
+            self.dtype(gate.a),
+            self.dtype(gate.b),
+            self.dtype(gate.c),
+            self.dtype(gate.d)
+        )
+
     def seed(self, val):
         random.seed(val)
         
@@ -309,6 +315,23 @@ class Backend:
         results = defaultdict(int)
         for i in choices:
             results[np.binary_repr(i, width=self.num_qubits)] += 1
+        
+        return dict(results)
+
+    def measure_first(self, num, samples):
+        probabilities = self.probabilities()
+        # print(probabilities)
+        # print(np.sum(self.amplitudes()))
+        choices = np.random.choice(
+            np.arange(0, 2**self.num_qubits), 
+            samples, 
+            p=probabilities
+        )
+        
+        results = defaultdict(int)
+        for i in choices:
+            key = np.binary_repr(i, width=self.num_qubits)[-num:]
+            results[key] += 1
         
         return dict(results)
        

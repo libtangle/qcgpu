@@ -14,7 +14,7 @@ def memoize(func):
     return memoized_func
 
 class Gate:
-    def __init__(self, gate):
+    def __init__(self, gate, unitary=True):
         gate = np.array(gate)
         
         if gate.shape != (2, 2):
@@ -25,8 +25,9 @@ class Gate:
             )
 
         # Check the gate is unitary
-        if (not np.allclose(np.eye(gate.shape[0]), np.dot(gate.conjugate().transpose(), gate))):
-            raise ValueError("gate is not unitary.")
+        if unitary:
+            if (not np.allclose(np.eye(gate.shape[0]), np.dot(gate.conjugate().transpose(), gate))):
+                raise ValueError("gate is not unitary.")
 
         self.a = complex(gate[0, 0])
         self.b = complex(gate[0, 1])
