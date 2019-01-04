@@ -7,6 +7,7 @@ Version](https://img.shields.io/pypi/v/qcgpu.svg?style=for-the-badge)](https://p
 [![License](https://img.shields.io/pypi/l/qcgpu.svg?style=for-the-badge)](https://pypi.python.org/pypi/qcgpu/)
 [![GitHub
 stars](https://img.shields.io/github/stars/qcgpu/qcgpu.svg?style=for-the-badge&label=Stars)](https://github.com/QCGPU/qcgpu)
+[![Unitary Fund](https://img.shields.io/badge/Supported%20By-UNITARY%20FUND-brightgreen.svg?style=for-the-badge)](http://unitary.fund)
 
 Open Source, High Performance & Hardware Accelerated, Quantum Computer
 Simulator. Read the [research paper](https://arxiv.org/abs/1805.00988).
