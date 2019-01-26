@@ -364,6 +364,21 @@ class Backend:
         )
 
         return kernel(self.buffer, target).get()
+        
+    def reset(self, target):
+        probability_of_0 = self.qubit_probability(target)
+        norm = 1 / np.sqrt(probability_of_0)
+        
+        program.collapse(
+            self.queue,
+            [int(2**self.num_qubits)],
+            # 2**self.num_qubits,
+            None,
+            self.buffer.data,
+            np.int32(target),
+            np.int32(0),
+            np.float32(norm)
+        )
 
     def measure_collapse(self, target):
         probability_of_0 = self.qubit_probability(target)
