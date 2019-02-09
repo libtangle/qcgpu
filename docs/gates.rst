@@ -14,7 +14,7 @@ the same way:
 
    import qcgpu
 
-   register = qcgpu.State(2)
+   state = qcgpu.State(2)
 
    state.h(0) # Applies the Hadamard (H) gate to the first qubit.
    state.x(1) # Applies a pauli-x (NOT) gate to the second qubit.
