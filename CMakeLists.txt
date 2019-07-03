@@ -1,14 +1,34 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.0)
 
-project(tangle)
+project(tangle_project)
 
-find_package(MPI REQUIRED)
+# ------------------------------
+# ---- USER OPTIONS
+# ------------------------------
 
-# Add headers
-include_directories(include)
+set(USER_SOURCE "example.c")
+set(OUTPUT_EXE "example")
 
-file(GLOB SOURCES "src/*.c")
+# ------------------------------
+# ---- TANGLE LIBRARY
+# ------------------------------
 
-add_executable(main ${SOURCES})
+if (NOT DEFINED ${TANGLE_LIB_PATH})
+    # Build libtangle.so
+    set(TANGLE_DIR "tangle")
+    add_subdirectory(${TANGLE_DIR})
+    set(TANGLE_LIB_PATH "${CMAKE_CURRENT_BINARY_DIR}/${TANGLE_DIR}")
+    set(TANGLE_LIB_EXACT "${TANGLE_LIB_PATH}/libtangle.so")
+endif()
 
-target_link_libraries(main PRIVATE MPI::MPI_C)
+# ------------------------------
+# ---- USER EXECUTABLE
+# ------------------------------
+
+message(STATUS "Compiling ${USER_SOURCE} to executable ${OUTPUT_EXE}")
+
+# Create user executable
+add_executable(${OUTPUT_EXE} ${USER_SOURCE})
+
+# Link libraries to user executable, including Tangle
+target_link_libraries(${OUTPUT_EXE} tangle)
