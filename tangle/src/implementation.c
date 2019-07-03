@@ -2,14 +2,8 @@
 
 #include <stdio.h>
 
-void say_hi() {
-  printf("Hi!\n");
-
-#ifdef _DO_THING
-  printf("YOU ENTERED POWER MODE!!!1!!\n");
-#endif
-
-#ifdef _DO_OTHER
-  printf("YOU ENTERED OTHER MODE!!!1!!\n");
-#endif
+void count_to(int i) {
+  for (int j = 1; j <= i; j++) {
+    printf("%d\n", j);
+  }
 }

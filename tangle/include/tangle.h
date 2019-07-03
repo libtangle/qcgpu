@@ -3,6 +3,6 @@
 #ifndef __TANGLE_H
 #define __TANGLE_H
 
-void say_hi();
+void count_to(int i);
 
 #endif
