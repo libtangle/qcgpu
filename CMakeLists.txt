@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.9)
 
 project(tangle_project)
 
@@ -8,6 +8,7 @@ set(USER_SOURCE "example.c")
 set(OUTPUT_EXE "example")
 
 option(DISTRIBUTED "Use MPI" OFF)
+option(MULTITHREADED "Use OpenMP" ON)
 
 # END EDIT
 
