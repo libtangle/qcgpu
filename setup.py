@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="tangle",
-    version="1.0.0",
+    version="1.1.0",
     author="Adam Kelly",
     author_email="adamkelly2201@gmail.com",
     description="High Performance Tools for Quantum Computation",
@@ -26,5 +26,5 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Topic :: Scientific/Engineering",
     ],
-    install_requires=['scikit-build']
+    install_requires=['scikit-build', 'cython']
 )

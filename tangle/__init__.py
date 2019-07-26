@@ -1,2 +1,1 @@
-from ._tangle import hello
-from ._tangle import elevation
+from ._tangle import say_hi
