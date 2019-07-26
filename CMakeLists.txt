@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.9)
-
 project(tangle)
 
-find_package(PythonExtensions REQUIRED)
+# Source for the command line tool
+set(CLI_MAIN "${PROJECT_SOURCE_DIR}/extras/simulator_cli.cpp")
 
-add_library(_tangle MODULE tangle/_tangle.cxx)
-python_extension_module(_tangle)
-install(TARGETS _tangle LIBRARY DESTINATION tangle)
+if(SKBUILD) # Using Python
+    add_subdirectory(tangle)
+else() # Using Command Line Tool
+    add_subdirectory(extras)
+endif()
