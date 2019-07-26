@@ -1,4 +1,4 @@
-<img align="center" src="https://libtangle.com/images/bloch.svg" />
+<img align="center" width="500" src="https://libtangle.com/images/bloch.svg" />
 
 # Tangle
 
