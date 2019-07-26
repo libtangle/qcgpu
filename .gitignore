@@ -256,3 +256,5 @@ ENV/
 .pytest_cache
 
 # End of https://www.gitignore.io/api/c,c++,cuda,linux,macos,windows
+
+_skbuild
