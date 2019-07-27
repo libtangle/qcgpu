@@ -1,5 +1,8 @@
 # cdef extern from "tangle.h":
 #     cdef void count_to(int i)
 
+cdef extern from "tangle.h":
+    void count_to(int i)
+
 def say_hi():
-    return print('hiaii')
+    return count_to(5)

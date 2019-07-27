@@ -1,1 +1,1 @@
-from ._tangle import say_hi
+from .pytangle import say_hi

@@ -1,43 +1,35 @@
 cmake_minimum_required(VERSION 3.9)
-
 project(tangle_project)
 
-# EDIT HERE 
 
 option(DISTRIBUTED "Use MPI" OFF)
 option(MULTITHREADED "Use OpenMP" ON)
 
-# END EDIT
 
 if (NOT DEFINED ${TANGLE_LIB_PATH})
     set(TANGLE_DIR "tangle")
     add_subdirectory(${TANGLE_DIR})
-    set(TANGLE_LIB_PATH "${CMAKE_CURRENT_BINARY_DIR}/${TANGLE_DIR}")
+    set(TANGLE_LIB_PATH "${CMAKE_SOURCE_DIR}/${TANGLE_DIR}")
     set(TANGLE_LIB_EXACT "${TANGLE_LIB_PATH}/libtangle.so")
 endif()
 
 
-# STANDALONE SIMULATOR
-
-set(USER_SOURCE "standalone/cli.c")
+set(CLI_SOURCE "standalone/cli.c")
 set(OUTPUT_EXE "tangle-cli")
 
-if(SKBUILD) # Using Python
+if(SKBUILD)
     add_subdirectory(python)
-else() # Using Command Line Tool
-    add_executable(${OUTPUT_EXE} ${USER_SOURCE})
-    target_link_libraries(${OUTPUT_EXE} libtangle)
+else()
+    add_executable(tangle_cli ${CLI_SOURCE})
+    set_target_properties(tangle_cli PROPERTIES OUTPUT_NAME ${OUTPUT_EXE})
+    target_link_libraries(tangle_cli tangle)
 
     if (DISTRIBUTED)
-    find_package(MPI REQUIRED)
-    include_directories(${MPI_INCLUDE_PATH})
-
-    target_link_libraries(${OUTPUT_EXE} ${MPI_C_LIBRARIES})
-    add_compile_definitions(_DISTRIBUTED)
+        find_package(MPI REQUIRED)
+        include_directories(${MPI_INCLUDE_PATH})
+        target_link_libraries(tangle_cli ${MPI_C_LIBRARIES})
     elseif (MULTITHREADED)
-    find_package(OpenMP REQUIRED)
-
-    target_link_libraries(${OUTPUT_EXE} OpenMP::OpenMP_C)
-    add_compile_definitions(_MULTITHREADED)
+        find_package(OpenMP REQUIRED)
+        target_link_libraries(tangle_cli OpenMP::OpenMP_C)
     endif()
 endif()
