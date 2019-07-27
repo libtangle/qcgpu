@@ -13,6 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://libtangle.com",
     packages=['tangle'],
+    package_dir={'tangle': 'python'},
     classifiers=[
         "Environment :: Console",
         "License :: OSI Approved :: MIT License",

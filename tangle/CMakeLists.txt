@@ -1,10 +1,30 @@
-find_package(PythonExtensions REQUIRED)
-find_package(Cython REQUIRED)
+# option(DISTRIBUTED "Use MPI" OFF)
+# option(MULTITHREADED "Use OpenMP" OFF)
+
+if (DISTRIBUTED)
+    find_package(MPI REQUIRED)
+    include_directories(${MPI_INCLUDE_PATH})
+elseif (MULTITHREADED)
+    find_package(OpenMP REQUIRED)
+endif()
 
 
-add_cython_target(_tangle.pyx CXX)
-add_library(_tangle MODULE ${_tangle})
-target_include_directories(_tangle PRIVATE ${TANGLE_SRC_DIR})
-python_extension_module(_tangle)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3")
 
-install(TARGETS _tangle LIBRARY DESTINATION tangle)
+
+add_subdirectory(src)
+message("Tangle Source: ${TANGLE_SRC}")
+add_library(libtangle SHARED ${TANGLE_SRC})
+
+# Header files & linking
+target_include_directories(libtangle PRIVATE src PUBLIC include)
+
+
+if (DISTRIBUTED)
+    target_link_libraries(libtangle ${MPI_C_LIBRARIES})
+    add_compile_definitions(_DISTRIBUTED)
+elseif (MULTITHREADED)
+    target_link_libraries(libtangle PUBLIC OpenMP::OpenMP_C)
+    add_compile_definitions(_MULTITHREADED)
+
+endif()
