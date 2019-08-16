@@ -26,6 +26,5 @@ setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Topic :: Scientific/Engineering",
-    ],
-    install_requires=['scikit-build', 'cython']
+    ]
 )
