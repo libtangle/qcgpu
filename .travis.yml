@@ -4,7 +4,7 @@ python:
 
 install:
     - pip3 install -r requirements-dev.txt
-    - python3 setup.py build
+    - python3 setup.py build_ext --inplace
     - python3 setup.py install
 
 script:
