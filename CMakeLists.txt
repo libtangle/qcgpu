@@ -3,7 +3,7 @@ project(tangle_project)
 
 
 option(DISTRIBUTED "Use MPI" OFF)
-option(MULTITHREADED "Use OpenMP" ON)
+option(MULTITHREADED "Use OpenMP" OFF)
 
 
 if (NOT DEFINED ${TANGLE_LIB_PATH})
