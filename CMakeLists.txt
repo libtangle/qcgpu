@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
 project(tangle_project)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 option(DISTRIBUTED "Use MPI" ON)
 option(MULTITHREADED "Use OpenMP" OFF)
@@ -13,7 +12,6 @@ if (NOT DEFINED ${TANGLE_LIB_PATH})
     set(TANGLE_LIB_EXACT "${TANGLE_LIB_PATH}/libtangle.so")
 endif()
 
-
 set(CLI_SOURCE "standalone/cli.c")
 set(OUTPUT_EXE "tangle-cli")
 
@@ -23,6 +21,9 @@ else()
     add_executable(tangle_cli ${CLI_SOURCE})
     set_target_properties(tangle_cli PROPERTIES OUTPUT_NAME ${OUTPUT_EXE})
     target_link_libraries(tangle_cli tangle)
+
+    # set_property(TARGET tangle_cli PROPERTY C_STANDARD 11)
+    set_property(TARGET tangle PROPERTY C_STANDARD 11)
 
     if (DISTRIBUTED)
         find_package(MPI REQUIRED)
