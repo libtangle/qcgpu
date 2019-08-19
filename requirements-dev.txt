@@ -1,5 +1,0 @@
-pytest
-scikit-build
-cython
-cmake
-ninja
