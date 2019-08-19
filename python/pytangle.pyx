@@ -6,3 +6,6 @@ cdef extern from "tangle.h":
 
 def say_hi():
     return count_to(5)
+
+def count(i):
+    return count_to(i)

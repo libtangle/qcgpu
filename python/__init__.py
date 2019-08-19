@@ -1,1 +1,1 @@
-from .pytangle import say_hi
+from .pytangle import say_hi, count
