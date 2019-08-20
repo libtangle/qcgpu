@@ -1,0 +1,19 @@
+language: c
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: true
+      compiler: gcc
+      addons:
+       apt:
+         packages: 
+           - build-essential
+           - ninja
+
+script:
+  - mkdir -p build
+  - cd build
+  - cmake ..
+  - make
