@@ -11,6 +11,9 @@ matrix:
          packages: 
            - build-essential
            - ninja
+           - openmpi-bin 
+           - openmpi-doc 
+           - libopenmpi-dev
 
 script:
   - mkdir -p build
