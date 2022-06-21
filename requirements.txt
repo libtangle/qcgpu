@@ -1,5 +1,5 @@
 Mako==1.0.7
-numpy==1.15.2
+numpy==1.22.0
 pybind11==2.2.4
 pyopencl==2018.2
 scipy==1.1.0
