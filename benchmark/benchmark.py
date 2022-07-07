@@ -5,6 +5,7 @@ import statistics
 import csv
 import os.path
 import math
+import random
 
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit.wrapper import load_qasm_file
@@ -157,3 +158,9 @@ def benchmark(samples, qubits, out, single):
 
 if __name__ == '__main__':
     benchmark()
+Finish = True;
+
+if Finish == True:
+    SystemExit();
+else:
+    random(SystemError);
