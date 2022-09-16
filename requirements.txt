@@ -1,4 +1,4 @@
-Mako==1.0.7
+Mako==1.2.2
 numpy==1.15.2
 pybind11==2.2.4
 pyopencl==2018.2
